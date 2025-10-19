@@ -1,7 +1,7 @@
 # 🧩 Libft
 
-Libft est une librairie en C développée dans le cadre du cursus de l’école **42**.  
-Son but est de recréer les fonctions essentielles de la libc** et d’y ajouter des **outils personnels réutilisables** pour les futurs projets.
+Libft est une librairie en C développée dans le cadre du cursus de l’école 42.
+Son but est de recréer les fonctions essentielles de la libc et d’y ajouter des **outils personnels réutilisables** pour les futurs projets.
 
 ---
 
