@@ -1,33 +1,34 @@
 # 🧩 Libft
 
-Libft est une librairie en C développée dans le cadre du cursus de l’école 42.
-Son but est de recréer les fonctions essentielles de la libc et d’y ajouter des **outils personnels réutilisables** pour les futurs projets.
+**Libft** est une librairie en C développée dans le cadre du cursus de l’école **42**.  
+Son but est de **recréer les fonctions essentielles de la libc** et d’y ajouter des **outils personnels réutilisables** pour les futurs projets.
 
 ---
 
 ## ⚙️ Compilation
 
+```bash
 make        # Compile la libft
 make clean  # Supprime les fichiers objets (.o)
 make fclean # Supprime les fichiers objets et la lib (.a)
 make re     # Recompile entièrement la lib
-make bonus  # Compile avec les bonus
+```
 
-La compilation crée le fichier "libft.a" que vous pourrez lier à vos futurs projets.
+La compilation crée le fichier **`libft.a`** que vous pourrez lier à vos futurs projets.
 
 ---
 
 ## 📚 Utilisation
 
 Inclure le header dans vos fichiers :
-```
+```c
 #include "libft.h"
 ```
 
 Compiler votre programme avec la librairie :
-
-gcc -Wall -Wextra -Werror main.c -L. -lft -o prog
-
+```bash
+gcc -Wall -Wextra -Werror main.c -L. -lft -o exec
+```
 
 ---
 
@@ -46,6 +47,7 @@ gcc -Wall -Wextra -Werror main.c -L. -lft -o prog
 
 ## 💡 Exemple d’utilisation
 
+```c
 #include "libft.h"
 #include <stdio.h>
 
@@ -58,7 +60,7 @@ int main(void)
 ```
 
 Compilation :
-```
+```bash
 gcc -Wall -Wextra -Werror main.c -L. -lft -o test && ./test
 ```
 
@@ -75,7 +77,7 @@ gcc -Wall -Wextra -Werror main.c -L. -lft -o test && ./test
 
 ## 👨‍💻 Auteur
 
-**Nom :** Yusuke
+**Nom :** Ilias  
 **École :** 42  
 **Projet :** Libft  
 **Langage :** C  
@@ -98,4 +100,3 @@ Libre d’utilisation à des fins pédagogiques.
 ---
 
 ⭐ *Si ce projet t’a aidé, n’hésite pas à lui mettre une étoile sur GitHub !*
-
