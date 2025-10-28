@@ -10,8 +10,8 @@ Welcome to my 42 cursus repository! Here you'll find all my projects completed a
 |---------|--------|-------|-------------|
 | [Libft](./libft) | ✅ | - | My first C library |
 | [ft_printf](./ft_printf) | ✅ | - | Printf recreation |
-| [get_next_line](./get_next_line) | 🚧 | - | Line-by-line file reading |
-| [Born2beroot](./born2beroot) | ⏳ | - | System administration |
+| [get_next_line](./get_next_line) | ✅ | - | Line-by-line file reading |
+| [Born2beroot](./born2beroot) | 🚧 | - | System administration |
 | [so_long](./so_long) | ⏳ | - | Small 2D game |
 | [push_swap](./push_swap) | ⏳ | - | Sorting algorithm |
 | [minishell](./minishell) | ⏳ | - | Mini bash shell |
