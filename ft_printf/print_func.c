@@ -22,7 +22,7 @@ int	print_ptr(unsigned long n)
 	base = "0123456789abcdef";
 	i = 0;
 	if (n == 0)
-		return (write(1, "0x0", 3));
+		return (write(1, "(nil)", 5));
 	while (n > 0)
 	{
 		buffer[i++] = base[n % 16];
