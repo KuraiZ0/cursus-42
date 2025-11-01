@@ -6,38 +6,63 @@
 /*   By: iliasalmani <iliasalmani@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 22:12:14 by iliasalmani       #+#    #+#             */
-/*   Updated: 2025/10/27 23:30:59 by iliasalmani      ###   ########.fr       */
+/*   Updated: 2025/11/01 22:22:06 by iliasalmani      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+char	*read_stock(int fd, char *reste)
 {
-	size_t	i;
+	int			readed;
+	char		buf[BUFFER_SIZE + 1];
+	char		*tmp;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (!reste)
+		return (NULL);
+	while (!(ft_strchr(reste, '\n')))
+	{
+		readed = read(fd, buf, BUFFER_SIZE);
+		if (readed == -1)
+		{
+			free(reste);
+			return (NULL);
+		}
+		if (!readed)
+			return (reste);
+		buf[readed] = '\0';
+		tmp = ft_strjoin(reste, buf);
+		free(reste);
+		reste = tmp;
+	}
+	return (reste);
 }
 
-char	*ft_strdup(const char *s1)
+char	*extract_line(char **reste)
 {
-	char	*new;
-	int		i;
+	char	*line;
+	char	*new_reste;
+	char	*newline_pos;
+	int		index;
 
-	new = malloc(sizeof(char) * ft_strlen((char *)s1) + 1);
-	if (!new || !s1)
-		return (NULL);
-	i = 0;
-	while (s1[i])
+	if (!*reste || **reste == '\0')
+		return (free(*reste), *reste = NULL, NULL);
+	newline_pos = ft_strchr(*reste, '\n');
+	if (newline_pos)
 	{
-		new[i] = s1[i];
-		i++;
+		index = newline_pos - *reste + 1;
+		line = ft_substr(*reste, 0, index);
+		if (!line)
+			return (NULL);
+		new_reste = ft_substr(*reste, index, ft_strlen(*reste) - index);
+		free(*reste);
+		*reste = new_reste;
+		return (line);
 	}
-	new[i] = '\0';
-	return (new);
+	line = ft_strdup(*reste);
+	free(*reste);
+	*reste = NULL;
+	return (line);
 }
 
 char	*get_next_line(int fd)
@@ -58,5 +83,29 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-// size_t	read(int fd, void *buffer, size_t nbyte)
-// 	fd = open("./text.txt", O_RDONLY);
+/*
+#include <stdio.h>
+#include <fcntl.h>
+
+int main()
+{
+    int fd;
+    char *line;
+
+    fd = open("./test.txt", O_RDONLY);
+    if (fd < 0)
+    {
+        perror("Error opening file");
+        return 1;
+    }
+
+    while ((line = get_next_line(fd)) != NULL)
+    {
+        printf("%s", line); // line already has \n if present
+        free(line);         // free each line after using it
+    }
+
+    close(fd);
+    return 0;
+}
+*/

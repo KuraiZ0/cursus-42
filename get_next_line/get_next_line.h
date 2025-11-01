@@ -6,7 +6,7 @@
 /*   By: iliasalmani <iliasalmani@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 15:43:04 by iliasalmani       #+#    #+#             */
-/*   Updated: 2025/10/27 22:52:33 by iliasalmani      ###   ########.fr       */
+/*   Updated: 2025/10/31 12:14:49 by iliasalmani      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,11 @@
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
 
+# endif
+
+# if BUFFER_SIZE > 8000000
+#  undef BUFFER_SIZE
+#  define BUFFER_SIZE 1000000
 # endif
 
 char	*get_next_line(int fd);
