@@ -12,11 +12,9 @@ Welcome to my 42 cursus repository! Here you'll find all my projects completed a
 | [ft_printf](./ft_printf) | ✅ | - | Printf recreation |
 | [get_next_line](./get_next_line) | ✅ | - | Line-by-line file reading |
 | [Born2beroot](./born2beroot) | 🚧 | - | System administration |
-| [pipex](./pipex) | 🚧 | - | Redirections and pipes basics |
-| [so_long](./so_long) | ⏳ | - | Small 2D game |
-| [push_swap](./push_swap) | ⏳ | - | Sorting algorithm |
-| [minishell](./minishell) | ⏳ | - | Mini bash shell |
-| [philosophers](./philosophers) | ⏳ | - | Threads and mutexes |
+| [Push-swap](./push-swap) | 🚧 | - | Optimized sorting with limited operations. |
+| [Python-core](./python-core) | ⏳ | - | 🐍 |
+
 
 ### 🎯 Bonus Projects
 *Coming soon...*
