@@ -6,64 +6,40 @@
 /*   By: iliasalmani <iliasalmani@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/26 00:43:52 by iliasalmani       #+#    #+#             */
-/*   Updated: 2025/10/28 13:28:37 by iliasalmani      ###   ########.fr       */
+/*   Updated: 2025/10/31 17:29:28 by iliasalmani      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdlib.h>
 
-char	*read_stock(int fd, char *reste)
+size_t	ft_strlen(const char *s)
 {
-	int			readed;
-	char		buf[BUFFER_SIZE + 1];
-	char		*tmp;
+	size_t	i;
 
-	if (!reste)
-		return (NULL);
-	while (!(ft_strchr(reste, '\n')))
-	{
-		readed = read(fd, buf, BUFFER_SIZE);
-		if (readed == -1)
-		{
-			free(reste);
-			return (NULL);
-		}
-		if (!readed)
-			return (reste);
-		buf[readed] = '\0';
-		tmp = ft_strjoin(reste, buf);
-		free(reste);
-		reste = tmp;
-	}
-	return (reste);
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
 }
 
-char	*extract_line(char **reste)
+char	*ft_strdup(const char *s1)
 {
-	char	*line;
-	char	*new_reste;
-	char	*newline_pos;
-	int		index;
+	char	*new;
+	int		i;
 
-	if (!*reste || **reste == '\0')
+	if (!s1)
 		return (NULL);
-	newline_pos = ft_strchr(*reste, '\n');
-	if (newline_pos)
+	new = malloc(sizeof(char) * ft_strlen((char *)s1) + 1);
+	if (!new || !s1)
+		return (NULL);
+	i = 0;
+	while (s1[i])
 	{
-		index = newline_pos - *reste + 1;
-		line = ft_substr(*reste, 0, index);
-		if (!line)
-			return (NULL);
-		new_reste = ft_substr(*reste, index, ft_strlen(*reste) - index);
-		free(*reste);
-		*reste = new_reste;
-		return (line);
+		new[i] = s1[i];
+		i++;
 	}
-	line = ft_strdup(*reste);
-	free(*reste);
-	*reste = NULL;
-	return (line);
+	new[i] = '\0';
+	return (new);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -93,14 +69,14 @@ char	*ft_strjoin(char const *s1, char const *s2)
 
 char	*ft_strchr(const char *str, int c)
 {
+	if (!str)
+		return (NULL);
 	while (*str)
 	{
 		if (*str == (char)c)
 			return ((char *)str);
 		str++;
 	}
-	if (*str == (char)c)
-		return ((char *)str);
 	return (NULL);
 }
 
