@@ -6,7 +6,7 @@
 /*   By: iliasalmani <iliasalmani@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 12:38:26 by iliasalmani       #+#    #+#             */
-/*   Updated: 2025/10/24 12:16:52 by iliasalmani      ###   ########.fr       */
+/*   Updated: 2025/11/02 16:17:19 by iliasalmani      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,14 +23,14 @@ int	print_ptr(unsigned long n)
 	i = 0;
 	if (n == 0)
 		return (write(1, "(nil)", 5));
+	count = write(1, "0x", 2);
 	while (n > 0)
 	{
 		buffer[i++] = base[n % 16];
 		n /= 16;
 	}
-	count = write(1, "0x", 2);
-	while (i--)
-		count += write(1, &buffer[i], 1);
+	while (i > 0)
+		count += write(1, &buffer[--i], 1);
 	return (count);
 }
 
@@ -113,7 +113,7 @@ int	print_hex(unsigned int n, int uppercase)
 		n /= 16;
 	}
 	count = 0;
-	while (i--)
-		count += write(1, &buffer[i], 1);
+	while (i > 0)
+		count += write(1, &buffer[--i], 1);
 	return (count);
 }
