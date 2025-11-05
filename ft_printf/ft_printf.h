@@ -6,14 +6,13 @@
 /*   By: iliasalmani <iliasalmani@student.42.fr>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 11:16:01 by iliasalmani       #+#    #+#             */
-/*   Updated: 2025/10/24 11:30:35 by iliasalmani      ###   ########.fr       */
+/*   Updated: 2025/10/24 12:58:47 by iliasalmani      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_PRINTF_H
 # define FT_PRINTF_H
 
-# include "libft/libft.h"
 # include <stdarg.h>
 # include <unistd.h>
 
