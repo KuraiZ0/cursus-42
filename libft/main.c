@@ -491,3 +491,5 @@ int main(void)
 	
 	return (0);
 }
+
+// cc main.c -L. -I. -o test_libft
