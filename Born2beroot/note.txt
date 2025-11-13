@@ -1,13 +1,3 @@
-w---------------------------------------PASSWORD-------------------------------------------------
-
-ialmani42
-Sup3rUs3r!1	      		// ROOT
-P4ssw0rd!1 	       		// User && sudo
-3ncrypti0n          		// Encryption phrase for volume 
-/etc/login.defs     		// Config file for passwd policy
-libpam-pwquality		// module for strenghten passwd
-/etc/security/pwquality.conf	// Config file for pwquality
-
 ---------------------------------------COMMAND--------------------------------------------------
 
 lsb_release -a 								// show distribution
