@@ -1,0 +1,94 @@
+w---------------------------------------PASSWORD-------------------------------------------------
+
+ialmani42
+Sup3rUs3r!1	      		// ROOT
+P4ssw0rd!1 	       		// User && sudo
+3ncrypti0n          		// Encryption phrase for volume 
+/etc/login.defs     		// Config file for passwd policy
+libpam-pwquality		// module for strenghten passwd
+/etc/security/pwquality.conf	// Config file for pwquality
+
+---------------------------------------COMMAND--------------------------------------------------
+
+lsb_release -a 								// show distribution
+uname -a 								// kernel & architecture
+getent passwd <USER>/id <USER> 						// show user 
+sudo grep -E 'pam_pwquality|pam_cracklib' -n /etc/pam.d/common-password // config pwquality presentation
+chage -l <USER>								// show expiration management
+sudo systemctl status ssh						// show ssh status
+grep -E 'PermitRootLogin|PasswordAuthentication" -n /etc/ssh/sshd_config // show PermitRootLogin & PasswordAuthentication
+ssh <USER@localhost> -p 2222						// connect mine terminal into vm terminal
+sudo ufw status verbose							// Which ports is opened
+sudo systemctl status fail2ban						// ????
+sudo pvdisplay / vgdisplay / lvdisplay					// show logical volume and size allocated
+lsblk									// proof for logical volume
+sudo crontab -l -u root && crontab -l -u <USER>				// show scheduled tasks
+bash monitoring.sh							// display output
+systemctl list-unit-files --state=enabled			// display necessary services
+sudo ufw status								// firewall status
+sudo cat /etc/ssh/sshd_config | grep Port				// display the ssh port
+getent group sudo							// show if the user is in the sudo group
+groups <USER>								// show groups <user>
+hostnamectl								// show hostname
+
+-------------------------------------PROOF.SH---------------------------------------------------
+mkdir -p ~/born2beroot_proof
+REPORT=~/born2beroot_proof/report.txt
+echo "=== Born2beroot Proof Report ===" | tee $REPORT
+
+echo -e "\n=== OS ===" | tee -a $REPORT
+lsb_release -a 2>&1 | tee -a $REPORT
+uname -a 2>&1 | tee -a $REPORT
+
+echo -e "\n=== SSH ===" | tee -a $REPORT
+sudo grep -E 'PermitRootLogin|PasswordAuthentication' /etc/ssh/sshd_config 2>&1 | tee -a $REPORT
+sudo systemctl status ssh --no-pager 2>&1 | tee -a $REPORT
+
+echo -e "\n=== UFW ===" | tee -a $REPORT
+sudo ufw status verbose 2>&1 | tee -a $REPORT
+
+echo -e "\n=== Fail2Ban ===" | tee -a $REPORT
+sudo fail2ban-client status 2>&1 | tee -a $REPORT
+
+echo -e "\n=== lighttpd ===" | tee -a $REPORT
+sudo systemctl status lighttpd --no-pager 2>&1 | tee -a $REPORT
+curl -I http://localhost 2>&1 | tee -a $REPORT
+
+echo -e "\n=== LVM ===" | tee -a $REPORT
+sudo pvdisplay 2>&1 | tee -a $REPORT
+sudo vgdisplay 2>&1 | tee -a $REPORT
+sudo lvdisplay 2>&1 | tee -a $REPORT
+
+echo -e "\n=== CRON (root) ===" | tee -a $REPORT
+sudo crontab -l -u root 2>&1 | tee -a $REPORT || true
+
+echo -e "\n=== End of report ===" | tee -a $REPORT
+
+--------------------------------------Q&A-------------------------------------------------------
+- Why ufw and ssh ?
+ufw to sort network traffic and ssh for secure remote access.
+- Difference between apt et aptitude ?
+apt is a basic tool and aptitude is a interface and it manage dependancies.
+- Why sudo ?
+because with sudo we can use admin command and keep the logs.
+
+---------------------------------EXPLAINATION---------------------------------------------------
+
+« J’ai déployé une machine Debian sécurisée avec partitionnement LVM, chiffrement, politique de mots de passe renforcée via PAM, Fail2Ban pour protéger le service SSH, un firewall configuré avec UFW, un serveur web Lighttpd, et un script de monitoring automatisé. Le proof.sh permet de valider l’intégrité de la configuration sans rien modifier. »
+
+LVM (Logical Volume Manager) permet de gérer l’espace disque de manière flexible.  
+Les disques physiques (PV) sont regroupés en Volume Groups (VG).  
+Les volumes logiques (LV) sont créés à l’intérieur des VG et montés comme des partitions classiques.  
+Cela permet de redimensionner, chiffrer et isoler facilement les volumes sans reformater.
+
+--------------------------------APPARMOR_SELINUX------------------------------------------------
+
+AppArmor et SELinux sont deux systèmes MAC (Mandatory Access Control) qui renforcent la sécurité du système.  
+SELinux utilise des labels pour définir des politiques très précises, mais il est complexe à gérer.  
+AppArmor utilise des profils simples pour limiter ce que chaque programme peut faire.  
+AppArmor est plus lisible et plus adapté aux distributions Debian/Ubuntu.  
+SELinux est plus puissant, utilisé sur RedHat/Fedora.  
+Dans Born2beroot (Debian), c’est AppArmor qui est utilisé par défaut.  
+Il permet de mieux isoler les processus et réduire les risques d’intrusion.
+
+------------------------------------------------------------------------------------------------
