@@ -19,7 +19,6 @@
 
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1024
-
 # endif
 
 # if BUFFER_SIZE > 8000000
@@ -33,7 +32,6 @@ char	*ft_strdup(const char *s1);
 size_t	ft_strlen(const char *s);
 char	*ft_strchr(const char *str, int c);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-void	free_null(char **ptr);
 char	*read_stock(int fd, char *reste);
 char	*extract_line(char **reste);
 
