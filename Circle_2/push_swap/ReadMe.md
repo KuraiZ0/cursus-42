@@ -19,7 +19,7 @@
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/KuraiZ0/push_swap.git
+git clone https://github.com/KuraiZ0/cursus-42/tree/main/Circle_2/push_swap.git
 cd push_swap
 make
 ```
