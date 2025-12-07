@@ -45,13 +45,13 @@ make
 Exécution
 Lancer le programme avec une liste d'entiers en arguments :
 
-Bash
+'''bash
 
 ./push_swap 2 1 3 6 5 8
 Vérification
 Pour vérifier si le tri est correct et compter le nombre de coups :
 
-Bash
+'''bash
 
 ARG="4 67 3 80 12"; ./push_swap $ARG | wc -l
 📊 Performance (Moyenne)
