@@ -1,7 +1,7 @@
 # 🔄 push_swap
 
 [![42 Project](https://img.shields.io/badge/42-push__swap-00babc?style=flat-square&logo=42)](https://github.com/yourusername/push_swap)
-![Grade](https://img.shields.io/badge/Grade-125%2F100-success?style=flat-square)
+![Grade](https://img.shields.io/badge/Grade-84%2F100-success?style=flat-square)
 ![Language](https://img.shields.io/badge/Language-C-blue?style=flat-square)
 
 ## 📋 Table of Contents
