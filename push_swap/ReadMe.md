@@ -19,7 +19,7 @@
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/yourusername/push_swap.git
+git clone https://github.com/KuraiZ0/push_swap.git
 cd push_swap
 make
 ```
@@ -49,4 +49,4 @@ make
 | 500 numbers| < 5500     | ⭐ |
 
 ---
-**Grade**: 125/100 | **Status**: Validated
+**Grade**: 84/100 | **Status**: Validated
