@@ -71,7 +71,7 @@ Here you'll find all my projects completed at 42 school.
 ```
 Status  : ✅ Validated
 Grade   : 125/100 ⭐
-Duration: 3 weeks
+Duration: 1 weeks
 ```
 **My first C library**  
 Recreation of standard libc functions + bonus functions for linked list manipulation.
@@ -117,7 +117,7 @@ Implementation of printf with conversions: %c, %s, %d, %i, %u, %x, %X, %p.
 ```
 Status  : ✅ Validated
 Grade   : 105/100 ⭐
-Duration: 1 week
+Duration: 2 week
 ```
 **Line-by-line file reading**  
 Function that reads a line from a file descriptor, regardless of buffer size.
@@ -139,7 +139,7 @@ Function that reads a line from a file descriptor, regardless of buffer size.
 ```
 Status  : ✅ Validated
 Grade   : 86/100 ✅
-Duration: 2 weeks
+Duration: 3 days
 ```
 **System administration**  
 Configuration of a Debian virtual machine with LVM encryption, SSH, UFW, and strict security policies.
@@ -166,7 +166,7 @@ Configuration of a Debian virtual machine with LVM encryption, SSH, UFW, and str
 ```
 Status  : ✅ Validated
 Grade   : 84/100 ✅
-Duration: 2 weeks
+Duration: 3 weeks
 ```
 **Optimized sorting with two stacks**  
 Sorting algorithm using a limited set of operations to sort numbers with minimum moves.
