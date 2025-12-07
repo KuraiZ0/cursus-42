@@ -325,8 +325,8 @@ bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bi
 - [x] **Circle 1** - Algorithms (Born2beRoot, Push_swap)
 - [ ] **Circle 2** - Python Fundamentals (Starting tomorrow! 🐍)
 - [ ] **Circle 3** - Communication & Graphics
-- [ ] **Circle 4** - Unix & Threading
-- [ ] **Circle 5** - C++ & Advanced
+- [ ] **Circle 4** - POO & Threading
+- [ ] **Circle 5** - IA & Advanced
 - [ ] **Circle 6** - Final Projects
 
 ### 🔮 Next Steps
@@ -428,15 +428,14 @@ This repository is under MIT License. See [LICENSE](./LICENSE) for more informat
 
 ### ⭐ If this repo helps you, feel free to star it!
 
-**Made with ❤️ by a 42 student**
 
-*"The only way to learn a new programming language is by writing programs in it."*  
-— **Dennis Ritchie**
+*"Wubba Lubba Dub Dub !"*  
+— **Mystery Travler**
 
 ---
 
-![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=yourusername.42-cursus)
-![Last Commit](https://img.shields.io/github/last-commit/yourusername/42-cursus)
-![Repo Size](https://img.shields.io/github/repo-size/yourusername/42-cursus)
+![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=kuraiz0.42-cursus)
+![Last Commit](https://img.shields.io/github/last-commit/kuraiz0/42-cursus)
+![Repo Size](https://img.shields.io/github/repo-size/kuraiz0/42-cursus)
 
 </div>
