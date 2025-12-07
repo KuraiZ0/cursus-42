@@ -253,7 +253,7 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 
 ```bash
 # Clone the entire cursus
-git clone https://github.com/yourusername/42-cursus.git
+git clone https://github.com/KuraiZ0/42-cursus.git
 cd 42-cursus
 
 # Navigate to a specific project
@@ -348,11 +348,10 @@ bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bi
 
 <div align="center">
 
-[![42 Profile](https://img.shields.io/badge/42-Profile-000000?style=for-the-badge&logo=42&logoColor=white)](https://profile.intra.42.fr/users/yourlogin)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
-[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:your.email@example.com)
-
+[![42 Profile](https://img.shields.io/badge/42-Profile-000000?style=for-the-badge&logo=42&logoColor=white)]([https://profile.intra.42.fr/users/yourlogin](https://profile-v3.intra.42.fr/))
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KuraiZ0)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ialmani@student.42belgium.be)
+[![Discord](https://img.shields.io/badge/Discord-Pepehv2-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discordapp.com/users/Pepehv2)
 **Feel free to reach out for questions or collaborations!**
 
 </div>
