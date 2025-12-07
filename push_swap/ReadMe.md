@@ -40,7 +40,7 @@ Les opérations autorisées pour manipuler les piles sont :
 
 ### Compilation
 Utilisez le `Makefile` pour compiler le projet.
-```bash
+bash
 make
 Exécution
 Lancer le programme avec une liste d'entiers en arguments :
