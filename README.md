@@ -268,7 +268,7 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 
 ```bash
 # Clone the entire cursus
-git clone https://github.com/KuraiZ0/42-cursus.git
+git clone https://github.com/KuraiZ0/cursus-42.git
 cd 42-cursus
 
 # Navigate to a specific project
