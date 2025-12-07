@@ -22,36 +22,36 @@ Here you'll find all my projects completed at 42 school.
 │                      CURSUS PROGRESS                         │
 ├──────────────────────────────────────────────────────────────┤
 │                                                              │
-│  Circle 0  ████████████████████  100%  ✅ Completed        │
-│  Circle 1  ████████████████████  100%  ✅ Completed        │
-│  Circle 2  ░░░░░░░░░░░░░░░░░░░    0%  🔜 Next              │
+│  Circle 0  ████████████████████  100%  ✅ Completed          │
+│  Circle 1  ████████████████████  100%  ✅ Completed          │
+│  Circle 2  ████████░░░░░░░░░░░   33%  🚧 In Progress         │
 │                                                              │
-│  Validated projects : 5/5  (Circle 0-1)                     │
-│  Average grade      : 100/100                               │
-│  Current level      : 2.58                                  │
+│  Validated projects : 5/5                                    │
+│  Average grade      : 100/100                                │
+│  Current level      : 2.58                                   │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
 
 ### 📈 Grade Breakdown
 
-| Project | Grade | Bonus |
-|---------|-------|-------|
-| Libft | **125**/100 | ✅ |
-| get_next_line | **105**/100 | ✅ |
-| ft_printf | **100**/100 | ❌ |
-| Born2beRoot | **86**/100 | ❌ |
-| Push_swap | **84**/100 | ❌ |
+| Project | Circle | Grade | Bonus |
+|---------|--------|-------|-------|
+| Libft | 0 | **125**/100 | ✅ |
+| ft_printf | 1 | **100**/100 | ✅ |
+| get_next_line | 1 | **105**/100 | ✅ |
+| Born2beRoot | 1 | **86**/100 | ❌ |
+| Push_swap | 2 | **84**/100 | ❌ |
 
 ---
 
 ## 🗂️ Projects
 
-### 🔰 Circle 0 - Fundamentals
+### 🔰 Circle 0 - The Beginning
 
 <table>
 <tr>
-<td width="50%">
+<td width="100%">
 
 #### 📚 [Libft](./libft)
 ```
@@ -63,11 +63,38 @@ Duration: 3 weeks
 Recreation of standard libc functions + bonus functions for linked list manipulation.
 
 **Highlights:**
-- ✅ All mandatory functions
-- ✅ Bonus part completed
+- ✅ All mandatory functions (Part 1 & 2)
+- ✅ Bonus part completed (linked lists)
 - ✅ Perfect norminette compliance
+- ✅ Extensive testing passed
 
-**Skills:** `C` `Memory Management` `Algorithms` `Linked Lists`
+**Skills:** `C` `Memory Management` `Algorithms` `Linked Lists` `Makefile`
+
+</td>
+</tr>
+</table>
+
+### 🔹 Circle 1 - Fundamentals
+
+<table>
+<tr>
+<td width="50%">
+
+#### 📝 [ft_printf](./ft_printf)
+```
+Status  : ✅ Validated
+Grade   : 100/100 ✅
+Duration: 1 week
+```
+**Printf recreation**  
+Implementation of printf with conversions: %c, %s, %d, %i, %u, %x, %X, %p.
+
+**Highlights:**
+- ✅ All conversions working
+- ✅ Clean and modular code
+- ✅ Variadic functions mastery
+
+**Skills:** `Variadic Functions` `Parsing` `Format Specifiers`
 
 </td>
 <td width="50%">
@@ -92,26 +119,7 @@ Function that reads a line from a file descriptor, regardless of buffer size.
 </tr>
 
 <tr>
-<td width="50%">
-
-#### 📝 [ft_printf](./ft_printf)
-```
-Status  : ✅ Validated
-Grade   : 100/100 ✅
-Duration: 1 week
-```
-**Printf recreation**  
-Implementation of printf with conversions: %c, %s, %d, %i, %u, %x, %X, %p.
-
-**Highlights:**
-- ✅ All conversions working
-- ✅ Clean and modular code
-- ✅ Extensive testing passed
-
-**Skills:** `Variadic Functions` `Parsing` `Format Specifiers`
-
-</td>
-<td width="50%">
+<td colspan="2">
 
 #### 🖥️ [Born2beRoot](./born2beroot)
 ```
@@ -125,16 +133,16 @@ Configuration of a Debian virtual machine with LVM encryption, SSH, UFW, and str
 **Highlights:**
 - ✅ LVM encrypted partitions
 - ✅ SSH on port 4242
-- ✅ Strong password policy
+- ✅ Strong password policy & sudo config
 - ✅ Monitoring script with cron
 
-**Skills:** `Linux` `System Administration` `Security` `Bash`
+**Skills:** `Linux` `System Administration` `Security` `Bash` `Virtualization`
 
 </td>
 </tr>
 </table>
 
-### 🔹 Circle 1 - Algorithms
+### 🔸 Circle 2 - Algorithms
 
 <table>
 <tr>
@@ -163,16 +171,16 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 </tr>
 </table>
 
-### 🔸 Circle 2 - Next Projects
+### 🐍 Circle 2+ - Python (New Common Core)
 
-> 🔜 **Coming soon:** Python Piscine (New Common Core update)
+> 🔜 **Starting tomorrow!** The new Python-based common core is coming.
 > 
-> The new Python-based common core launches tomorrow! Circle 2 will include Python fundamentals, OOP, and data science basics.
+> The curriculum is being updated with Python as a foundational language:
+> - **Python Piscine**: 4 weeks of intensive Python learning
+> - **Modules**: Basics, OOP, Data Science (NumPy, Pandas, Matplotlib)
+> - **New structure**: Born2beRoot moves to Circle 2, Push_swap to Circle 3
 > 
-> **What's changing:**
-> - Born2beRoot → Moving to Circle 2
-> - Push_swap → Moving to Circle 3
-> - Python replaces C for foundational learning
+> Python projects will follow **PEP 8** standard (checked with flake8), not norminette.
 
 ---
 
