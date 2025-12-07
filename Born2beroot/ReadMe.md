@@ -1,56 +1,57 @@
-# 🐧 Born2BeRoot
+# 🖥️ Born2beRoot
 
-![Status](https://img.shields.io/badge/Status-Completed-success) ![System](https://img.shields.io/badge/OS-Debian-red) ![Virtualization](https://img.shields.io/badge/VM-VirtualBox-orange)
+[![42 Project](https://img.shields.io/badge/42-Born2beRoot-00babc?style=flat-square&logo=42)](https://github.com/yourusername/born2beroot)
+![Grade](https://img.shields.io/badge/Grade-86%2F100-success?style=flat-square)
+![OS](https://img.shields.io/badge/OS-Debian-red?style=flat-square)
 
-## 📝 Description
+## 📋 Table of Contents
+- [Description](#description)
+- [Installation](#installation)
+- [Configuration](#configuration)
+- [Security Setup](#security-setup)
+- [Monitoring Script](#monitoring-script)
 
-**Born2BeRoot** est un projet d'introduction à la virtualisation et à l'administration système rigoureuse. L'objectif est de créer une machine virtuelle (VM) sécurisée tournant sous **Debian** (ou CentOS), sans interface graphique.
+## 🎯 Description
 
-Ce projet impose le respect de règles strictes concernant le partitionnement, la gestion des utilisateurs, la sécurité réseau et le monitoring.
+**Born2beRoot** introduces you to the world of virtualization and system administration. You'll create your first virtual machine following strict rules.
 
-## ⚙️ Configuration Système
+## 🚀 Installation
 
-* **Hyperviseur :** VirtualBox
-* **Système d'exploitation :** Debian (Stable)
-* **Partitionnement :** LVM (Logical Volume Manager) chiffré.
-* **Interface :** CLI uniquement (Command Line Interface).
+### Virtual Machine Setup
+- OS: Debian 12
+- RAM: 1024 MB
+- Disk: 30 GB VDI
+- Encryption: LVM
 
-## 🛡️ Sécurité & Services Mis en Place
+## ⚙️ Configuration
 
-### 1. Gestion des Utilisateurs et Mots de passe
-* Politique de mots de passe forts configurée via `libpam-pwquality` (longueur min, complexité, expiration).
-* Groupe `sudo` restreint et sécurisé.
+### SSH Configuration
+```bash
+sudo apt install openssh-server
+sudo nano /etc/ssh/sshd_config
+# Port 4242
+# PermitRootLogin no
+sudo systemctl restart ssh
+```
 
-### 2. Réseau et SSH
-* Service SSH installé et configuré sur le **port 4242**.
-* Connexion `root` via SSH désactivée.
+### UFW Firewall
+```bash
+sudo apt install ufw
+sudo ufw allow 4242
+sudo ufw enable
+```
 
-### 3. Pare-feu (Firewall)
-* Utilisation de **UFW** (Uncomplicated Firewall).
-* Seul le port 4242 est ouvert vers l'extérieur.
+## 📊 Monitoring Script
 
-### 4. Monitoring
-* Développement d'un script `monitoring.sh` en Bash.
-* Diffusion des informations système (CPU, RAM, Disque, Last boot, LVM status, Connexions actives) sur tous les terminaux toutes les 10 minutes via `cron`.
+```bash
+#!/bin/bash
+arch=$(uname -a)
+pcpu=$(grep "physical id" /proc/cpuinfo | wc -l)
+vcpu=$(grep "processor" /proc/cpuinfo | wc -l)
+wall "Architecture: $arch
+CPU physical: $pcpu
+vCPU: $vcpu"
+```
 
-## 💻 Commandes Utiles
-
-Se connecter à la VM depuis l'hôte :
-<pre>
-ssh <user>@<ip_address> -p 4242
-Vérifier la configuration du pare-feu :
-</pre>
-<pre>
-sudo ufw status
-</pre>
-Vérifier la politique de mots de passe :
-
-<pre>
-sudo chage -l <user>
-</upre>
-
-  Vérifier le partitionnement LVM :
-
-<pre>
-lsblk
-</pre>
+---
+**Grade**: 86/100 | **Status**: Validated
