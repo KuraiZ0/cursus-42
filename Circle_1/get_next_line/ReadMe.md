@@ -17,7 +17,7 @@
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/KuraiZ0/get_next_line.git
+git clone https://github.com/KuraiZ0/cursus-42/tree/main/Circle_1/get_next_line.git
 cd get_next_line
 ```
 
