@@ -45,9 +45,10 @@ Here you'll find all my projects completed at 42 school.
 ├── 📂 Circle-2
 │   └── 📂 push_swap
 └── 📜 README.md
+```
+
 ### 📈 Grade Breakdown
 
-```
 | Project | Circle | Grade | Bonus |
 |---------|--------|-------|-------|
 | Libft | 0 | **125**/100 | ✅ |
