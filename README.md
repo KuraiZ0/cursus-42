@@ -33,8 +33,21 @@ Here you'll find all my projects completed at 42 school.
 └──────────────────────────────────────────────────────────────┘
 ```
 
+## 📂 Repository Structure
+```text
+.
+├── 📂 Circle-0
+│   ├── 📂 libft
+│   ├── 📂 ft_printf
+│   └── 📂 get_next_line
+├── 📂 Circle-1
+│   └── 📂 born2beroot
+├── 📂 Circle-2
+│   └── 📂 push_swap
+└── 📜 README.md
 ### 📈 Grade Breakdown
 
+```
 | Project | Circle | Grade | Bonus |
 |---------|--------|-------|-------|
 | Libft | 0 | **125**/100 | ✅ |
@@ -191,6 +204,7 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 ### Languages & Technologies
 
 ![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
@@ -226,7 +240,7 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 💯 **Free** - Accessible to everyone  
 ⏰ **24/7** - Campus open day and night  
 
-> *"42 doesn't teach, 42 makes you learn"*
+> *"Learning to learn."*
 
 ### 📐 The 42 Pedagogy
 
@@ -299,6 +313,10 @@ flake8 --max-line-length=79 --ignore=E203,W503 *.py
 ```
 
 ### Recommended Testers
+| Tester | Status |
+|--------|--------|
+| Tripouille | ![Pass](https://img.shields.io/badge/Passed-100%25-success)  |
+| Francinette | ![Pass](https://img.shields.io/badge/Passed-Strict-success) |
 
 ```bash
 # Libft
@@ -316,8 +334,21 @@ git clone https://github.com/LeoFu9487/push_swap_tester.git
 # Or use Francinette (universal tester)
 bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
 ```
+### 🐍 Python Environment Setup
 
+To run the Python projects, ensure you have the correct environment:
+
+```bash
+# Create virtual environment
+python3 -m venv .venv
+
+# Activate environment
+source .venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
 ---
+```
 
 ## 📈 Roadmap
 
