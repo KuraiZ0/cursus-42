@@ -17,7 +17,7 @@
 ## 🚀 Installation
 
 ```bash
-git clone https://github.com/KuraiZ0/ft_printf.git
+git clone https://github.com/KuraiZ0/cursus-42/edit/main/Circle_1/ft_printf.git
 cd ft_printf
 make
 ```
