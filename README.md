@@ -38,14 +38,13 @@ Here you'll find all my projects completed at 42 school.
 .
 ├── 📂 Circle-0
 │   ├── 📂 libft
-│   ├── 📂 ft_printf
-│   └── 📂 get_next_line
 ├── 📂 Circle-1
 │   └── 📂 born2beroot
+│   ├── 📂 ft_printf
+│   └── 📂 get_next_line
 ├── 📂 Circle-2
 │   └── 📂 push_swap
-│   ├── 📂 Python_module_00
-│   └── 📂 Python_module_01
+│   ├── 📂 Python_Module
 └── 📜 README.md
 ```
 
