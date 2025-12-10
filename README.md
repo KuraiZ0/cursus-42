@@ -3,7 +3,7 @@
 <div align="center">
 
 ![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)
-![Level](https://img.shields.io/badge/Level-3.42-success?style=for-the-badge)
+![Level](https://img.shields.io/badge/Level-2.60-success?style=for-the-badge)
 ![Progress](https://img.shields.io/badge/Circle-2_Complete-blue?style=for-the-badge)
 
 **Welcome to my 42 cursus repository!**  
