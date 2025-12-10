@@ -26,9 +26,9 @@ Here you'll find all my projects completed at 42 school.
 │  Circle 1  ████████████████████  100%  ✅ Completed          │
 │  Circle 2  ████████░░░░░░░░░░░   33%  🚧 In Progress         │
 │                                                              │
-│  Validated projects : 5/5                                    │
+│  Validated projects : 6/6                                    │
 │  Average grade      : 100/100                                │
-│  Current level      : 2.58                                   │
+│  Current level      : 2.60                                   │
 │                                                              │
 └──────────────────────────────────────────────────────────────┘
 ```
@@ -44,6 +44,8 @@ Here you'll find all my projects completed at 42 school.
 │   └── 📂 born2beroot
 ├── 📂 Circle-2
 │   └── 📂 push_swap
+│   ├── 📂 Python_module_00
+│   └── 📂 Python_module_01
 └── 📜 README.md
 ```
 
@@ -56,6 +58,7 @@ Here you'll find all my projects completed at 42 school.
 | get_next_line | 1 | **105**/100 | ✅ |
 | Born2beRoot | 1 | **86**/100 | ❌ |
 | Push_swap | 2 | **84**/100 | ❌ |
+| Python_Module| 2 | **100**/100 | 
 
 ---
 
