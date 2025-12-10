@@ -271,7 +271,7 @@ Sorting algorithm using a limited set of operations to sort numbers with minimum
 ```bash
 # Clone the entire cursus
 git clone https://github.com/KuraiZ0/cursus-42.git
-cd 42-cursus
+cd cursus-42
 
 # Navigate to a specific project
 cd libft
