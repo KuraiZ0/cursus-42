@@ -1,325 +1,301 @@
-# 🎓 42 Cursus - My Journey
+<div align="center">
+
+# 🎓 42 Brussels - Cursus Journey
+
+[![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)](https://42.fr)
+[![Level](https://img.shields.io/badge/Level-2.60-success?style=for-the-badge)](https://profile.intra.42.fr/users/ialmani)
+[![Progress](https://img.shields.io/badge/Circle-2_In_Progress-blue?style=for-the-badge)](https://github.com/kuraiz0/cursus-42)
+[![Languages](https://img.shields.io/badge/Languages-C_|_Python_|_Bash-orange?style=for-the-badge)](#)
+
+**Welcome to my 42 cursus repository!**  
+This repository contains all my projects completed at 42 Brussels.
+
+[📊 Statistics](#-statistics) • [📂 Projects](#-projects-by-circle) • [💻 Tech Stack](#-tech-stack--skills) • [📞 Contact](#-contact)
+
+---
+
+</div>
+
+## 📊 Statistics
+
+```
+┌────────────────────────────────────────────────────────────────┐
+│                      CURSUS PROGRESS                           │
+├────────────────────────────────────────────────────────────────┤
+│                                                                │
+│  Circle 0  ████████████████████  100%  ✅ Completed           │
+│  Circle 1  ████████████████████  100%  ✅ Completed           │
+│  Circle 2  ████████░░░░░░░░░░░   33%  🚧 In Progress          │
+│                                                                │
+│  Validated projects : 6/6                                      │
+│  Average grade      : 100/100                                  │
+│  Current level      : 2.60                                     │
+│  Total time spent   : ~320 hours                               │
+│                                                                │
+└────────────────────────────────────────────────────────────────┘
+```
 
 <div align="center">
 
-![42 School](https://img.shields.io/badge/42-School-000000?style=for-the-badge&logo=42&logoColor=white)
-![Level](https://img.shields.io/badge/Level-2.60-success?style=for-the-badge)
-![Progress](https://img.shields.io/badge/Circle-2_Complete-blue?style=for-the-badge)
+### 📈 Grade Breakdown
 
-**Welcome to my 42 cursus repository!**  
-Here you'll find all my projects completed at 42 school.
-
-[About 42](#-about-42) • [Projects](#-projects) • [Statistics](#-statistics) • [Contact](#-contact)
+| Project | Circle | Grade | Bonus | Status |
+|:-------:|:------:|:-----:|:-----:|:------:|
+| 📚 Libft | 0 | **125**/100 | ✅ | ✅ Validated |
+| 📝 ft_printf | 1 | **100**/100 | ✅ | ✅ Validated |
+| 📖 get_next_line | 1 | **105**/100 | ✅ | ✅ Validated |
+| 🖥️ Born2beRoot | 1 | **86**/100 | ❌ | ✅ Validated |
+| 🔄 Push_swap | 2 | **84**/100 | ❌ | ✅ Validated |
+| 🐍 Python Module | 2 | **100**/100 | ➖ | ✅ Validated |
 
 </div>
 
 ---
 
-## 📊 Statistics
-
-```
-┌──────────────────────────────────────────────────────────────┐
-│                      CURSUS PROGRESS                         │
-├──────────────────────────────────────────────────────────────┤
-│                                                              │
-│  Circle 0  ████████████████████  100%  ✅ Completed          │
-│  Circle 1  ████████████████████  100%  ✅ Completed          │
-│  Circle 2  ████████░░░░░░░░░░░   33%  🚧 In Progress         │
-│                                                              │
-│  Validated projects : 6/6                                    │
-│  Average grade      : 100/100                                │
-│  Current level      : 2.60                                   │
-│                                                              │
-└──────────────────────────────────────────────────────────────┘
-```
-
-## 📂 Repository Structure
-```text
-.
-├── 📂 Circle-0
-│   ├── 📂 libft
-├── 📂 Circle-1
-│   └── 📂 born2beroot
-│   ├── 📂 ft_printf
-│   └── 📂 get_next_line
-├── 📂 Circle-2
-│   └── 📂 push_swap
-│   ├── 📂 Python_Module
-└── 📜 README.md
-```
-
-### 📈 Grade Breakdown
-
-| Project | Circle | Grade | Bonus |
-|---------|--------|-------|-------|
-| Libft | 0 | **125**/100 | ✅ |
-| ft_printf | 1 | **100**/100 | ✅ |
-| get_next_line | 1 | **105**/100 | ✅ |
-| Born2beRoot | 1 | **86**/100 | ❌ |
-| Push_swap | 2 | **84**/100 | ❌ |
-| Python_Module| 2 | **100**/100 | 
-
----
-
-## 🗂️ Projects
+## 📂 Projects by Circle
 
 ### 🔰 Circle 0 - The Beginning
 
-<table>
-<tr>
-<td width="100%">
+<details open>
+<summary><b>📚 Libft</b> - My First C Library</summary>
 
-#### 📚 [Libft](./libft)
 ```
-Status  : ✅ Validated
-Grade   : 125/100 ⭐
-Duration: 1 weeks
+Status   : ✅ Validated
+Grade    : 125/100 ⭐
+Duration : ~3 weeks
+Bonus    : ✅ Completed
 ```
-**My first C library**  
-Recreation of standard libc functions + bonus functions for linked list manipulation.
 
-**Highlights:**
+**Description:**  
+Recreation of standard C library functions (libc) plus bonus functions for linked list manipulation.
+
+**Key Features:**
 - ✅ All mandatory functions (Part 1 & 2)
 - ✅ Bonus part completed (linked lists)
-- ✅ Perfect norminette compliance
-- ✅ Extensive testing passed
+- ✅ Perfect Norminette compliance
+- ✅ Extensive testing with Tripouille & Francinette
 
-**Skills:** `C` `Memory Management` `Algorithms` `Linked Lists` `Makefile`
+**Skills Acquired:**  
+`Memory Management` • `Pointers` • `String Manipulation` • `Linked Lists` • `Makefile`
 
-</td>
-</tr>
-</table>
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_0/libft)**
+
+</details>
+
+---
 
 ### 🔹 Circle 1 - Fundamentals
 
-<table>
-<tr>
-<td width="50%">
+<details open>
+<summary><b>📝 ft_printf</b> - Printf Recreation</summary>
 
-#### 📝 [ft_printf](./ft_printf)
 ```
-Status  : ✅ Validated
-Grade   : 100/100 ✅
-Duration: 1 week
+Status   : ✅ Validated
+Grade    : 100/100 ✅
+Duration : ~1 week
+Bonus    : ✅ Completed
 ```
-**Printf recreation**  
-Implementation of printf with conversions: %c, %s, %d, %i, %u, %x, %X, %p.
 
-**Highlights:**
-- ✅ All conversions working
-- ✅ Clean and modular code
+**Description:**  
+Reimplementation of the famous printf function with support for multiple conversions: `%c` `%s` `%d` `%i` `%u` `%x` `%X` `%p`.
+
+**Key Features:**
+- ✅ All conversions working perfectly
+- ✅ Clean, modular code architecture
 - ✅ Variadic functions mastery
+- ✅ Edge case handling
 
-**Skills:** `Variadic Functions` `Parsing` `Format Specifiers`
+**Skills Acquired:**  
+`Variadic Functions` • `Format Parsing` • `Type Conversion` • `Buffer Management`
 
-</td>
-<td width="50%">
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_1/ft_printf)**
 
-#### 📖 [get_next_line](./get_next_line)
+</details>
+
+<details open>
+<summary><b>📖 get_next_line</b> - Line-by-Line File Reading</summary>
+
 ```
-Status  : ✅ Validated
-Grade   : 105/100 ⭐
-Duration: 2 week
+Status   : ✅ Validated
+Grade    : 105/100 ⭐
+Duration : ~2 weeks
+Bonus    : ✅ Completed
 ```
-**Line-by-line file reading**  
-Function that reads a line from a file descriptor, regardless of buffer size.
 
-**Highlights:**
+**Description:**  
+A function that reads a line from a file descriptor, regardless of buffer size. Handles multiple file descriptors simultaneously.
+
+**Key Features:**
 - ✅ Static variables mastery
 - ✅ Multiple FD support (bonus)
 - ✅ Efficient buffer management
+- ✅ Memory leak free
 
-**Skills:** `File I/O` `Static Variables` `Buffer Management`
+**Skills Acquired:**  
+`File I/O` • `Static Variables` • `Buffer Management` • `Memory Optimization`
 
-</td>
-</tr>
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_1/get_next_line)**
 
-<tr>
-<td colspan="2">
+</details>
 
-#### 🖥️ [Born2beRoot](./born2beroot)
+<details open>
+<summary><b>🖥️ Born2beRoot</b> - System Administration</summary>
+
 ```
-Status  : ✅ Validated
-Grade   : 86/100 ✅
-Duration: 3 days
+Status   : ✅ Validated
+Grade    : 86/100 ✅
+Duration : ~3 days
+Bonus    : ❌ Not attempted
 ```
-**System administration**  
-Configuration of a Debian virtual machine with LVM encryption, SSH, UFW, and strict security policies.
 
-**Highlights:**
+**Description:**  
+Configuration of a Debian virtual machine with LVM encryption, SSH, UFW firewall, and strict security policies.
+
+**Key Implementations:**
 - ✅ LVM encrypted partitions
-- ✅ SSH on port 4242
-- ✅ Strong password policy & sudo config
-- ✅ Monitoring script with cron
+- ✅ SSH configuration on port 4242
+- ✅ Strong password policy & sudo configuration
+- ✅ Monitoring script with cron jobs
+- ✅ UFW firewall rules
 
-**Skills:** `Linux` `System Administration` `Security` `Bash` `Virtualization`
+**Skills Acquired:**  
+`Linux` • `System Administration` • `Security` • `Bash Scripting` • `Virtualization`
 
-</td>
-</tr>
-</table>
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_1/born2beroot)**
 
-### 🔸 Circle 2 - Algorithms
+</details>
 
-<table>
-<tr>
-<td width="100%">
+---
 
-#### 🔄 [Push_swap](./push_swap)
+### 🔸 Circle 2 - Algorithms & Python
+
+<details open>
+<summary><b>🔄 Push_swap</b> - Optimized Sorting Algorithm</summary>
+
 ```
-Status  : ✅ Validated
-Grade   : 84/100 ✅
-Duration: 3 weeks
+Status   : ✅ Validated
+Grade    : 84/100 ✅
+Duration : ~3 weeks
+Bonus    : ❌ Not attempted
 ```
-**Optimized sorting with two stacks**  
-Sorting algorithm using a limited set of operations to sort numbers with minimum moves.
 
-**Performance:**
+**Description:**  
+Sort numbers using two stacks and a limited set of operations with minimum moves. Implements an efficient chunk-based sorting algorithm.
+
+**Performance Benchmarks:**
 - 3 numbers: ≤ 3 operations ✅
 - 5 numbers: ≤ 12 operations ✅
 - 100 numbers: < 900 operations ✅
 - 500 numbers: < 7000 operations ✅
 
-**Algorithm:** Chunk-based sorting with cost calculation for optimal moves.
+**Algorithm Strategy:**  
+Chunk-based sorting with cost calculation for optimal move selection.
 
-**Skills:** `Sorting Algorithms` `Optimization` `Complexity Analysis` `Data Structures`
+**Skills Acquired:**  
+`Sorting Algorithms` • `Algorithm Optimization` • `Complexity Analysis` • `Data Structures`
 
-</td>
-</tr>
-</table>
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_2/push_swap)**
 
-### 🐍 Circle 2+ - Python (New Common Core)
+</details>
 
-> 🔜 **Starting tomorrow!** The new Python-based common core is coming.
-> 
-> The curriculum is being updated with Python as a foundational language:
-> - **Python Piscine**: 4 weeks of intensive Python learning
-> - **Modules**: Basics, OOP, Data Science (NumPy, Pandas, Matplotlib)
-> - **New structure**: Born2beRoot moves to Circle 2, Push_swap to Circle 3
-> 
-> Python projects will follow **PEP 8** standard (checked with flake8), not norminette.
+<details open>
+<summary><b>🐍 Python Module</b> - Introduction to Python</summary>
+
+```
+Status   : ✅ Validated
+Grade    : 100/100 ✅
+Duration : ~1 week
+```
+
+**Description:**  
+First steps with Python programming as part of the new 42 Common Core curriculum.
+
+**Key Concepts:**
+- ✅ Python syntax and fundamentals
+- ✅ Data structures (lists, dictionaries, sets)
+- ✅ Functions and scope
+- ✅ PEP 8 compliance (flake8)
+
+**Skills Acquired:**  
+`Python` • `OOP Basics` • `Code Style` • `Documentation`
+
+**[📁 View Project](https://github.com/kuraiz0/cursus-42/tree/main/Circle_2/Python_Module)**
+
+</details>
 
 ---
 
-## 🎯 Skills Acquired
+## 💻 Tech Stack & Skills
 
 <div align="center">
 
-### Languages & Technologies
+### Languages & Tools
 
-![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)
-![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)
-
-### Mastered Areas
-
-```
-🧠 Algorithms & Data Structures
-💾 Memory Management & Allocation
-🔐 Security & System Administration
-📂 File I/O & Buffer Management
-🔧 Debugging & Optimization
-📊 Complexity Analysis
-👥 Pair-programming & Code Review
-🖥️ Unix/Linux Systems
-```
+[![C](https://img.shields.io/badge/C-00599C?style=for-the-badge&logo=c&logoColor=white)](#)
+[![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)](#)
+[![Bash](https://img.shields.io/badge/Bash-4EAA25?style=for-the-badge&logo=gnubash&logoColor=white)](#)
+[![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)](#)
+[![Debian](https://img.shields.io/badge/Debian-A81D33?style=for-the-badge&logo=debian&logoColor=white)](#)
+[![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)](#)
+[![VS Code](https://img.shields.io/badge/VS_Code-007ACC?style=for-the-badge&logo=visualstudiocode&logoColor=white)](#)
+[![Vim](https://img.shields.io/badge/Vim-019733?style=for-the-badge&logo=vim&logoColor=white)](#)
 
 </div>
 
----
-
-## 💻 About 42
-
-<img align="right" width="200" src="https://upload.wikimedia.org/wikipedia/commons/8/8d/42_Logo.svg">
-
-**42** is a revolutionary computer science school based on peer-to-peer learning:
-
-✨ **No lectures** - Self-directed learning  
-🤝 **Peer-learning** - Collaboration between students  
-🎯 **Practical projects** - Learning by doing  
-🌍 **Global network** - Over 40 campuses worldwide  
-💯 **Free** - Accessible to everyone  
-⏰ **24/7** - Campus open day and night  
-
-> *"Learning to learn."*
-
-### 📐 The 42 Pedagogy
+### 🎯 Core Competencies
 
 ```
-  Project assigned
-        │
-        ▼
-   Research & Testing
-        │
-        ▼
-   Peer-evaluation ──► Correction ──► Validation
-        │                                │
-        │◄───────── Retry ───────────────┘
-        │
-        ▼
-   XP earned & New project
+💡 Problem Solving & Algorithm Design
+🧠 Data Structures & Memory Management
+🔐 System Security & Administration
+📂 File I/O & Buffer Optimization
+🐛 Debugging & Code Optimization
+📊 Time & Space Complexity Analysis
+👥 Peer-to-Peer Learning & Code Review
+🖥️ Unix/Linux Systems & Shell Scripting
 ```
 
 ---
 
-## 🛠️ Usage
+## 🛠️ Getting Started
 
 ### Clone the Repository
 
 ```bash
 # Clone the entire cursus
-git clone https://github.com/KuraiZ0/cursus-42.git
+git clone https://github.com/kuraiz0/cursus-42.git
 cd cursus-42
 
 # Navigate to a specific project
-cd libft
+cd Circle_1/ft_printf
 ```
 
-### Standard Compilation
+### Compilation
 
-Each project contains its own **Makefile**. Common commands:
+Each project contains its own **Makefile**. Standard commands:
 
 ```bash
 make        # Compile the project
-make clean  # Remove .o files
+make clean  # Remove object files
 make fclean # Remove all generated files
 make re     # Recompile from scratch
-make bonus  # Compile with bonuses (if available)
+make bonus  # Compile with bonus features (if available)
 ```
 
-### Testing Standards
+### Code Standards
 
-**C projects** follow the 42 coding standard:
-
+**C Projects** - Follow 42 Norm (checked with norminette):
 ```bash
-# Check the norm (C projects)
 norminette *.c *.h
-
-# Expected output
-libft.h: OK!
-ft_strlen.c: OK!
 ```
 
-**Python projects** (coming soon) will follow **PEP 8** standard verified with **flake8**:
-
+**Python Projects** - Follow PEP 8 (checked with flake8):
 ```bash
-# Install flake8
 pip install flake8
-
-# Check Python code
 flake8 *.py
-
-# With custom configuration
-flake8 --max-line-length=79 --ignore=E203,W503 *.py
 ```
 
 ### Recommended Testers
-| Tester | Status |
-|--------|--------|
-| Tripouille | ![Pass](https://img.shields.io/badge/Passed-100%25-success)  |
-| Francinette | ![Pass](https://img.shields.io/badge/Passed-Strict-success) |
 
 ```bash
 # Libft
@@ -334,142 +310,139 @@ git clone https://github.com/Tripouille/gnlTester.git
 # Push_swap
 git clone https://github.com/LeoFu9487/push_swap_tester.git
 
-# Or use Francinette (universal tester)
+# Universal Tester
 bash -c "$(curl -fsSL https://raw.github.com/xicodomingues/francinette/master/bin/install.sh)"
 ```
-### 🐍 Python Environment Setup
-
-To run the Python projects, ensure you have the correct environment:
-
-```bash
-# Create virtual environment
-python3 -m venv .venv
-
-# Activate environment
-source .venv/bin/activate
-
-# Install dependencies
-pip install -r requirements.txt
----
-```
-
-## 📈 Roadmap
-
-- [x] **Circle 0** - C Basics (Libft, get_next_line, ft_printf)
-- [x] **Circle 1** - Algorithms (Born2beRoot, Push_swap)
-- [ ] **Circle 2** - Python Fundamentals (Starting tomorrow! 🐍)
-- [ ] **Circle 3** - Communication & Graphics
-- [ ] **Circle 4** - POO & Threading
-- [ ] **Circle 5** - IA & Advanced
-- [ ] **Circle 6** - Final Projects
-
-### 🔮 Next Steps
-
-**Immediate goals:**
-1. 🐍 Complete Python Piscine (4 weeks)
-2. 📚 Master Python OOP concepts
-3. 📊 Learn data science basics with Pandas/NumPy
-
-**Future projects:**
-- minitalk, pipex, so_long
-- Philosophers, minishell
-- NetPractice, cub3d
-- CPP modules
 
 ---
 
-## 🤝 Contact & Networks
+## 📚 About 42 School
 
 <div align="center">
 
-[![42 Profile](https://img.shields.io/badge/42-Profile-000000?style=for-the-badge&logo=42&logoColor=white)](https://profile-v3.intra.42.fr/users/ialmani))
+[![42 Logo](https://upload.wikimedia.org/wikipedia/commons/8/8d/42_Logo.svg)](https://42.fr)
 
+</div>
+
+**42** is a revolutionary coding school based on peer-to-peer learning:
+
+- 🎯 **Project-Based Learning** - No teachers, no lectures
+- 🤝 **Peer Evaluation** - Students evaluate each other
+- 🌍 **Global Network** - 50+ campuses worldwide
+- 💯 **100% Free** - No tuition fees
+- ⏰ **24/7 Access** - Campus open around the clock
+- 🚀 **Self-Paced** - Progress at your own speed
+
+### 🔄 The 42 Methodology
+
+```
+Project Assigned
+     ↓
+Research & Development
+     ↓
+Implementation
+     ↓
+Peer Evaluation ──→ Correction ──→ Validation
+     │                                  │
+     └─────────── Retry ────────────────┘
+     ↓
+XP Earned & Next Project
+```
+
+> *"Learning to learn is the most important skill of the 21st century."*
+
+---
+
+## 🎯 Roadmap
+
+### ✅ Completed
+- [x] **Circle 0** - C Basics & Memory Management
+- [x] **Circle 1** - Algorithms & System Administration
+- [x] **Circle 2** (Partial) - Push_swap & Python Introduction
+
+### 🚧 In Progress
+- [ ] Complete Circle 2 projects
+- [ ] Python Piscine (4 weeks intensive)
+
+### 🔮 Upcoming
+- [ ] **Circle 3** - Graphics & Communication (minitalk, so_long, FdF)
+- [ ] **Circle 4** - Object-Oriented Programming (C++ modules)
+- [ ] **Circle 5** - Advanced Algorithms (minishell, philosophers)
+- [ ] **Circle 6** - Final Projects & Specialization
+
+---
+
+## 📖 Resources
+
+### 📚 Documentation
+- [42 Docs](https://harm-smits.github.io/42docs/) - Unofficial documentation
+- [C Reference](https://en.cppreference.com/w/c) - Complete C reference
+- [Linux Man Pages](https://man7.org/linux/man-pages/) - System manual
+- [PEP 8](https://pep8.org/) - Python style guide
+
+### 🛠️ Development Tools
+- [Norminette](https://github.com/42School/norminette) - 42 norm checker
+- [Valgrind](https://valgrind.org/) - Memory leak detection
+- [GDB](https://www.gnu.org/software/gdb/) - GNU Debugger
+- [flake8](https://flake8.pycqa.org/) - Python linter
+
+### 🎓 Learning Resources
+- [Learn C](https://www.learn-c.org/) - Interactive C tutorial
+- [Shell Scripting Tutorial](https://www.shellscript.sh/) - Bash guide
+- [Real Python](https://realpython.com/) - Python tutorials
+- [Git Immersion](https://gitimmersion.com/) - Learn Git
+
+---
+
+## 📞 Contact
+
+<div align="center">
+
+[![42 Profile](https://img.shields.io/badge/42-Profile-000000?style=for-the-badge&logo=42&logoColor=white)](https://profile.intra.42.fr/users/ialmani)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/KuraiZ0)
+[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ialmani@student.42brussels.be)
+[![Discord](https://img.shields.io/badge/Discord-5865F2?style=for-the-badge&logo=discord&logoColor=white)](https://discordapp.com/users/Pepehv2)
 
-[![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:ialmani@student.42belgium.be)
-
-[![Discord](https://img.shields.io/badge/Discord-Pepehv2-7289DA?style=for-the-badge&logo=discord&logoColor=white)](https://discordapp.com/users/Pepehv2)
-
-**Feel free to reach out for questions or collaborations!**
+**Feel free to reach out for questions, collaborations, or just to chat about coding!**
 
 </div>
 
 ---
 
-## 📜 Useful Resources
+## ⚠️ Academic Integrity
 
-### 📚 Documentation & Guides
-- [42 Docs](https://harm-smits.github.io/42docs/) - Unofficial documentation
-- [C Reference](https://en.cppreference.com/w/c) - Complete C reference
-- [Linux Man Pages](https://man7.org/linux/man-pages/) - Linux manual pages
-- [PEP 8](https://pep8.org/) - Python style guide
-
-### 🎓 Tutorials
-- [Learn C](https://www.learn-c.org/) - Interactive C tutorial
-- [Shell Scripting Tutorial](https://www.shellscript.sh/) - Bash guide
-- [Git Immersion](https://gitimmersion.com/) - Learn Git
-- [Real Python](https://realpython.com/) - Python tutorials
-
-### 🛠️ Tools
-- [Norminette](https://github.com/42School/norminette) - Norm checker
-- [Valgrind](https://valgrind.org/) - Memory leak detection
-- [GDB](https://www.gnu.org/software/gdb/) - GNU Debugger
-- [flake8](https://flake8.pycqa.org/) - Python linter
-
----
-
-## 💡 Key Learnings
-
-### From Circle 0-1
-
-**Technical Skills:**
-- Mastered C memory management (malloc, free, pointers)
-- Understanding of file descriptors and system calls
-- Variadic functions and format string parsing
-- Sorting algorithm optimization
-- Linux system administration fundamentals
-
-**Soft Skills:**
-- Self-directed learning and research
-- Peer collaboration and code review
-- Time management and project planning
-- Problem decomposition and debugging
-- Resilience and persistence
-
----
-
-## ⚖️ Disclaimer
-
-> ⚠️ **Warning to 42 students!**
+> **Important Notice for 42 Students:**
 > 
-> These projects are shared for **educational purposes only**. 
+> This repository is shared for **educational and reference purposes only**.
 > 
-> ❌ **Don't copy the code directly** - you'll only hurt yourself.  
-> ✅ **Use it as a reference** - understand the logic, then code it yourself.  
+> ❌ **DON'T** copy code directly - you'll only hurt your learning  
+> ✅ **DO** use it as a reference to understand concepts  
+> ✅ **DO** write your own implementation after understanding the logic
 > 
-> Plagiarism is severely punished at 42 and detected during evaluations.  
+> Plagiarism is strictly forbidden at 42 and easily detected during peer evaluations.  
 > **Learn, understand, then create your own solution!** 💪
 
 ---
 
 ## 📄 License
 
-This repository is under MIT License. See [LICENSE](./LICENSE) for more information.
+This project is open source and available under the [MIT License](LICENSE).
 
 ---
 
 <div align="center">
 
-### ⭐ If this repo helps you, feel free to star it!
+### ⭐ If this repository helps you, consider giving it a star!
 
-
-*"Wubba Lubba Dub Dub !"*  
-— **Mystery Travler**
+[![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=kuraiz0.cursus-42)](https://github.com/kuraiz0/cursus-42)
+[![Last Commit](https://img.shields.io/github/last-commit/kuraiz0/cursus-42?style=flat-square)](https://github.com/kuraiz0/cursus-42/commits)
+[![Repo Size](https://img.shields.io/github/repo-size/kuraiz0/cursus-42?style=flat-square)](https://github.com/kuraiz0/cursus-42)
 
 ---
 
-![Visitor Count](https://visitor-badge.laobi.icu/badge?page_id=kuraiz0.42-cursus)
-![Last Commit](https://img.shields.io/github/last-commit/kuraiz0/42-cursus)
-![Repo Size](https://img.shields.io/github/repo-size/kuraiz0/42-cursus)
+*"The only way to learn a new programming language is by writing programs in it."*  
+— **Dennis Ritchie**
+
+**Made with ❤️ at 42 Brussels**
 
 </div>
