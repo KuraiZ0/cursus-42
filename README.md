@@ -65,30 +65,30 @@ My 42 cursus journey visualized as a solar system - each circle represents a new
 | 🐍 **Python Module 00** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 01** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 02** | 2 | **100**/100 | 🔵 Validated | ✓ |
-| 🐍 **Python Module 03** | 2 | - | ⚪ In Progress | Dec 2024 |
-| 🐍 **Python Module 04** | 2 | - | ⚫ Next | Dec-Jan 2025 |
-| 🐍 **Python Module 05** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🐍 **Python Module 06** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🐍 **Python Module 07** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🐍 **Python Module 08** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🐍 **Python Module 09** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🐍 **Python Module 10** | 2 | - | ⚫ Planned | Jan 2025 |
-| 🎯 **A-Maze-In** | 2 | - | ⚫ Planned | Jan 2025 |
-| 📝 **Exam Rank 02** | 2 | - | ⚫ Planned | Jan 2025 |
-| 📞 **Call Me Maybe** | 3 | - | 🔒 Locked | Feb 2025 |
-| 🚁 **Fly-In** | 3 | - | 🔒 Locked | Feb 2025 |
-| 💻 **Codexion** | 3 | - | 🔒 Locked | Feb 2025 |
-| 📝 **Exam Rank 03** | 3 | - | 🔒 Locked | Feb 2025 |
-| 🤖 **RAG Against the Machine** | 4 | - | 🔒 Locked | Mar 2025 |
-| 👻 **Pac-Man** | 4 | - | 🔒 Locked | Mar 2025 |
-| 🌐 **NetPractice** | 4 | - | 🔒 Locked | Mar 2025 |
-| 📝 **Exam Rank 04** | 4 | - | 🔒 Locked | Mar 2025 |
-| 🐋 **Inception** | 5 | - | 🔒 Locked | Apr 2025 |
-| 🎭 **The Answer Protocol** | 5 | - | 🔒 Locked | Apr 2025 |
-| 🕴️ **Agent Smith** | 5 | - | 🔒 Locked | Apr 2025 |
-| 📝 **Exam Rank 05** | 5 | - | 🔒 Locked | Apr 2025 |
-| 🎮 **ft_transcendence** | 6 | - | 🔒 Locked | May 2025 |
-| 📝 **Exam Rank 06** | 6 | - | 🔒 Locked | May 2025 |
+| 🐍 **Python Module 03** | 2 | - | ⚪ In Progress | Dec 2025 |
+| 🐍 **Python Module 04** | 2 | - | ⚫ Next | Dec 2025 |
+| 🐍 **Python Module 05** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 06** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 07** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 08** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 09** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 10** | 2 | - | ⚫ Planned | ??? |
+| 🎯 **A-Maze-In** | 2 | - | ⚫ Planned | ??? |
+| 📝 **Exam Rank 02** | 2 | - | ⚫ Planned | ??? |
+| 📞 **Call Me Maybe** | 3 | - | 🔒 Locked | ??? |
+| 🚁 **Fly-In** | 3 | - | 🔒 Locked | ??? |
+| 💻 **Codexion** | 3 | - | 🔒 Locked | ??? |
+| 📝 **Exam Rank 03** | 3 | - | 🔒 Locked | ??? |
+| 🤖 **RAG Against the Machine** | 4 | - | 🔒 Locked | ??? |
+| 👻 **Pac-Man** | 4 | - | 🔒 Locked | ??? |
+| 🌐 **NetPractice** | 4 | - | 🔒 Locked | ??? |
+| 📝 **Exam Rank 04** | 4 | - | 🔒 Locked | ??? |
+| 🐋 **Inception** | 5 | - | 🔒 Locked | ??? |
+| 🎭 **The Answer Protocol** | 5 | - | 🔒 Locked | ??? |
+| 🕴️ **Agent Smith** | 5 | - | 🔒 Locked | ??? |
+| 📝 **Exam Rank 05** | 5 | - | 🔒 Locked | ??? |
+| 🎮 **ft_transcendence** | 6 | - | 🔒 Locked | ??? |
+| 📝 **Exam Rank 06** | 6 | - | 🔒 Locked | ??? |
 
 _* System bug preventing proper validation display, but projects are validated_
 
