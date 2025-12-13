@@ -42,7 +42,7 @@ This repository contains all my projects completed at 42 Brussels.
 | Project | Circle | Grade | Bonus | Status |
 |:-------:|:------:|:-----:|:-----:|:------:|
 | 📚 Libft | 0 | **125**/100 | ✅ | ✅ Validated |
-| 📝 ft_printf | 1 | **100**/100 | ✅ | ✅ Validated |
+| 📝 ft_printf | 1 | **100**/100 | ❌ | ✅ Validated |
 | 📖 get_next_line | 1 | **105**/100 | ✅ | ✅ Validated |
 | 🖥️ Born2beRoot | 1 | **86**/100 | ❌ | ✅ Validated |
 | 🔄 Push_swap | 2 | **84**/100 | ❌ | ✅ Validated |
