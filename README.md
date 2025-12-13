@@ -34,7 +34,6 @@ This repository contains all my projects completed at 42 Brussels.
 │  Validated projects : 8/27 total                               │
 │  Average grade      : 100/100                                  │
 │  Current level      : 2.60                                     │
-│  Total time spent   : ~320 hours                               │
 │                                                                │
 └────────────────────────────────────────────────────────────────┘
 ```
