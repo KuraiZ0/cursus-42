@@ -88,7 +88,7 @@ _* System bug preventing proper validation display, but projects are validated_
 
 ### 🔰 Circle 0 - The Beginning
 
-<details open>
+<details close>
 <summary><b>📚 Libft</b> - My First C Library</summary>
 
 ```
@@ -118,7 +118,7 @@ Recreation of standard C library functions (libc) plus bonus functions for linke
 
 ### 🔹 Circle 1 - Fundamentals
 
-<details open>
+<details close>
 <summary><b>📝 ft_printf</b> - Printf Recreation</summary>
 
 ```
@@ -144,7 +144,7 @@ Reimplementation of the famous printf function with support for multiple convers
 
 </details>
 
-<details open>
+<details close>
 <summary><b>📖 get_next_line</b> - Line-by-Line File Reading</summary>
 
 ```
@@ -170,7 +170,7 @@ A function that reads a line from a file descriptor, regardless of buffer size. 
 
 </details>
 
-<details open>
+<details close>
 <summary><b>🖥️ Born2beRoot</b> - System Administration</summary>
 
 ```
@@ -197,7 +197,7 @@ Configuration of a Debian virtual machine with LVM encryption, SSH, UFW firewall
 
 </details>
 
-<details open>
+<details close>
 <summary><b>🔄 Push_swap</b> - Optimized Sorting Algorithm</summary>
 
 ```
@@ -230,7 +230,7 @@ Chunk-based sorting with cost calculation for optimal move selection.
 
 ### 🔸 Circle 2 - Python Mastery & Advanced Graphics
 
-<details open>
+<details close>
 <summary><b>🐍 Python Modules 00-10</b> - Complete Python Journey</summary>
 
 ```
