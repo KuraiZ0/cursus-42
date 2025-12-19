@@ -248,7 +248,7 @@ Chunk-based sorting with cost calculation for optimal move selection.
 Status   : ⚪ In Progress (3/11 completed)
 Modules  : 00 ✅ | 01 ✅ | 02 ✅ | 03 🔄 | 04-10 ⚫
 Duration : ~8-12 weeks total
-ETA      : December 2024 - January 2025
+ETA      : December 2025 - January 2025
 ```
 
 **Description:**  
@@ -598,7 +598,7 @@ ETA      : May 2025
 
 ## 🎯 Roadmap & Timeline
 
-### ✅ Completed (Circles 0-1) - 2024
+### ✅ Completed (Circles 0-1) - 2025
 - [x] **Libft** - C library fundamentals (125/100) ⭐
 - [x] **ft_printf** - Variadic functions mastery (100/100)
 - [x] **get_next_line** - File I/O operations (105/100) ⭐
@@ -607,7 +607,7 @@ ETA      : May 2025
 
 _* Validated but system bug preventing proper display_
 
-### 🚧 In Progress (Circle 2) - Dec 2024 - Jan 2025
+### 🚧 In Progress (Circle 2) - Dec 2025 - Jan 2025
 - [x] **Python Module 00** - Basics (100/100)
 - [x] **Python Module 01** - Control flow (100/100)
 - [x] **Python Module 02** - Data structures (100/100)
