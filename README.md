@@ -237,7 +237,7 @@ Chunk-based sorting with cost calculation for optimal move selection.
 Status   : ⚪ In Progress (3/11 completed)
 Modules  : 00 ✅ | 01 ✅ | 02 ✅ | 03 🔄 | 04-10 ⚫
 Duration : ~8-12 weeks total
-ETA      : December 2025 - January 2025
+ETA      : December 2025 - January 2026
 ```
 
 **Description:**  
@@ -270,7 +270,7 @@ Comprehensive Python learning path covering fundamentals to advanced topics incl
 Status   : ⚫ Next
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : January 2025
+ETA      : January 2026
 ```
 
 **Description:**  
@@ -294,7 +294,7 @@ Create a 3D maze game using ray-casting techniques, inspired by Wolfenstein 3D. 
 ```
 Status   : ⚫ Planned
 Duration : 3 hours
-ETA      : January 2025
+ETA      : January 2026
 ```
 
 **Topics Covered:**
@@ -316,7 +316,7 @@ ETA      : January 2025
 Status   : 🔒 Locked (Circle 3)
 Grade    : TBD
 Duration : ~2-3 weeks
-ETA      : February 2025
+ETA      : February 2026
 ```
 
 **Description:**  
@@ -334,7 +334,7 @@ Project involving inter-process communication using signals or other IPC mechani
 Status   : 🔒 Locked (Circle 3)
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : February 2025
+ETA      : February 2026
 ```
 
 **Description:**  
@@ -349,7 +349,7 @@ Advanced programming challenge (specifics to be discovered).
 Status   : 🔒 Locked (Circle 3)
 Grade    : TBD
 Duration : ~2-3 weeks
-ETA      : February 2025
+ETA      : February 2026
 ```
 
 **Description:**  
@@ -363,7 +363,7 @@ Algorithmic and coding challenges project.
 ```
 Status   : 🔒 Locked
 Duration : 3 hours
-ETA      : February 2025
+ETA      : February 2026
 ```
 
 </details>
@@ -379,7 +379,7 @@ ETA      : February 2025
 Status   : 🔒 Locked (Circle 4)
 Grade    : TBD
 Duration : ~4-5 weeks
-ETA      : March 2025
+ETA      : March 2026
 ```
 
 **Description:**  
@@ -397,7 +397,7 @@ Build a RAG (Retrieval-Augmented Generation) system combining information retrie
 Status   : 🔒 Locked (Circle 4)
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : March 2025
+ETA      : March 2026
 ```
 
 **Description:**  
@@ -415,7 +415,7 @@ Recreate the classic Pac-Man game with AI for ghost behavior.
 Status   : 🔒 Locked (Circle 4)
 Grade    : TBD
 Duration : ~1-2 weeks
-ETA      : March 2025
+ETA      : March 2026
 ```
 
 **Description:**  
@@ -432,7 +432,7 @@ Practical networking exercises covering TCP/IP, subnetting, and routing.
 ```
 Status   : 🔒 Locked
 Duration : 3 hours
-ETA      : March 2025
+ETA      : March 2026
 ```
 
 </details>
@@ -448,7 +448,7 @@ ETA      : March 2025
 Status   : 🔒 Locked (Circle 5)
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : April 2025
+ETA      : April 2026
 ```
 
 **Description:**  
@@ -466,7 +466,7 @@ Set up a complete web infrastructure using Docker containers (NGINX, WordPress, 
 Status   : 🔒 Locked (Circle 5)
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : April 2025
+ETA      : April 2026
 ```
 
 **Description:**  
@@ -484,7 +484,7 @@ Implementation of advanced communication protocols.
 Status   : 🔒 Locked (Circle 5)
 Grade    : TBD
 Duration : ~3-4 weeks
-ETA      : April 2025
+ETA      : April 2026
 ```
 
 **Description:**  
@@ -501,7 +501,7 @@ Build a multi-agent AI system with autonomous behavior.
 ```
 Status   : 🔒 Locked
 Duration : 3 hours
-ETA      : April 2025
+ETA      : April 2026
 ```
 
 </details>
@@ -517,7 +517,7 @@ ETA      : April 2025
 Status   : 🔒 Locked (Circle 6)
 Grade    : TBD
 Duration : ~6-8 weeks
-ETA      : May 2025
+ETA      : May 2026
 ```
 
 **Description:**  
@@ -542,7 +542,7 @@ Create a full-stack real-time multiplayer Pong game with chat, matchmaking, and 
 ```
 Status   : 🔒 Locked
 Duration : 3 hours
-ETA      : May 2025
+ETA      : May 2026
 ```
 
 **The final challenge to complete the 42 cursus!**
@@ -596,7 +596,7 @@ ETA      : May 2025
 
 _* Validated but system bug preventing proper display_
 
-### 🚧 In Progress (Circle 2) - Dec 2025 - Jan 2025
+### 🚧 In Progress (Circle 2) - Dec 2025 - Jan 2026
 - [x] **Python Module 00** - Basics (100/100)
 - [x] **Python Module 01** - Control flow (100/100)
 - [x] **Python Module 02** - Data structures (100/100)
@@ -605,25 +605,25 @@ _* Validated but system bug preventing proper display_
 - [ ] **A-Maze-In** - 3D ray-casting game
 - [ ] **Exam Rank 02**
 
-### 🔮 Circle 3 - Feb 2025
+### 🔮 Circle 3 - Feb 2026
 - [ ] **Call Me Maybe** - IPC & signals
 - [ ] **Fly-In** - Advanced challenge
 - [ ] **Codexion** - Algorithm challenges
 - [ ] **Exam Rank 03**
 
-### 🚀 Circle 4 - Mar 2025
+### 🚀 Circle 4 - Mar 2026
 - [ ] **RAG Against the Machine** - AI/ML with RAG
 - [ ] **Pac-Man** - Game AI development
 - [ ] **NetPractice** - Network configuration
 - [ ] **Exam Rank 04**
 
-### 💎 Circle 5 - Apr 2025
+### 💎 Circle 5 - Apr 2026
 - [ ] **Inception** - Docker & containerization
 - [ ] **The Answer Protocol** - Advanced protocols
 - [ ] **Agent Smith** - Multi-agent systems
 - [ ] **Exam Rank 05**
 
-### 🏆 Circle 6 - May 2025
+### 🏆 Circle 6 - May 2026
 - [ ] **ft_transcendence** - Full-stack final project
 - [ ] **Exam Rank 06** - Final exam
 - [ ] 🎓 **Cursus Complete!**
