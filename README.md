@@ -38,17 +38,6 @@ This repository contains all my projects completed at 42 Brussels.
 └────────────────────────────────────────────────────────────────┘
 ```
 
-<div align="center">
-
-### 🌌 Holy Graph Visualization
-
-My 42 cursus journey visualized as a solar system - each circle represents a new orbit of knowledge!
-
-<img src="https://raw.githubusercontent.com/kuraiz0/cursus-42/main/.github/holy-graph.png" alt="42 Holy Graph" width="700"/>
-
-**Legend:** 🔵 Completed | ⚪ In Progress | ⚫ Locked
-
-</div>
 
 <div align="center">
 
