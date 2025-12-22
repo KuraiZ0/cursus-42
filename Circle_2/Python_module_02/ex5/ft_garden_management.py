@@ -59,7 +59,7 @@ class GardenManager:
         if not plant.name:
             raise (PlantError("Plant name cannot be empty!"))
         self.plants.append(plant)
-        print(f"Added {plant.name} successfully.")
+        print(f"Added {plant.name} successfully")
 
     def add_water(self):
         """
@@ -99,9 +99,10 @@ class GardenManager:
                 SunlightError(
                     f"Sunlight hours {plant.sunlight_hours}"
                     f" is too high (max 12)."))
-        return (
-            f"{plant.name}: healthy! (water: "
-            f"{plant.water_level}, sun: {plant.sunlight_hours})")
+        else:
+            return (
+                f"{plant.name}: healthy! (water: "
+                f"{plant.water_level}, sun: {plant.sunlight_hours})")
 
 
 if __name__ == "__main__":
@@ -128,13 +129,13 @@ if __name__ == "__main__":
     print()
 
     print("Checking plant health...")
-    gardener.check_plant_health(tomato)
+    print(gardener.check_plant_health(tomato))
     try:
         gardener.check_plant_health(lettuce)
     except WaterError as we:
         print(f"Error checking lettuce: Water level {we}")
     print()
-
+    gardener.check_plant_health(tomato)
     print("Testing error recovery...")
     gardener.water_tank = 5
     try:
@@ -145,15 +146,3 @@ if __name__ == "__main__":
     print()
 
     print("Garden management system test complete!")
-    # print("=== Test Part ===")
-    # tester = GardenManager("Crash-Test")
-    # carrot = Plant("Carrot", 1042, 21490)
-
-    # try:
-    #     tester.add_plant(carrot)
-    # except GardenError as ge:
-    #     raise GardenError(f"Error: {ge}")
-    # try:
-    #     tester.check_plant_health(carrot)
-    # except GardenError as ge:
-    #     print(f"Error: {ge}")

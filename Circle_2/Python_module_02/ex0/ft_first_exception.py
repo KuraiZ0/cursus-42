@@ -12,22 +12,28 @@
 
 
 def check_temperature(temp_str):
-    temp_str = str(input("Enter the temperature: "))
+    """
+    function to check if temperature is good
+    """
     try:
+        print(f"Testing temperature: {temp_str}")
         temp = int(temp_str)
     except ValueError:
-        print(f"Error: '{temp_str}' is not a valid number.")
+        print(f"Error: '{temp_str}' is not a valid number.\n")
         return None
     if temp > 40:
-        print(f"Error: {temp}°C is too hot for plants (max 40°C).")
+        print(f"Error: {temp}°C is too hot for plants (max 40°C).\n")
     elif temp < 0:
-        print(f"Error: {temp}°c is too cold for plants (min 0°C).")
+        print(f"Error: {temp}°c is too cold for plants (min 0°C).\n")
     else:
-        print(f"Temperature {temp}°C is perfect for plants!")
+        print(f"Temperature {temp}°C is perfect for plants!\n")
         return temp
 
 
 def test_temperature_input():
+    """
+    Simple test function
+    """
     check_temperature("25")
     print()
     check_temperature("abc")

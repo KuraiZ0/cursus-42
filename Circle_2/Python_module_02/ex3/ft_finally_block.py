@@ -11,7 +11,7 @@
 # ****************************************************************************#
 
 
-def water_plant(plant_list):
+def water_plants(plant_list):
     print("Opening watering system")
     try:
         for plant in plant_list:
@@ -29,7 +29,7 @@ def water_plant(plant_list):
 def test_watering_system():
     print("Testing with error...")
     bad_list = ['tulip', None]
-    water_plant(bad_list)
+    water_plants(bad_list)
 
 
 if __name__ == "__main__":
@@ -37,7 +37,8 @@ if __name__ == "__main__":
     print("=== Garden Watering System ===")
     print()
     print("Testing normal watering...")
-    water_plant(my_list)
+    water_plants(my_list)
     print()
     test_watering_system()
+    print()
     print("Cleanup always happens, even with errors!")
