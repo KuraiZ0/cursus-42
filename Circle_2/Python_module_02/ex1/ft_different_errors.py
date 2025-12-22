@@ -11,13 +11,13 @@
 # ****************************************************************************#
 
 
-def garden_operator():
+def garden_operations():
     try:
         print("Testing ValueError...")
         int("abc")
         print("No error.")
     except ValueError:
-        print("Caught ValueError: invalid literal for int()\n")
+        print("Caught ValueError: invalid literal for int\n")
     try:
         print("Testing ZeroDivisionError...")
         42 / 0
@@ -26,7 +26,7 @@ def garden_operator():
         print("Caught ZeroDivisionError: division by zero\n")
     try:
         print("Testing FileNotFoundError...")
-        open("sneh.txt", "r")
+        open("missing.txt", "r")
         print("No error.\n")
     except FileNotFoundError:
         print("Caught FileNotFoundError: No such file 'sneh.txt'\n")
@@ -40,11 +40,11 @@ def garden_operator():
         print("Testing multiple errors together...")
         int("abc")
     except (ValueError, ZeroDivisionError, FileNotFoundError, KeyError):
-        print("Caught an error, but program continue!\n")
+        print("Caught an error, but program continues!\n")
 
 
 def test_error_types():
-    garden_operator()
+    garden_operations()
     print("\nAll error types tested successfully!\n")
 
 
