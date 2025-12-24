@@ -53,9 +53,9 @@ This repository contains all my projects completed at 42 Brussels.
 | 🐍 **Python Module 00** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 01** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 02** | 2 | **100**/100 | 🔵 Validated | ✓ |
-| 🐍 **Python Module 03** | 2 | - | ⚪ In Progress | Dec 2025 |
-| 🐍 **Python Module 04** | 2 | - | ⚫ Next | Dec 2025 |
-| 🐍 **Python Module 05** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 03** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🐍 **Python Module 04** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🐍 **Python Module 05** | 2 | - | ⚪ In Progress | ??? |
 | 🐍 **Python Module 06** | 2 | - | ⚫ Planned | ??? |
 | 🐍 **Python Module 07** | 2 | - | ⚫ Planned | ??? |
 | 🐍 **Python Module 08** | 2 | - | ⚫ Planned | ??? |
@@ -247,14 +247,14 @@ Comprehensive Python learning path covering fundamentals to advanced topics incl
 - ✅ **Module 00** (100/100) - Python basics, variables, data types
 - ✅ **Module 01** (100/100) - Control flow, functions, string manipulation
 - ✅ **Module 02** (100/100) - Lists, dictionaries, file I/O
-- 🔄 **Module 03** - Object-Oriented Programming basics
-- ⚫ **Module 04** - Advanced OOP, inheritance, polymorphism
-- ⚫ **Module 05** - Exceptions, decorators, generators
-- ⚫ **Module 06** - NumPy & array manipulation
-- ⚫ **Module 07** - Pandas & data analysis
-- ⚫ **Module 08** - Matplotlib & data visualization
-- ⚫ **Module 09** - Machine Learning basics (scikit-learn)
-- ⚫ **Module 10** - Advanced ML & neural networks
+- 🔄 **Module 03** - Exceptions, decorators, generators
+- ⚫ **Module 04** - Object-Oriented Programming basics, file I/O
+- ⚫ **Module 05** - Advanced OOP, inheritance, polymorphism
+- ⚫ **Module 06**
+- ⚫ **Module 07**
+- ⚫ **Module 08**
+- ⚫ **Module 09** 
+- ⚫ **Module 10** 
 
 **Skills Acquired/To Acquire:**  
 `Python` • `OOP` • `Data Structures` • `NumPy` • `Pandas` • `Matplotlib` • `Machine Learning` • `PEP 8`
