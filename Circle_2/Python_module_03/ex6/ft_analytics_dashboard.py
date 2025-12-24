@@ -14,8 +14,7 @@ player_list = [
     ('alice', 2300, {"first_kill", "level_10"}),
     ('bob', 1800, {"level_10"}),
     ('diana', 2001, {"first_kill", "boss_slayer"}),
-    ('charlie', 2150, {"boss_slayer"})
-    ]
+    ('charlie', 2150, {"boss_slayer"})]
 
 player_dict = {
     'alice': 2300,
@@ -33,8 +32,7 @@ active_region = {
     'alice': 'north',
     'bob': 'south',
     'charlie': 'eastern',
-    'diana': 'west'
-}
+    'diana': 'west'}
 
 
 def print_list():

@@ -12,8 +12,6 @@
 
 import math
 
-# import sys
-
 
 def dist_formula(pos1, pos2):
     """calculate 3D Euclidean distance between two positions"""

@@ -37,20 +37,20 @@ def game_event(count, players):
         yield event
 
 
-def print_event():
+def print_event(players):
     """
     loop for catch stats and print each event and print stream
     analytics
     """
-    compt = 0
+    count = 0
     high_level = 0
     treasure = 0
     level_up = 0
 
     for event in game_event(1000, players):
-        compt += 1
-        if compt <= 3:
-            print(f"Event {compt}: Player {event['player']} (level "
+        count += 1
+        if count <= 3:
+            print(f"Event {count}: Player {event['player']} (level "
                   f"{event['level']}) {event['action']}")
         if event['level'] >= 10:
             high_level += 1
@@ -73,10 +73,9 @@ def print_event():
 def fibonacci():
     a = 0
     b = 1
-    for i in range(0, 10):
+    for _ in range(0, 10):
         yield a
-        b = a + b
-        a = b - a + a
+        a, b = b, a + b
 
 
 def prime_num():
@@ -94,7 +93,7 @@ if __name__ == "__main__":
     print("=== Game Data Stream Processor ===")
     print()
     print("Processing 1000 game events...")
-    print_event()
+    print_event(players)
     print()
     print("=== Generator Demonstration ===")
     print("Fibonacci sequence (first 10):")

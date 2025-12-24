@@ -11,12 +11,9 @@
 # ****************************************************************************#
 
 class Player:
-    def __init__(self, name, inventory=None):
+    def __init__(self, name, inventory=dict()):
         self.name = name
-        if inventory is None:
-            self.inventory = dict()
-        else:
-            self.inventory = inventory
+        self.inventory = inventory
 
     def display_inv(self):
         """
@@ -26,7 +23,7 @@ class Player:
             result = data['quantity'] * data['value']
             print(f"{name} ({data['type']}, {data['rarity']}): "
                   f"{data['quantity']}x @ {int(data['value'])} "
-                  f"gold each = {int(result)}")
+                  f"gold each = {int(result)} gold(s)")
 
     def trade(self, item_name, quantity, player2):
         """
@@ -34,13 +31,16 @@ class Player:
         """
         print(f"=== Transaction: {self.name} gives {player2.name}"
               f" {quantity} {item_name}(s) ===")
-        if (item_name in self.inventory and
-                self.inventory[item_name]['quantity'] >= quantity):
-            if item_name not in player2.inventory:
-                player2.inventory[item_name] = inv[item_name].copy()
-            self.inventory[item_name]['quantity'] -= quantity
-            player2.inventory[item_name]['quantity'] += quantity
-            print("Transaction successful!")
+        if item_name not in player2.inventory:
+            item = self.inventory[item_name]
+            player2.inventory[item_name] = dict(
+                quantity=0,
+                type=item['type'],
+                rarity=item['rarity'],
+                value=item['value'])
+        self.inventory[item_name]['quantity'] -= quantity
+        player2.inventory[item_name]['quantity'] += quantity
+        print("Transaction successful!")
 
     def total_value(self):
         """
@@ -106,53 +106,42 @@ def comp_player(player1, player2):
     print(f"Rarest items: {', '.join(rarest)}")
 
 
-"""
-Dict with all items
-"""
-inv = {
-    'doran sword': {
-        'quantity': 1,
-        'type': 'weapon',
-        'rarity': 'iconic',
-        'value': 500.0
-    },
-    'potion': {
-        'quantity': 5,
-        'type': 'consumable',
-        'rarity': 'common',
-        'value': 50.0
-    },
-    'doran shield': {
-        'quantity': 2,
-        'type': 'armor',
-        'rarity': 'rare',
-        'value': 200.0
-    },
-    'doran ring': {
-        'quantity': 1,
-        'type': 'doran ring',
-        'rarity': 'iconic',
-        'value': 200.0
-    }
-}
-
-
 if __name__ == "__main__":
     """
     Alice inventory attribution
     """
     alice_stuff = {
-        'doran sword': inv['doran sword'],
-        'doran ring': inv['doran ring'],
-        'potion': inv['potion']
+        'doran_sword': {
+            'quantity': 1,
+            'type': 'weapon',
+            'rarity': 'rare',
+            'value': 500.0
+        },
+        'potion': {
+            'quantity': 5,
+            'type': 'consumable',
+            'rarity': 'common',
+            'value': 50.0
+        },
+        'doran_shield': {
+            'quantity': 1,
+            'type': 'armor',
+            'rarity': 'uncommon',
+            'value': 200.0
+        }
     }
     alice = Player("Alice", alice_stuff)
+
     """
     Bob inventory attribution
     """
     bob_stuff = {
-        'doran sword': inv['doran sword'],
-        'potion': inv['potion'],
+        'doran_ring': {
+            'quantity': 1,
+            'type': 'accessory',
+            'rarity': 'rare',
+            'value': 300.0
+        }
     }
     bob = Player("Bob", bob_stuff)
 
