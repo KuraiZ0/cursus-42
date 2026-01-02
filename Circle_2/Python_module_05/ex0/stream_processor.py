@@ -77,7 +77,7 @@ class TextProcessor(DataProcessor):
             return False
 
     def format_output(self, result: str) -> str:
-        return (f"Output: {result}")
+        return f"Output: {result}"
 
 
 class LogProcessor(DataProcessor):
@@ -107,7 +107,7 @@ class LogProcessor(DataProcessor):
             return False
 
     def format_output(self, result: str) -> str:
-        return (f"Output: {result}")
+        return f"Output: {result}"
 
 
 if __name__ == "__main__":
