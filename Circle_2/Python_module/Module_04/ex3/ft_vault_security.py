@@ -11,6 +11,7 @@
 # ****************************************************************************#
 
 def secure_excrat():
+    """Secure extracts classified data and preserve it with vault protocols."""
     print("Initiating secure vault access...")
     print("Vault connection established with failsafe protocols\n")
     print("SECURE EXTRACTION:\n")

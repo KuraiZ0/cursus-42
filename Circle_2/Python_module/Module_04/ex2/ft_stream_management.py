@@ -13,6 +13,7 @@ import sys
 
 
 def diagnostic(id, status_rep):
+    """Displays a system diagnostic report with archive status and checks."""
     sys.stdout.write(f"[STANDARD] Archive status from {id}: {status_rep}\n")
     sys.stderr.write("[ALERT] System diagnostic:"
                      " Communication channels verified\n")
