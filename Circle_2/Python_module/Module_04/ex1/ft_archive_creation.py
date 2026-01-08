@@ -18,6 +18,7 @@ data = [
 
 
 def write_txt():
+    """ Function to write somethings in a txt file."""
     print("Initializing new storage unit: new_discovery.txt")
     file = open('new_discovery.txt', 'w')
     print("Storage unit created successfully...\n")

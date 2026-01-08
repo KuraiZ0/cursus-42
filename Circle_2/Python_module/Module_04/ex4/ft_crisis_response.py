@@ -11,6 +11,7 @@
 # ****************************************************************************#
 
 def crisis_alert(file_name):
+    """ Trying to access to a file and display errors if crisis occured"""
     try:
         print(f"CRISIS ALERT: Attempting access to '{file_name}'...")
         with open(file_name, 'r') as file:
