@@ -1,4 +1,6 @@
-from __init__ import SpellCard, Deck, ArtifactCard
+from SpellCard import SpellCard
+from Deck import Deck
+from ArtifactCard import ArtifactCard
 
 
 if __name__ == "__main__":
