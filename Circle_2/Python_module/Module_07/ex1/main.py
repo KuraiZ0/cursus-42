@@ -1,6 +1,7 @@
-from SpellCard import SpellCard
-from Deck import Deck
-from ArtifactCard import ArtifactCard
+from .SpellCard import SpellCard
+from .Deck import Deck
+from .ArtifactCard import ArtifactCard
+from ..ex0.CreatureCard import CreatureCard
 
 
 if __name__ == "__main__":
@@ -9,19 +10,22 @@ if __name__ == "__main__":
     light = SpellCard("Lightning Bolt", 3, "Common", "damage")
     mana_crystal = ArtifactCard(
         "Mana Crystal", 2, "Rare", 999, "+1 mana per turn")
+    f_dragon = CreatureCard(
+        "Fire Dragon", 5, "Rare", 6, 4)  # attack=6, health=4
 
-    deck = Deck()
+    deck = Deck([])
     deck.add_card(light)
     deck.add_card(mana_crystal)
-
+    deck.add_card(f_dragon)
     print(f"Deck stats: {deck.get_deck_stats()}")
     print()
     print("Drawing and playing cards:")
     deck.shuffle()
 
+    game_state = {'mana': 10, 'artifacts': []}
+    
     spell = deck.draw_card()
     if spell:
-        game_state = {'mana': 10, 'artifacts': []}
         print(f"Drew: {spell.name} (Spell)")
         print(f"Play result: {spell.play(game_state)}")
 
@@ -29,5 +33,10 @@ if __name__ == "__main__":
     if artifact:
         print(f"Drew: {artifact.name} (Artifact)")
         print(f"Play result: {artifact.play(game_state)}")
+
+    creature = deck.draw_card()
+    if creature:
+        print(f"Drew: {creature.name} (Creature)")
+        print(f"Play result: {creature.play(game_state)}")
 
     print("Polymorphism in action: Same interface, different card behaviors!")

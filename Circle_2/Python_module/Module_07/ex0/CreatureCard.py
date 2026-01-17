@@ -1,4 +1,4 @@
-from Card import Card
+from .Card import Card
 
 
 class CreatureCard(Card):
@@ -9,7 +9,13 @@ class CreatureCard(Card):
         self.health = health
 
     def play(self, game_state: dict) -> dict:
-        return game_state
+        result = {
+            'card_played': self.name,
+            'mana_used': self.cost,
+            'effect': 'Creature summoned to battlefield'
+        }
+        game_state['mana'] -= self.cost
+        return result
 
     def attack_target(self, target) -> dict:
         """Function to attack a predefined target"""

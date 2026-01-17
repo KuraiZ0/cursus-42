@@ -13,7 +13,7 @@ class SpellCard:
         result = {
             'card_played': self.name,
             'mana_used': self.cost,
-            'effect': f'{self.effect_type.capitalize()} effect applied'
+            'effect': f'Deal {self.cost} damage to target'  # ← Ligne changée
         }
         game_state['mana'] -= self.cost
         return result
