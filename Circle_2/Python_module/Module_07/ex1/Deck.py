@@ -1,7 +1,8 @@
+"""Base class for creating a deck."""
 from typing import List, Dict
-from SpellCard import SpellCard
-from ArtifactCard import ArtifactCard
-from Card import Card
+from .SpellCard import SpellCard
+from .ArtifactCard import ArtifactCard
+from ex0.Card import Card
 import random
 
 
