@@ -33,9 +33,10 @@ class Deck:
             return {'total_cards': 0}
 
         total_cost = sum(card.cost for card in self.deck)
+        avg = total_cost / len(self.deck)
         stats = {
             'total_cards': len(self.deck),
-            'avg_cost': total_cost / len(self.deck),
+            'avg_cost': f"{avg:.2f}",
             'creatures': sum(
                 1 for card in self.deck if hasattr(card, 'attack')),
             'spells': sum(

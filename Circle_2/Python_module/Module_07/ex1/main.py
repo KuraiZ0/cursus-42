@@ -1,7 +1,7 @@
 from .SpellCard import SpellCard
 from .Deck import Deck
 from .ArtifactCard import ArtifactCard
-from ..ex0.CreatureCard import CreatureCard
+from ex0.CreatureCard import CreatureCard
 
 
 if __name__ == "__main__":
@@ -19,7 +19,7 @@ if __name__ == "__main__":
     deck.add_card(f_dragon)
     print(f"Deck stats: {deck.get_deck_stats()}")
     print()
-    print("Drawing and playing cards:")
+    print("Drawing and playing cards:\n")
     deck.shuffle()
 
     game_state = {'mana': 10, 'artifacts': []}
@@ -27,16 +27,16 @@ if __name__ == "__main__":
     spell = deck.draw_card()
     if spell:
         print(f"Drew: {spell.name} (Spell)")
-        print(f"Play result: {spell.play(game_state)}")
+        print(f"Play result: {spell.play(game_state)}\n")
 
     artifact = deck.draw_card()
     if artifact:
         print(f"Drew: {artifact.name} (Artifact)")
-        print(f"Play result: {artifact.play(game_state)}")
+        print(f"Play result: {artifact.play(game_state)}\n")
 
     creature = deck.draw_card()
     if creature:
         print(f"Drew: {creature.name} (Creature)")
-        print(f"Play result: {creature.play(game_state)}")
+        print(f"Play result: {creature.play(game_state)}\n")
 
     print("Polymorphism in action: Same interface, different card behaviors!")
