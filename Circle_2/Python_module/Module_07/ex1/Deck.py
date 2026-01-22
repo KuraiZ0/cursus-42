@@ -1,4 +1,5 @@
-"""Base class for creating a deck."""
+"""This module provides the `Deck` class for managing a collection of cards."""
+
 from typing import List, Dict
 from .SpellCard import SpellCard
 from .ArtifactCard import ArtifactCard
@@ -7,13 +8,36 @@ import random
 
 
 class Deck:
+    """Represents a deck of cards."""
+
     def __init__(self, deck: list):
+        """
+        Initialize a Deck instance.
+
+        Args:
+            deck: An unused parameter.
+        """
         self.deck: List[Card] = []
 
     def add_card(self, card: Card):
+        """
+        Add a card to the deck.
+
+        Args:
+            card: The card to add.
+        """
         self.deck.append(card)
 
     def remove_card(self, card_name: str) -> bool:
+        """
+        Remove a card from the deck by name.
+
+        Args:
+            card_name: The name of the card to remove.
+
+        Returns:
+            True if the card was removed, False otherwise.
+        """
         for i, card in enumerate(self.deck):
             if card.name == card_name:
                 self.deck.pop(i)
@@ -21,14 +45,27 @@ class Deck:
         return False
 
     def shuffle(self) -> None:
+        """Shuffle the deck."""
         random.shuffle(self.deck)
 
     def draw_card(self) -> Card:
+        """
+        Draw a card from the top of the deck.
+
+        Returns:
+            The card drawn, or None if the deck is empty.
+        """
         if self.deck:
             return self.deck.pop(0)
         return None
 
     def get_deck_stats(self) -> Dict[str, any]:
+        """
+        Get statistics about the deck.
+
+        Returns:
+            A dictionary with deck statistics.
+        """
         if not self.deck:
             return {'total_cards': 0}
 

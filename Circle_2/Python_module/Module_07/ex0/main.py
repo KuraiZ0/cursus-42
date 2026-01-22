@@ -1,7 +1,10 @@
+"""This script demonstrates the usage of the CreatureCard class."""
+
 from CreatureCard import CreatureCard
 
 if __name__ == "__main__":
     print("=== DataDeck Card Foundation ===\n")
+
     print("Testing Abstract Base Class Design:\n")
     print("CreatureCard Info:")
     first_card = CreatureCard("Fire Dragon", 5, "Legendary", 7, 5)
