@@ -24,7 +24,7 @@ if __name__ == "__main__":
     result_attack: dict[Any] = arcane.attack(enemy)
     print(f"Attack result: {result_attack}")
     dmg = result_attack['damage']
-    print(f"Defend result: {enemy.defend(dmg)}")
+    print(f"Defend result: {enemy.defend(dmg)}\n")
 
     print("Magic phase:")
     enemy_list: list[EliteCard] = [enemy1.name, enemy2.name]

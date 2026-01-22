@@ -11,7 +11,19 @@ class EliteCard(Card, Combatable, Magical):
     def __init__(
             self, name: str, cost: int, rarity: str, attack: int,
             health: int, mana: int, type: str = "", armor: int = 0):
-        """Initialize the EliteCard with combat and magic stats."""
+        """
+        Initialize the EliteCard with combat and magic stats.
+
+        Args:
+            name: The name of the card.
+            cost: The mana cost of the card.
+            rarity: The rarity of the card.
+            attack: The attack power of the card.
+            health: The health points of the card.
+            mana: The mana points of the card.
+            type: The combat type of the card.
+            armor: The armor points of the card.
+        """
         super().__init__(name, cost, rarity)
         self.attack_value = attack
         self.health = health
@@ -20,7 +32,15 @@ class EliteCard(Card, Combatable, Magical):
         self.armor = armor
 
     def attack(self, target: Any) -> dict:
-        """Execute an attack against a specific target."""
+        """
+        Execute an attack against a specific target.
+
+        Args:
+            target: The target of the attack.
+
+        Returns:
+            A dictionary with the combat results.
+        """
         return {
             "attacker": self.name,
             "target": target.name,
@@ -29,7 +49,15 @@ class EliteCard(Card, Combatable, Magical):
         }
 
     def defend(self, incoming_damage: int) -> dict:
-        """Calculate damage taken after armor reduction."""
+        """
+        Calculate damage taken after armor reduction.
+
+        Args:
+            incoming_damage: The amount of damage to defend against.
+
+        Returns:
+            A dictionary with the defense results.
+        """
         blocked: int = min(incoming_damage, self.armor)
         taken: int = max(0, incoming_damage - self.armor)
         result: dict[Any] = {
@@ -41,7 +69,16 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def cast_spell(self, spell_name: str, targets: list) -> dict:
-        """Cast a spell and consume mana."""
+        """
+        Cast a spell and consume mana.
+
+        Args:
+            spell_name: The name of the spell to cast.
+            targets: A list of targets for the spell.
+
+        Returns:
+            A dictionary with the spell casting results.
+        """
         result: dict[Any] = {
             "caster": self.name,
             "spell": spell_name,
@@ -51,7 +88,15 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def channel_mana(self, amount: int) -> dict:
-        """Increase the mana pool by the specified amount."""
+        """
+        Increase the mana pool by the specified amount.
+
+        Args:
+            amount: The amount of mana to channel.
+
+        Returns:
+            A dictionary with the mana channeling results.
+        """
         self.mana += amount
         result: dict[Any] = {
             "channeled": amount,
@@ -60,20 +105,38 @@ class EliteCard(Card, Combatable, Magical):
         return result
 
     def get_combat_stats(self) -> dict:
-        """Return the attack and health values."""
+        """
+        Return the attack and health values.
+
+        Returns:
+            A dictionary with the combat stats.
+        """
         return {
             "attack": self.attack_value,
             "health": self.health
         }
 
     def get_magic_stats(self) -> dict:
-        """Return the current mana value."""
+        """
+        Return the current mana value.
+
+        Returns:
+            A dictionary with the magic stats.
+        """
         return {
             "mana": self.mana
         }
 
     def play(self, game_state: dict) -> dict:
-        """Activate the card in the game."""
+        """
+        Activate the card in the game.
+
+        Args:
+            game_state: The current game state.
+
+        Returns:
+            A dictionary with the play results.
+        """
         return {
             "card_played": self.name,
             "type": "EliteCard",
