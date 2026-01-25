@@ -31,11 +31,15 @@ class GameEngine:
             dict: The comprehensive report of the turn execution.
         """
         hand: list[Any] = [
-            self.factory.create_creature("dragon"),
-            self.factory.create_creature("goblin"),
-            self.factory.create_spell("fireball"),
-            self.factory.create_artifact("ring")
+            self.factory.create_creature("Fire Dragon"),
+            self.factory.create_creature("Goblin Warrior"),
+            self.factory.create_spell("Lightning Bolt"),
+            self.factory.create_artifact("Ring")
         ]
+
+        hand_display: list[str] = [
+            f"{card.name} ({card.cost})" for card in hand]
+        print(f"Hand: {hand_display}\n")
 
         battlefield: list[Any] = []
 
