@@ -1,6 +1,6 @@
 """Aggressive Strategy."""
 
-from GameStrategy import GameStrategy
+from .GameStrategy import GameStrategy
 from typing import Any
 
 

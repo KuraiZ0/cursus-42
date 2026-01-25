@@ -72,7 +72,7 @@ class FantasyCardFactory(CardFactory):
     def get_supported_types(self) -> dict:
         """Return the list of supported fantasy card types."""
         return {
-            "creatures": ["Dragon", "Goblin", "Orc"],
+            "creatures": ["Dragon", "Goblin", "Cursed Spirit"],
             "spells": ["Fireball", "Ice Bolt"],
             "artifacts": ["Magic Ring", "Ancient Staff"]
         }
