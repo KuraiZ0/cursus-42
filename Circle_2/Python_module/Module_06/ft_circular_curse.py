@@ -1,7 +1,9 @@
+"""This module demonstrates how to avoid circular dependencies in Python."""
 from alchemy.grimoire import record_spell, validate_ingredients
 
 
 def ing_valid() -> None:
+    """Test ingredient validation."""
     print("Testing ingredient validation:")
     print(f'validate_ingredients("fire air"):'
           f' {validate_ingredients("fire air")}')
@@ -10,6 +12,7 @@ def ing_valid() -> None:
 
 
 def spell_valid() -> None:
+    """Test spell recording with validation."""
     print("Testing spell recording with validation:")
     print(f'record_spell("Fireball", "fire air"):'
           f' {record_spell("Fireball", "fire air")}')
@@ -18,6 +21,7 @@ def spell_valid() -> None:
 
 
 def late() -> None:
+    """Test late import technique."""
     from alchemy.grimoire import record_spell
     print("Testing late import technique:")
     print(f'record_spell("Lightning", "air"):'

@@ -1,4 +1,8 @@
-"""Tournament Card implementation."""
+"""
+This module provides the `TournamentCard` class.
+
+A card capable of participating in tournaments.
+"""
 
 from .Rankable import Rankable
 from ex0.Card import Card
@@ -18,9 +22,25 @@ class TournamentCard(Card, Combatable, Rankable):
     def __init__(
         self, name: str, cost: int, rarity: str,
             attack_value: int, health: int, mana: int, card_id: str,
-            armor: int = 0, rating: int = 0, win: int = 0, loose: int = 0
-            ) -> None:
-        """Initialize a TournamentCard."""
+            armor: int = 0, rating: int = 0, win: int = 0, loss: int = 0
+    ) -> None:
+        """
+        Initialize a TournamentCard.
+
+        Args:
+            name (str): The name of the card.
+            cost (int): The mana cost of the card.
+            rarity (str): The rarity of the card.
+            attack_value (int): The attack value of the card.
+            health (int): The health points of the card.
+            mana (int): The mana points of the card.
+            card_id (str): The unique ID of the card.
+            armor (int, optional): The armor points of the card.
+                                   Defaults to 0.
+            rating (int, optional): The rating of the card. Defaults to 0.
+            win (int, optional): The number of wins. Defaults to 0.
+            loss (int, optional): The number of losses. Defaults to 0.
+        """
         super().__init__(name, cost, rarity)
         self.attack_value = attack_value
         self.health = health
@@ -30,16 +50,32 @@ class TournamentCard(Card, Combatable, Rankable):
         else:
             self.rating = randint(999, 1501)
         self.win = win
-        self.loose = loose
+        self.loss = loss
         self.card_id = card_id
         self.armor = armor
 
     def play(self, game_state: dict) -> dict:
-        """Play the card."""
+        """
+        Play the card.
+
+        Args:
+            game_state (dict): The current game state.
+
+        Returns:
+            dict: The updated game state.
+        """
         return game_state
 
     def attack(self, target) -> dict:
-        """Execute an attack on a target."""
+        """
+        Execute an attack on a target.
+
+        Args:
+            target: The target of the attack.
+
+        Returns:
+            dict: A dictionary containing the attack information.
+        """
         return {
             "attacker": self.name,
             "target": target.name,
@@ -90,13 +126,19 @@ class TournamentCard(Card, Combatable, Rankable):
         Args:
             losses (int): The number of losses to add.
         """
-        self.loose += losses
+        self.loss += losses
         self.rating -= 16
 
     def get_rank_info(self) -> dict:
+        """
+        Get the rank information of the card.
+
+        Returns:
+            dict: A dictionary containing the rating and record.
+        """
         return {
             "rating": self.rating,
-            "record": f"{self.win}-{self.loose}"
+            "record": f"{self.win}-{self.loss}"
         }
 
     def calculate_rating(self) -> int:
@@ -109,13 +151,25 @@ class TournamentCard(Card, Combatable, Rankable):
         return self.rating
 
     def get_tournament_stats(self) -> dict:
+        """
+        Get the tournament statistics of the card.
+
+        Returns:
+            dict: A dictionary containing the wins, losses, and rating.
+        """
         return {
             "wins": self.win,
-            "losses": self.loose,
+            "losses": self.loss,
             "rating": self.rating
         }
 
     def get_combat_stats(self) -> dict:
+        """
+        Get the combat statistics of the card.
+
+        Returns:
+            dict: A dictionary containing the attacker's name.
+        """
         return {
             "attacker": self.name
         }

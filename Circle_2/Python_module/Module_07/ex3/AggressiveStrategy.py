@@ -1,4 +1,9 @@
-"""Aggressive Strategy."""
+"""
+This module defines the AggressiveStrategy class.
+
+A game strategy that prioritizes dealing maximum damage by playing low-cost
+cards and attacking with all available creatures.
+"""
 
 from .GameStrategy import GameStrategy
 from typing import Any

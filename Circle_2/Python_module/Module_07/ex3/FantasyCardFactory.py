@@ -1,4 +1,8 @@
-"""Card factory."""
+"""
+This module provides a concrete implementation of the CardFactory.
+
+A base class for creating fantasy-themed cards.
+"""
 
 from ex1 import ArtifactCard
 from ex1 import SpellCard
@@ -10,10 +14,25 @@ from typing import Any
 
 
 class FantasyCardFactory(CardFactory):
-    """Create random cards."""
+    """
+    A factory for creating fantasy-themed cards.
+
+    This class implements the `CardFactory` interface to generate random
+    creature, spell, and artifact cards with fantasy-themed attributes. It
+    also provides a method for creating a themed deck of a specified size.
+    """
 
     def create_creature(self, name_or_power: str | int | None = None) -> Card:
-        """Create a Creature Card."""
+        """
+        Create a new Creature card with random attributes.
+
+        Args:
+            name_or_power (str | int | None): The name or power of the
+                                              creature.
+
+        Returns:
+            Card: A new Creature card instance.
+        """
         rarity_type: list[str] = ["Common", "Rare", "Epic", "Legendary"]
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)
@@ -23,7 +42,15 @@ class FantasyCardFactory(CardFactory):
         return card
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
-        """Create a Spell Card."""
+        """
+        Create a new Spell card with random attributes.
+
+        Args:
+            name_or_power (str | int | None): The name or power of the spell.
+
+        Returns:
+            Card: A new Spell card instance.
+        """
         rarity_type: list[str] = ["Common", "Rare", "Epic", "Legendary"]
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)
@@ -32,7 +59,16 @@ class FantasyCardFactory(CardFactory):
         return card
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
-        """Create an Artifact Card."""
+        """
+        Create a new Artifact card with random attributes.
+
+        Args:
+            name_or_power (str | int | None): The name or power of the
+                                              artifact.
+
+        Returns:
+            Card: A new Artifact card instance.
+        """
         rarity_type: list[str] = ["Common", "Rare", "Epic", "Legendary"]
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)

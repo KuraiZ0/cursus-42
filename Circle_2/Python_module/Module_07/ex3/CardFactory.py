@@ -1,4 +1,8 @@
-"""Card factory."""
+"""
+This module defines the CardFactory abstract base class.
+
+It provides an interface for creating cards and themed decks in a card game.
+"""
 
 from abc import ABC, abstractmethod
 from ex0.Card import Card
