@@ -1,4 +1,9 @@
-"""Game engine."""
+"""
+This module defines the GameEngine class.
+
+It manages game configurations and simulates game turns based on a specified
+factory and strategy.
+"""
 
 from .GameStrategy import GameStrategy
 from .CardFactory import CardFactory

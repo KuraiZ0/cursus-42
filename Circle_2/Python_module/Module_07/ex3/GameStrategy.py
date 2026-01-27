@@ -41,9 +41,13 @@ class GameStrategy(ABC):
 
     @abstractmethod
     def prioritize_targets(self, available_targets: list) -> list:
-        """Return the available targets.
+        """
+        Prioritize targets based on the strategy.
+
+        Args:
+            available_targets (list): A list of potential targets.
 
         Returns:
-            list: List of available targets
+            list: A prioritized list of targets.
         """
         pass
