@@ -1,7 +1,8 @@
 """This module provides the `SpellCard` class."""
+from ex0.Card import Card
 
 
-class SpellCard:
+class SpellCard(Card):
     """Represents a spell card."""
 
     def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
@@ -14,9 +15,7 @@ class SpellCard:
             rarity: The rarity of the card.
             effect_type: The type of effect the spell has.
         """
-        self.name = name
-        self.cost = cost
-        self.rarity = rarity
+        super().__init__(name, cost, rarity)
         self.effect_type = effect_type
 
     def play(self, game_state: dict) -> dict:
