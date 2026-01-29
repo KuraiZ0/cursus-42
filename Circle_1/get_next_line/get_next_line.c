@@ -83,29 +83,28 @@ char	*get_next_line(int fd)
 	return (line);
 }
 
-/*
-#include <stdio.h>
-#include <fcntl.h>
 
-int main()
-{
-    int fd;
-    char *line;
+// #include <stdio.h>
+// #include <fcntl.h>
 
-    fd = open("./test.txt", O_RDONLY);
-    if (fd < 0)
-    {
-        perror("Error opening file");
-        return 1;
-    }
+// int main()
+// {
+//     int fd;
+//     char *line;
 
-    while ((line = get_next_line(fd)) != NULL)
-    {
-        printf("%s", line); // line already has \n if present
-        free(line);         // free each line after using it
-    }
+//     fd = open("./test.txt", O_RDONLY);
+//     if (fd < 0)
+//     {
+//         perror("Error opening file");
+//         return 1;
+//     }
 
-    close(fd);
-    return 0;
-}
-*/
+//     while ((line = get_next_line(fd)) != NULL)
+//     {
+//         printf("%s", line); // line already has \n if present
+//         free(line);         // free each line after using it
+//     }
+
+//     close(fd);
+//     return 0;
+// }

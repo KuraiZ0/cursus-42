@@ -1,8 +1,8 @@
 """Space Crew Management module."""
-from pydantic import ValidationError
 from typing import Self
 from datetime import datetime
-from pydantic import BaseModel, Field, model_validator
+from pydantic import (
+    BaseModel, Field, model_validator, ValidationError)
 from enum import Enum
 
 
