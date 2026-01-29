@@ -34,12 +34,7 @@ SRC = push_swap.c \
 		index.c\
 		error_handle.c\
 
-OBJ = $(SRC:.c=.o)Updated!``
-ok
-
-
-
-
+OBJ = $(SRC:.c=.o)
 
 %.o: %.c push_swap.h
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(PRINTF_DIR) -c $< -o $@
