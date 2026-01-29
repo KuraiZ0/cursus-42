@@ -1,7 +1,8 @@
 """This module provides the `ArtifactCard` class."""
+from ex0.Card import Card
 
 
-class ArtifactCard:
+class ArtifactCard(Card):
     """Represents an artifact card."""
 
     def __init__(
@@ -17,9 +18,7 @@ class ArtifactCard:
             durability: The durability of the artifact.
             effect: The effect of the artifact.
         """
-        self.name = name
-        self.cost = cost
-        self.rarity = rarity
+        super().__init__(name, cost, rarity)
         self.durability = durability
         self.effect = effect
 
