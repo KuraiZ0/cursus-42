@@ -1,6 +1,7 @@
 """Alien Contact Log Validation module."""
 from typing import Self, Optional
-from pydantic import BaseModel, Field, model_validator
+from pydantic import (
+    BaseModel, Field, model_validator, ValidationError)
 from datetime import datetime
 from enum import Enum
 
@@ -78,7 +79,7 @@ if __name__ == "__main__":
         print(f"Duration: {alien.duration_minutes} minutes")
         print(f"Witnesses: {alien.witness_count}")
         print(f"Message: {alien.message_received}\n")
-    except ValueError as ve:
+    except ValidationError as ve:
         print(ve)
     print("======================================")
     print("Expected validation error:")
@@ -93,5 +94,5 @@ if __name__ == "__main__":
             witness_count=1,
             message_received="Greatings from Zeta Reticuli"
         )
-    except ValueError as ve:
+    except ValidationError as ve:
         print(ve)
