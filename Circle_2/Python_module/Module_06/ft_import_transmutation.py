@@ -36,10 +36,10 @@ def method3() -> None:
 
 def method4() -> None:
     """Demonstrates multiple imports."""
-    from alchemy.elements import create_fire, create_water
+    from alchemy.elements import create_fire, create_earth
     from alchemy.potions import strength_potion as sp
     print("Method 4 - Multiple imports:")
-    print(f"create_water(): {create_water()}")
+    print(f"create_earth(): {create_earth()}")
     print(f"create_fire(): {create_fire()}")
     print(f"strength_potion(): {sp()}")
 

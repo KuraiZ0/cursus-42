@@ -11,8 +11,8 @@ def validate_ingredients(ingredients: str) -> str:
     Returns:
         A string indicating whether the ingredients are valid or not.
     """
-    valid_elements = ["fire", "water", "earth", "air"]
-    for element in valid_elements:
-        if element in ingredients:
-            return f"{ingredients} - VALID"
-    return f"{ingredients} - INVALID"
+    valid_elements: list[str] = ["fire", "water", "earth", "air"]
+    for ingredient in ingredients.split():
+        if ingredient not in valid_elements:
+            return f"{ingredients} - INVALID"
+    return f"{ingredients} - VALID"
