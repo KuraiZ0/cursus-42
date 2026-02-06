@@ -21,4 +21,4 @@ def spell_accumulator(initial_power: int) -> callable:
 
 def enchantment_factory(enchantment_type: str) -> callable:
 
-    def apply_enchantment(enchantment: str):
+    def enchantment_type(item_name: str):

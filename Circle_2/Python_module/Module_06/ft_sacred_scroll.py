@@ -38,5 +38,5 @@ if __name__ == "__main__":
 
     print()
     print("Package metadata:")
-    print(alchemy.__version__)
-    print(alchemy.__author__)
+    print(f"Version: {alchemy.__version__}")
+    print(f"Author: {alchemy.__author__}")
