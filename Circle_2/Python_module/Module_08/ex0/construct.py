@@ -16,7 +16,7 @@ if __name__ == "__main__":
         )
         print("Package installation path:")
         for path in sys.path:
-            if sys.path.endswith("site-packages"):
+            if path.endswith("site-packages"):
                 print(path)
     else:
         print("\nMATRIX STATUS: You're still plugged in\n")
@@ -25,7 +25,7 @@ if __name__ == "__main__":
         print("WARNING: You're in the global environment!")
         print("The machines can see everything you install.\n")
         print("To enter the construct, run:")
-        print("python -m venv matrix_env")
+        print("python3 -m venv matrix_env")
         print("source matrix_env/bin/activate   # On Unix\n")
         print("matrix_env")
         print("Scripts")

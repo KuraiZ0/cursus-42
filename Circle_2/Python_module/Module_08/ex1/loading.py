@@ -2,8 +2,11 @@
 
 If they are met, it generates a plot of random data.
 """
+import sys
+
 try:
-    print("Checking dependancies:")
+    print("\nLOADING STATUS: Loading programs...\n")
+    print("Checking dependencies:")
     import pandas as pd
     print(f"[OK] pandas ({pd.__version__}) - Data manipulation ready")
     import matplotlib.pyplot as plt
@@ -21,7 +24,9 @@ except ImportError as e:
           "install requirements: pip install -r requirements.txt")
     print("More easy is use Poetry:\n pip install poetry")
     print("After just use <poetry install> "
-          "it will install the dependancies in a venv")
+          "it will install the dependencies in a venv")
+    sys.exit(1)
+
 
 if __name__ == "__main__":
     print("Analyzing Matrix Data...")
