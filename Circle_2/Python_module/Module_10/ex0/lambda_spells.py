@@ -1,4 +1,5 @@
 """A module for demonstrating lambda functions and their equivalents."""
+from typing import Any
 
 
 def artifact_sorter(artifacts: list[dict]) -> list[dict]:
@@ -10,7 +11,8 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     Returns:
         The sorted list of artifacts.
     """
-    return sorted(artifacts, key=lambda artifact: artifact["power"], reverse=True)
+    return sorted(
+        artifacts, key=lambda artifact: artifact["power"], reverse=True)
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
@@ -47,7 +49,7 @@ def mage_stats(mages: list[dict]) -> dict:
     Returns:
         A dictionary with 'max_power', 'min_power', and 'avg_power'.
     """
-    powers = [mage["power"] for mage in mages]
+    powers: list[Any] = [mage["power"] for mage in mages]
     return {
         "max_power": max(powers),
         "min_power": min(powers),
@@ -56,14 +58,21 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    firestaff = {"name": "Fire Staff", "power": 92}
-    crystal = {"name": "Crystal Orb", "power": 85}
-    artifacts_list = [firestaff, crystal]
+    artifacts_list: list[Any] = [
+        {"name": "Crystal Orb", "power": 85, "type": "magical"},
+        {"name": "Fire Staff", "power": 92, "type": "weapon"},
+    ]
 
-    print("\nTesting artifact sorter...")
-    sorted_artifacts = artifact_sorter(artifacts_list)
+    spells_list: list[str] = ["fireball", "heal", "shield"]
+
+    print("Testing artifact sorter...")
+    sorted_artifacts: list[Any] = artifact_sorter(artifacts_list)
     print(
-        f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']}) "
+        f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']} power)"
         f"comes before {sorted_artifacts[1]['name']} "
-        f"({sorted_artifacts[1]['power']})"
+        f"({sorted_artifacts[1]['power']} power)"
     )
+
+    print("\nTesting spell transformer...")
+    transformed: list[str] = spell_transformer(spells_list)
+    print(" ".join(transformed))
