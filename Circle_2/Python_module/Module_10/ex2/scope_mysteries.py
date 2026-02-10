@@ -1,4 +1,5 @@
 """A module for exploring variable scopes in Python."""
+from typing import Any
 
 
 def mage_counter() -> callable:
@@ -123,7 +124,7 @@ if __name__ == "__main__":
     print(shield("Shield"))
     print()
     print("Testing memory vault...")
-    vault = memory_vault()
+    vault: dict[Any] = memory_vault()
     stored = vault["store"]
     recalled = vault["recall"]
     stored("password", "12345")

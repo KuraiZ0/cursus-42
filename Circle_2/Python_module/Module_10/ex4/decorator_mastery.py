@@ -123,7 +123,8 @@ def retry_spell(max_attempts: int) -> callable:
                     return result
                 except Exception:
                     print(
-                        f"Spell failed, retrying... " f"(attempts {n}/{max_attempts})"
+                        f"Spell failed, retrying... "
+                        f"(attempts {n}/{max_attempts})"
                     )
                     n += 1
             return f"Spell casting failed " f"after {max_attempts} attempts."
@@ -139,7 +140,8 @@ class MageGuild:
     @staticmethod
     def validate_mage_name(name: str) -> bool:
         """I used Static method for checks if name is valid."""
-        space_or_letter = all(char.isalpha() or char.isspace() for char in name)
+        space_or_letter: bool = all(
+            char.isalpha() or char.isspace() for char in name)
         if len(name) >= 3 and space_or_letter:
             return True
         else:
@@ -161,4 +163,21 @@ class MageGuild:
 
 if __name__ == "__main__":
 
-    print("\nTesting spell timer...\n")
+    print("Testing spell timer...")
+
+    @spell_timer
+    def fireball():
+        """Cast a fireball spell."""
+        time.sleep(0.1)
+        return "Fireball cast!"
+
+    result = fireball()
+    print(f"Result: {result}")
+
+    print("\nTesting MageGuild...")
+    print(MageGuild.validate_mage_name("Merlin"))
+    print(MageGuild.validate_mage_name("Al"))
+
+    guild = MageGuild()
+    print(guild.cast_spell("Lightning", 15))
+    print(guild.cast_spell("Fireball", 5))

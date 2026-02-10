@@ -68,7 +68,8 @@ if __name__ == "__main__":
 
     print("\nTesting spell combiner...")
     combined_spell = spell_combiner(fireball, heal)
-    print(f"Combined spell result: {combined_spell('Dragon')}")
+    result = combined_spell('Dragon')
+    print(f"Combined spell result: {result[0]}, {result[1]}")
 
     print("\nTesting power amplifier...")
     amplified_power = power_amplifier(get_power, 3)
