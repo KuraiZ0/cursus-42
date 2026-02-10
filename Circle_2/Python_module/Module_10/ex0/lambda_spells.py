@@ -10,8 +10,7 @@ def artifact_sorter(artifacts: list[dict]) -> list[dict]:
     Returns:
         The sorted list of artifacts.
     """
-    return sorted(artifacts, key=lambda artifact: artifact['power'],
-                  reverse=True)
+    return sorted(artifacts, key=lambda artifact: artifact["power"], reverse=True)
 
 
 def power_filter(mages: list[dict], min_power: int) -> list[dict]:
@@ -24,7 +23,7 @@ def power_filter(mages: list[dict], min_power: int) -> list[dict]:
     Returns:
         A list of mages who meet the power requirement.
     """
-    return list(filter(lambda mage: mage['power'] >= min_power, mages))
+    return list(filter(lambda mage: mage["power"] >= min_power, mages))
 
 
 def spell_transformer(spells: list[str]) -> list[str]:
@@ -48,11 +47,11 @@ def mage_stats(mages: list[dict]) -> dict:
     Returns:
         A dictionary with 'max_power', 'min_power', and 'avg_power'.
     """
-    powers = [mage['power'] for mage in mages]
+    powers = [mage["power"] for mage in mages]
     return {
         "max_power": max(powers),
         "min_power": min(powers),
-        "avg_power": round(sum(powers) / len(powers), 2)
+        "avg_power": round(sum(powers) / len(powers), 2),
     }
 
 
@@ -63,6 +62,8 @@ if __name__ == "__main__":
 
     print("\nTesting artifact sorter...")
     sorted_artifacts = artifact_sorter(artifacts_list)
-    print(f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']}) "
-          f"comes before {sorted_artifacts[1]['name']} "
-          f"({sorted_artifacts[1]['power']})")
+    print(
+        f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']}) "
+        f"comes before {sorted_artifacts[1]['name']} "
+        f"({sorted_artifacts[1]['power']})"
+    )

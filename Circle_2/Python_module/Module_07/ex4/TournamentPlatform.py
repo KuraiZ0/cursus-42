@@ -95,7 +95,7 @@ class TournamentPlatform:
             dict: A dictionary containing the tournament report.
         """
         total_rating: int = sum(c.rating for c in self.cards.values())
-        avg = total_rating / len(self.cards) if self.cards else 0
+        avg: float = total_rating / len(self.cards) if self.cards else 0
 
         return {
             "total_cards": len(self.cards),

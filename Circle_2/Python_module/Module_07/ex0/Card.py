@@ -6,7 +6,7 @@ from abc import ABC, abstractmethod
 class Card(ABC):
     """Represents an abstract base for a card."""
 
-    def __init__(self, name: str, cost: int, rarity: str):
+    def __init__(self, name: str, cost: int, rarity: str) -> None:
         """
         Initialize a Card instance.
 
@@ -20,7 +20,7 @@ class Card(ABC):
         self.rarity = rarity
 
     @abstractmethod
-    def play(self, game_stats: dict) -> dict:
+    def play(self, game_state: dict) -> dict:
         """
         Play the card.
 
