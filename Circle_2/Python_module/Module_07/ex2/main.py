@@ -11,19 +11,21 @@ if __name__ == "__main__":
     print("Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
     print()
 
-    arcane = EliteCard(
+    arcane: EliteCard = EliteCard(
         "Arcane Warrior", 8, "Legendary", attack=5, health=20,
         mana=10, type="melee", armor=5)
-    enemy = EliteCard("Enemy", 8, "Legendary", 5, 6, 4, "melee", 5)
-    enemy1 = EliteCard("Goblin", 2, "Common", attack=2, health=4, mana=0)
-    enemy2 = EliteCard("Troll", 6, "Rare", attack=4, health=15, mana=0)
+    enemy: EliteCard = EliteCard("Enemy", 8, "Legendary", 5, 6, 4, "melee", 5)
+    enemy1: EliteCard = EliteCard(
+        "Goblin", 2, "Common", attack=2, health=4, mana=0)
+    enemy2: EliteCard = EliteCard(
+        "Troll", 6, "Rare", attack=4, health=15, mana=0)
 
     print(f"Playing {arcane.name} (Elite Card):\n")
     print("Combat phase:")
 
     result_attack: dict[Any] = arcane.attack(enemy)
     print(f"Attack result: {result_attack}")
-    dmg = result_attack['damage']
+    dmg: str = result_attack['damage']
     print(f"Defend result: {enemy.defend(dmg)}\n")
 
     print("Magic phase:")

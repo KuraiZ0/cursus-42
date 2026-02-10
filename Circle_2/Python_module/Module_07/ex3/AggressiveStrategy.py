@@ -34,8 +34,8 @@ class AggressiveStrategy(GameStrategy):
                   mana spent.
         """
         actions: list[Any] = []
-        dmg = 0
-        mana_spent = 0
+        dmg: int = 0
+        mana_spent: int = 0
 
         for card in hand:
             if card.cost <= 3:

@@ -11,11 +11,12 @@ if __name__ == "__main__":
     print("\n=== DataDeck Tournament Platform ===\n")
     print("Registering Tournament Cards... \n")
 
-    dragon = TournamentCard(
+    dragon: TournamentCard = TournamentCard(
         "Fire Dragon", 7, "Legendary", 9, 7, 9, "dragon_001", 4)
-    wizard = TournamentCard("Ice Wizard", 4, "Rare", 6, 5, 4, "wizard_001", 2)
+    wizard: TournamentCard = TournamentCard(
+        "Ice Wizard", 4, "Rare", 6, 5, 4, "wizard_001", 2)
 
-    tournament = TournamentPlatform()
+    tournament: TournamentPlatform = TournamentPlatform()
     tournament.register_card(dragon)
     print()
     tournament.register_card(wizard)

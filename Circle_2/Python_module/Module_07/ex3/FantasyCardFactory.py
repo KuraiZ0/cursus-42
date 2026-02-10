@@ -38,7 +38,8 @@ class FantasyCardFactory(CardFactory):
         rarity: str = choice(rarity_type)
         attack: int = randint(0, 10)
         health: int = randint(0, 10)
-        card = CreatureCard(name_or_power, cost, rarity, attack, health)
+        card: CreatureCard = CreatureCard(
+            name_or_power, cost, rarity, attack, health)
         return card
 
     def create_spell(self, name_or_power: str | int | None = None) -> Card:
@@ -54,7 +55,7 @@ class FantasyCardFactory(CardFactory):
         rarity_type: list[str] = ["Common", "Rare", "Epic", "Legendary"]
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)
-        card = SpellCard(
+        card: SpellCard = SpellCard(
             name_or_power, cost, rarity, f"{name_or_power} deal damage!")
         return card
 
@@ -73,7 +74,7 @@ class FantasyCardFactory(CardFactory):
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)
         durability: int = randint(0, 10)
-        card = ArtifactCard(
+        card: ArtifactCard = ArtifactCard(
             name_or_power, cost, rarity, durability, "+1 mana per turn")
         return card
 

@@ -7,7 +7,8 @@ if __name__ == "__main__":
 
     print("Testing Abstract Base Class Design:\n")
     print("CreatureCard Info:")
-    first_card = CreatureCard("Fire Dragon", 5, "Legendary", 7, 5)
+    first_card: CreatureCard = CreatureCard(
+        "Fire Dragon", 5, "Legendary", 7, 5)
     print(first_card.get_stats())
     print()
     print("Playing Fire Dragon with 6 mana available:")
@@ -20,7 +21,7 @@ if __name__ == "__main__":
     print(f"Play result: {first_card.play(dico)}")
     print()
     print(f"{first_card.name} attacks Goblin Warrior:")
-    goblin = CreatureCard("Goblin Warrior", 4, "Rare", 2, 7)
+    goblin: CreatureCard = CreatureCard("Goblin Warrior", 4, "Rare", 2, 7)
     print(f"Attack result: {first_card.attack_target(goblin)}")
     print()
     print("Testing insufficient mana (3 available):")

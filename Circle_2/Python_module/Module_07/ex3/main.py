@@ -14,9 +14,9 @@ if __name__ == "__main__":
     print("\n=== DataDeck Game Engine ===\n")
     print("Configuring Fantasy Card Game...")
 
-    factory = FantasyCardFactory()
-    strategy = AggressiveStrategy()
-    engine = GameEngine()
+    factory: FantasyCardFactory = FantasyCardFactory()
+    strategy: AggressiveStrategy = AggressiveStrategy()
+    engine: GameEngine = GameEngine()
 
     engine.configure_engine(factory, strategy)
     status: dict[Any] = engine.get_engine_status()

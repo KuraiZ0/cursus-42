@@ -1,11 +1,13 @@
 """This module provides the `SpellCard` class."""
+from typing import Any
 from ex0.Card import Card
 
 
 class SpellCard(Card):
     """Represents a spell card."""
 
-    def __init__(self, name: str, cost: int, rarity: str, effect_type: str):
+    def __init__(
+            self, name: str, cost: int, rarity: str, effect_type: str) -> None:
         """
         Initialize a SpellCard instance.
 
@@ -30,7 +32,7 @@ class SpellCard(Card):
         Returns:
             A dictionary representing the effect of playing the card.
         """
-        result = {
+        result: dict[Any] = {
             'card_played': self.name,
             'mana_used': self.cost,
             'effect': f'Deal {self.cost} damage to target'

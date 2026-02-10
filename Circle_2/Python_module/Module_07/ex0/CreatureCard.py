@@ -1,5 +1,6 @@
 """This module provides the `CreatureCard` class."""
 
+from typing import Any
 from .Card import Card
 
 
@@ -7,7 +8,8 @@ class CreatureCard(Card):
     """Represents a creature card."""
 
     def __init__(
-            self, name: str, cost: int, rarity: str, attack: int, health: int):
+            self, name: str, cost: int, rarity: str, attack: int, health: int
+            ) -> None:
         """
         Initialize a CreatureCard instance.
 
@@ -34,7 +36,7 @@ class CreatureCard(Card):
         Returns:
             A dictionary representing the effect of playing the card.
         """
-        result = {
+        result: dict[Any] = {
             'card_played': self.name,
             'mana_used': self.cost,
             'effect': 'Creature summoned to battlefield'
@@ -70,7 +72,7 @@ class CreatureCard(Card):
         Returns:
             A dictionary with the creature's stats.
         """
-        result = self.get_card_info()
+        result: dict[Any] = self.get_card_info()
         result["attack"] = self.attack
         result["health"] = self.health
         return result
