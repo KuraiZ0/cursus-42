@@ -1,4 +1,5 @@
 """This module provides the `ArtifactCard` class."""
+from typing import Any
 from ex0.Card import Card
 
 
@@ -7,7 +8,7 @@ class ArtifactCard(Card):
 
     def __init__(
             self, name: str,
-            cost: int, rarity: str, durability: int, effect: str):
+            cost: int, rarity: str, durability: int, effect: str) -> None:
         """
         Initialize an ArtifactCard instance.
 
@@ -35,7 +36,7 @@ class ArtifactCard(Card):
         Returns:
             A dictionary representing the effect of playing the card.
         """
-        result = {
+        result: dict[Any] = {
             'card_played': self.name,
             'mana_used': self.cost,
             'effect': f'Permanent: {self.effect}'

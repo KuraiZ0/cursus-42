@@ -7,7 +7,7 @@ from .SpellCard import SpellCard
 from ex0.Card import Card
 from ex0.CreatureCard import CreatureCard
 
-__all__ = [
+__all__: list[str] = [
     "ArtifactCard",
     "Deck",
     "SpellCard",

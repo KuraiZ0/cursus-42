@@ -1,6 +1,6 @@
 """This module provides the `Deck` class for managing a collection of cards."""
 
-from typing import List, Dict
+from typing import List, Dict, Any
 from .SpellCard import SpellCard
 from .ArtifactCard import ArtifactCard
 from ex0.Card import Card
@@ -10,7 +10,7 @@ import random
 class Deck:
     """Represents a deck of cards."""
 
-    def __init__(self, deck: list):
+    def __init__(self, deck: list) -> None:
         """
         Initialize a Deck instance.
 
@@ -19,7 +19,7 @@ class Deck:
         """
         self.deck: List[Card] = []
 
-    def add_card(self, card: Card):
+    def add_card(self, card: Card) -> None:
         """
         Add a card to the deck.
 
@@ -69,9 +69,9 @@ class Deck:
         if not self.deck:
             return {'total_cards': 0}
 
-        total_cost = sum(card.cost for card in self.deck)
-        avg = total_cost / len(self.deck)
-        stats = {
+        total_cost: int = sum(card.cost for card in self.deck)
+        avg: float = total_cost / len(self.deck)
+        stats: dict[Any] = {
             'total_cards': len(self.deck),
             'avg_cost': f"{avg:.2f}",
             'creatures': sum(

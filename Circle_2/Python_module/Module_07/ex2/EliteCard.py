@@ -10,7 +10,7 @@ class EliteCard(Card, Combatable, Magical):
 
     def __init__(
             self, name: str, cost: int, rarity: str, attack: int,
-            health: int, mana: int, type: str = "", armor: int = 0):
+            health: int, mana: int, type: str = "", armor: int = 0) -> None:
         """
         Initialize the EliteCard with combat and magic stats.
 

@@ -10,13 +10,13 @@ from ex0.CreatureCard import CreatureCard
 if __name__ == "__main__":
     print("=== DataDeck Deck Builder ===\n")
     print("Building deck with different card types...")
-    light = SpellCard("Lightning Bolt", 3, "Common", "damage")
-    mana_crystal = ArtifactCard(
+    light: SpellCard = SpellCard("Lightning Bolt", 3, "Common", "damage")
+    mana_crystal: ArtifactCard = ArtifactCard(
         "Mana Crystal", 2, "Rare", 999, "+1 mana per turn")
-    f_dragon = CreatureCard(
+    f_dragon: CreatureCard = CreatureCard(
         "Fire Dragon", 5, "Rare", 6, 4)
 
-    deck = Deck([])
+    deck: Deck = Deck([])
     deck.add_card(light)
     deck.add_card(mana_crystal)
     deck.add_card(f_dragon)
