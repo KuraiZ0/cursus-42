@@ -1,6 +1,7 @@
 """This script demonstrates the usage of the CreatureCard class."""
 
-from CreatureCard import CreatureCard
+from typing import Any
+from ex0.CreatureCard import CreatureCard
 
 if __name__ == "__main__":
     print("=== DataDeck Card Foundation ===\n")
@@ -13,12 +14,9 @@ if __name__ == "__main__":
     print()
     print("Playing Fire Dragon with 6 mana available:")
     print(f"Playable: {first_card.is_playable(6)}")
-    dico: dict = {
-        "card_played": first_card.name,
-        "mana_used": first_card.cost,
-        "effect": "Creature summoned to battlefield"
-    }
-    print(f"Play result: {first_card.play(dico)}")
+    game_state: dict[Any] = {"mana": 6, "battlefield": []}
+    result_play: dict[Any] = first_card.play(game_state)
+    print(f"Play result: {result_play}")
     print()
     print(f"{first_card.name} attacks Goblin Warrior:")
     goblin: CreatureCard = CreatureCard("Goblin Warrior", 4, "Rare", 2, 7)

@@ -53,6 +53,7 @@ def spell_sequence(spells: list[callable]) -> callable:
 
 
 if __name__ == "__main__":
+
     def fireball(target: str) -> str:
         """Cast a fireball spell."""
         return f"Fireball hits {target}"

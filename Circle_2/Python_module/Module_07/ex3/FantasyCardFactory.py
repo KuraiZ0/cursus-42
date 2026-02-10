@@ -4,9 +4,9 @@ This module provides a concrete implementation of the CardFactory.
 A base class for creating fantasy-themed cards.
 """
 
-from ex1 import ArtifactCard
-from ex1 import SpellCard
-from ex0 import CreatureCard
+from ex1.ArtifactCard import ArtifactCard
+from ex1.SpellCard import SpellCard
+from ex0.CreatureCard import CreatureCard
 from ex0.Card import Card
 from .CardFactory import CardFactory
 from random import randint, choice
@@ -56,7 +56,7 @@ class FantasyCardFactory(CardFactory):
         cost: int = randint(0, 9)
         rarity: str = choice(rarity_type)
         card: SpellCard = SpellCard(
-            name_or_power, cost, rarity, f"{name_or_power} deal damage!")
+            name_or_power, cost, rarity, "damage")
         return card
 
     def create_artifact(self, name_or_power: str | int | None = None) -> Card:
@@ -91,8 +91,8 @@ class FantasyCardFactory(CardFactory):
         deck: list[Any] = []
 
         for _ in range(0, size):
-            random: str = choice(["creature", "spell", "artifact"])
-            match random:
+            rndm: str = choice(["creature", "spell", "artifact"])
+            match rndm:
                 case "creature":
                     deck.append(self.create_creature())
                 case "spell":

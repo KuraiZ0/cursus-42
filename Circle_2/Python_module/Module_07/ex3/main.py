@@ -4,7 +4,7 @@ Main entry point for the DataDeck Game Engine.
 This script demonstrates the usage of the FantasyCardFactory to create various
 types of cards and simulates a game turn.
 """
-from .GameEngine import GameEngine
+from ex3.GameEngine import GameEngine
 from .AggressiveStrategy import AggressiveStrategy
 from ex3.FantasyCardFactory import FantasyCardFactory
 from typing import Any
@@ -34,7 +34,7 @@ if __name__ == "__main__":
         'turn_simulated': 1,
         'strategy_used': turn['strategy'],
         'total_damage': turn['damage_dealt'],
-        'card_created': 4
+        'cards_created': 4
     }
     print()
     print("Game Report:")

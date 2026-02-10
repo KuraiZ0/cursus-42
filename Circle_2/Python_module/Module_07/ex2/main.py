@@ -6,9 +6,9 @@ from typing import Any
 if __name__ == "__main__":
     print("=== DataDeck Ability System ===\n")
     print("EliteCard capabilites:")
-    print("Card: ['play', 'get_card_info', 'is_playable']")
-    print("Combatable: ['attack', 'defend', 'get_combat_stats']")
-    print("Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
+    print("- Card: ['play', 'get_card_info', 'is_playable']")
+    print("- Combatable: ['attack', 'defend', 'get_combat_stats']")
+    print("- Magical: ['cast_spell', 'channel_mana', 'get_magic_stats']")
     print()
 
     arcane: EliteCard = EliteCard(
@@ -25,12 +25,12 @@ if __name__ == "__main__":
 
     result_attack: dict[Any] = arcane.attack(enemy)
     print(f"Attack result: {result_attack}")
-    dmg: str = result_attack['damage']
-    print(f"Defend result: {enemy.defend(dmg)}\n")
+    dmg: int = result_attack['damage']
+    print(f"Defend result: {arcane.defend(dmg)}\n")
 
     print("Magic phase:")
     enemy_list: list[EliteCard] = [enemy1.name, enemy2.name]
     print(f"Spell cast: {arcane.cast_spell('Fireball', enemy_list)}")
-    print(f"Manal channel: {arcane.channel_mana(3)}\n")
+    print(f"Mana channel: {arcane.channel_mana(3)}\n")
 
     print("Multiple interface implementation successful!")

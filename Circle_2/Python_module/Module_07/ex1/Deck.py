@@ -73,12 +73,12 @@ class Deck:
         avg: float = total_cost / len(self.deck)
         stats: dict[Any] = {
             'total_cards': len(self.deck),
-            'avg_cost': f"{avg:.2f}",
             'creatures': sum(
                 1 for card in self.deck if hasattr(card, 'attack')),
             'spells': sum(
                 1 for card in self.deck if isinstance(card, SpellCard)),
             'artifacts': sum(
-                1 for card in self.deck if isinstance(card, ArtifactCard))
+                1 for card in self.deck if isinstance(card, ArtifactCard)),
+            'avg_cost': f"{avg:.2f}"
         }
         return stats
