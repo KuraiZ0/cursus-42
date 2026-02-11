@@ -1,5 +1,5 @@
 """Alien Contact Log Validation module."""
-from typing import Self, Optional
+from typing import Optional
 from pydantic import (
     BaseModel, Field, model_validator, ValidationError)
 from datetime import datetime
@@ -41,7 +41,7 @@ class AlienContact(BaseModel):
     is_verified: bool = Field(default=False)
 
     @model_validator(mode='after')
-    def verify_data(self) -> Self:
+    def verify_data(self):
         """Validate complex business rules for contacts."""
         if not self.contact_id.startswith("AC"):
             raise ValueError('Contact ID must start with "AC" (Alien Contact)')
