@@ -1,5 +1,4 @@
 """Space Crew Management module."""
-from typing import Self
 from datetime import datetime
 from pydantic import BaseModel, Field, model_validator, ValidationError
 from enum import Enum
@@ -40,7 +39,7 @@ class SpaceMission(BaseModel):
     budget_millions: float = Field(ge=1.0, le=10000.0)
 
     @model_validator(mode='after')
-    def verify_data(self) -> Self:
+    def verify_data(self):
         """Validate mission safety requirements."""
         leadership: bool = any(
             m.rank in (Rank.COMMANDER, Rank.CAPTAIN) for m in self.crew)

@@ -47,7 +47,7 @@ class Config:
     output_file: Path
     perfect: bool
     seed: Optional[int]
-    display: str  # NONE | TERMINAL
+    display: str
 
 
 class ConfigError(Exception):
@@ -55,7 +55,7 @@ class ConfigError(Exception):
 
 
 def _parse_bool(value: str) -> bool:
-    v = value.strip().lower()
+    v: str = value.strip().lower()
     if v in {"true", "1", "yes", "y"}:
         return True
     if v in {"false", "0", "no", "n"}:
@@ -71,9 +71,10 @@ def _parse_int(value: str) -> int:
 
 
 def _parse_coord(value: str) -> Coord:
-    parts = value.strip().split(",")
+    parts: list[str] = value.strip().split(",")
     if len(parts) != 2:
-        raise ConfigError(f"Invalid coordinate format: {value!r} (expected x,y)")
+        raise ConfigError(
+            f"Invalid coordinate format: {value!r} (expected x,y)")
     return _parse_int(parts[0]), _parse_int(parts[1])
 
 
