@@ -55,13 +55,13 @@ This repository contains all my projects completed at 42 Brussels.
 | 🐍 **Python Module 02** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 03** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 04** | 2 | **100**/100 | 🔵 Validated | ✓ |
-| 🐍 **Python Module 05** | 2 | - | ⚪ In Progress | ??? |
-| 🐍 **Python Module 06** | 2 | - | ⚫ Planned | ??? |
-| 🐍 **Python Module 07** | 2 | - | ⚫ Planned | ??? |
-| 🐍 **Python Module 08** | 2 | - | ⚫ Planned | ??? |
-| 🐍 **Python Module 09** | 2 | - | ⚫ Planned | ??? |
-| 🐍 **Python Module 10** | 2 | - | ⚫ Planned | ??? |
-| 🎯 **A-Maze-In** | 2 | - | ⚫ Planned | ??? |
+| 🐍 **Python Module 05** | 2 | **100**/100 | 🔵   Validated | ✓ |
+| 🐍 **Python Module 06** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🐍 **Python Module 07** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🐍 **Python Module 08** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🐍 **Python Module 09** | 2 | **100**/100 | 🔵 Validated | ??? |
+| 🐍 **Python Module 10** | 2 | **100**/100 | 🔵 Validated | ??? |
+| 🎯 **A-Maze-In** | 2 | - | ⚪ In Progress | ??? |
 | 📝 **Exam Rank 02** | 2 | - | ⚫ Planned | ??? |
 | 📞 **Call Me Maybe** | 3 | - | 🔒 Locked | ??? |
 | 🚁 **Fly-In** | 3 | - | 🔒 Locked | ??? |
