@@ -58,21 +58,35 @@ def mage_stats(mages: list[dict]) -> dict:
 
 
 if __name__ == "__main__":
-    artifacts_list: list[Any] = [
-        {"name": "Crystal Orb", "power": 85, "type": "magical"},
-        {"name": "Fire Staff", "power": 92, "type": "weapon"},
-    ]
-
-    spells_list: list[str] = ["fireball", "heal", "shield"]
-
-    print("Testing artifact sorter...")
-    sorted_artifacts: list[Any] = artifact_sorter(artifacts_list)
-    print(
-        f"{sorted_artifacts[0]['name']} ({sorted_artifacts[0]['power']} power)"
-        f"comes before {sorted_artifacts[1]['name']} "
-        f"({sorted_artifacts[1]['power']} power)"
-    )
+    artifacts: list[Any] = [{"name": "Crystal Orb", "power": 85},
+                            {"name": "Fire Staff", "power": 92}]
+    print("\nTesting artifact sorter...")
+    sorted_list: list[dict] = artifact_sorter(artifacts)
+    if len(sorted_list) >= 2:
+        first: dict = sorted_list[0]
+        second: dict = sorted_list[1]
+        print(f"{first['name']} ({first['power']} power) comes before "
+              f"{second['name']} ({second['power']} power)")
 
     print("\nTesting spell transformer...")
-    transformed: list[str] = spell_transformer(spells_list)
-    print(" ".join(transformed))
+    spell: list[str] = spell_transformer(["fireball", "heal", "shield"])
+    result: str = " ".join(spell)
+    print(result)
+
+    mages: list[dict[str, Any]] = [
+        {"name": "Alex", "power": 50},
+        {"name": "Jordan", "power": 30},
+        {"name": "Morgan", "power": 85}
+    ]
+    print("\nTesting power filter...")
+    strong: list[dict] = power_filter(mages, 40)
+
+    formatted_mages: str = ", ".join(
+        [f"{m['name']} ({m['power']})" for m in strong]
+    )
+    print(f"Qualified mages: {formatted_mages}")
+    print("\nTesting mage stats...")
+    stats: dict[str, Any] = mage_stats(mages)
+
+    print(f"Max: {stats['max_power']} | Min: {stats['min_power']} | "
+          f"Average: {stats['avg_power']}")

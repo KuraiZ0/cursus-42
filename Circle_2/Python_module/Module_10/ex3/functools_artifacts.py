@@ -145,7 +145,6 @@ if __name__ == "__main__":
     print("Testing memoized fibonacci...")
     print(f"Fib(10): {memoized_fibonacci(10)}")
     print(f"Fib(15): {memoized_fibonacci(15)}")
-    print()
     print("\nTesting spell dispatcher...")
     cast = spell_dispatcher()
     print(cast(100))
