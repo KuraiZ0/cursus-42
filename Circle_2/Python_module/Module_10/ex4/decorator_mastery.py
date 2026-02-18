@@ -166,18 +166,30 @@ if __name__ == "__main__":
     print("Testing spell timer...")
 
     @spell_timer
-    def fireball():
+    def fireball() -> str:
         """Cast a fireball spell."""
         time.sleep(0.1)
         return "Fireball cast!"
 
-    result = fireball()
-    print(f"Result: {result}")
+    timer_result: str = fireball()
+    print(f"Result: {timer_result}")
 
-    print("\nTesting MageGuild...")
-    print(MageGuild.validate_mage_name("Merlin"))
-    print(MageGuild.validate_mage_name("Al"))
+    print("\nTesting MageGuild name validation...")
+    merlin_valid: bool = MageGuild.validate_mage_name("Merlin")
+    al_valid: bool = MageGuild.validate_mage_name("Al")
+    print(f"Is 'Merlin' valid? {merlin_valid} | Is 'Al' valid? {al_valid}")
 
+    print("\nTesting MageGuild spell casting...")
     guild = MageGuild()
     print(guild.cast_spell("Lightning", 15))
-    print(guild.cast_spell("Fireball", 5))
+    print(guild.cast_spell("Frostbite", 5))
+
+    print("\nTesting retry spell...")
+
+    @retry_spell(3)
+    def unstable_portal() -> str:
+        """Attempt to open an unstable portal."""
+        raise ValueError("Portal collapsed!")
+
+    portal_result: str = unstable_portal()
+    print(f"Result: {portal_result}")

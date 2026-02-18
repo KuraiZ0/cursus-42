@@ -1,4 +1,5 @@
 """A module of higher-order functions for spell manipulation."""
+from typing import Any
 
 
 def spell_combiner(spell1: callable, spell2: callable) -> callable:
@@ -66,6 +67,10 @@ if __name__ == "__main__":
         """Get the base power level."""
         return 10
 
+    def is_boss(target: str) -> bool:
+        """Check if the target is a boss."""
+        return target.lower() == "dragon"
+
     print("\nTesting spell combiner...")
     combined_spell = spell_combiner(fireball, heal)
     result = combined_spell('Dragon')
@@ -74,3 +79,13 @@ if __name__ == "__main__":
     print("\nTesting power amplifier...")
     amplified_power = power_amplifier(get_power, 3)
     print(f"Original: {get_power()}, Amplified: {amplified_power()}")
+
+    print("\nTesting conditional caster...")
+    cond_spell: callable = conditional_caster(is_boss, fireball)
+    print(f"On Dragon: {cond_spell('Dragon')} | "
+          f"On Goblin: {cond_spell('Goblin')}")
+
+    print("\nTesting spell sequence...")
+    seq_spell: callable = spell_sequence([fireball, heal])
+    seq_results: list[Any] = seq_spell("Hero")
+    print(f"Sequence results: {', '.join(seq_results)}")
