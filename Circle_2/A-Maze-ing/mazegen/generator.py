@@ -1,3 +1,4 @@
+"""This module provides the MazeGenerator class for creating mazes."""
 from typing import Any
 from random import seed as sd, choice
 import time
@@ -5,9 +6,21 @@ import sys
 
 
 class MazeGenerator:
+    """Generates a maze using a recursive backtracking algorithm."""
+
     def __init__(
          self, width: int, height: int, start: tuple, end: tuple,
          seed: int | None = None) -> None:
+        """
+        Initialize the MazeGenerator with specified dimensions.
+
+        Args:
+            width (int): The width of the maze.
+            height (int): The height of the maze.
+            start (tuple): The (x, y) coordinates of the starting cell.
+            end (tuple): The (x, y) coordinates of the ending cell.
+            seed (int | None): An optional seed for the random number.
+        """
         self.width = width
         self.height = height
         self.seed = seed
@@ -23,6 +36,7 @@ class MazeGenerator:
         self._reserve_42()
 
     def _reserve_42(self) -> None:
+        """Reserve 42 pattern in the maze grid by marking cells as visited."""
         if self.width < 7 or self.height < 5:
             print("Error: Maze too small for the '42' pattern.")
             return
@@ -35,11 +49,12 @@ class MazeGenerator:
         two: list[tuple[int, int]] = [
             (4, 0), (5, 0), (6, 0), (6, 1), (6, 2), (5, 2),
             (4, 2), (4, 3), (4, 4), (5, 4), (6, 4)]
-        
+
         for dx, dy in four + two:
             self.visited[y_off + dy][x_off + dx] = True
 
     def _break_wall(self, x1: int, x2: int, y1: int, y2: int) -> None:
+        """Break the wall between two adjacent cells."""
         # Nord=1, Est=2, Sud=4, Ouest=8
         dx: int = x2 - x1
         dy: int = y2 - y1
@@ -57,6 +72,7 @@ class MazeGenerator:
             self.grid[y2][x2] -= 4
 
     def _neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
+        """Return a list of unvisited neighbors for a given cell."""
         neighbors: list[tuple[int, int]] = []
         candidates: list[tuple[int, int]] = [
             (x, y - 1),  # Nord
@@ -73,7 +89,7 @@ class MazeGenerator:
     def _display_frame(self, current: tuple[int, int] | None,
                        stack_set: set[tuple[int, int]],
                        color: str = "37") -> None:
-        """Affiche une frame de l'animation de génération."""
+        """Display a frame of the generation animation."""
         C: str = f"\033[{color}m"
         R = "\033[0m"
 
@@ -110,6 +126,15 @@ class MazeGenerator:
     def generate(
             self, start_x: int = None, start_y: int = None,
             animate: bool = False, delay: float = 0.01) -> None:
+        """
+        Generate the maze using a recursive backtracking algorithm.
+
+        Args:
+            start_x (int, optional): The starting X coordinate for generation.
+            start_y (int, optional): The starting Y coordinate for generation.
+            animate (bool, optional): If True, displays the generation process.
+            delay (float, optional): Delay in seconds between animation frames.
+        """
         if start_x is None or start_y is None:
             start_x, start_y = self.start
         stack: list[tuple[int, int]] = [(start_x, start_y)]
@@ -117,7 +142,7 @@ class MazeGenerator:
 
         if animate:
             print("\033[2J\033[H", end="")
-            print(f"\n  \033[1mGénération en cours...\033[0m\n")
+            print("\n  \033[1mGénération en cours...\033[0m\n")
             total_lines: int = self.height * 2 + 1
             print("\n" * total_lines, end="")
 
@@ -148,6 +173,14 @@ class MazeGenerator:
             time.sleep(0.1)
 
     def display(self, path_str: str = "", color: str = "37", char: str = "#"):
+        """
+        Display the maze in the console, optionally showing a path.
+
+        Args:
+            path_str (str, optional): A string representing the path.
+            color (str, optional): ANSI color code for the maze walls.
+            char (str, optional): Character to use for drawing the path.
+        """
         C: str = f"\033[{color}m"
         R = "\033[0m"
         path_coords: set[Any] = set()
@@ -175,7 +208,7 @@ class MazeGenerator:
                     sym: str = f"\033[94m {char} \033[0m"
                 else:
                     sym = "   "
-                
+
                 line_a += sym + (C + "|" + R if val & 2 else " ")
                 line_b += (C + "___" + R if val & 4 else "   ")
                 line_b += (C + "|" + R if val & 2 else " ")
@@ -183,6 +216,13 @@ class MazeGenerator:
             print(line_b)
 
     def save_to_file(self, filename: str, path_str: str | None) -> None:
+        """
+        Save the generated maze to a file.
+
+        Args:
+            filename (str): The name of the file to save the maze to.
+            path_str (str | None): An string representing the path to save.
+        """
         try:
             with open(filename, 'w') as f:
                 for row in self.grid:
