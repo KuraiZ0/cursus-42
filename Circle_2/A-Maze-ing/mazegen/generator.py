@@ -59,17 +59,17 @@ class MazeGenerator:
         dx: int = x2 - x1
         dy: int = y2 - y1
         if dx == 1:
-            self.grid[y1][x1] -= 2
-            self.grid[y2][x2] -= 8
+            self.grid[y1][x1] &= ~2
+            self.grid[y2][x2] &= ~8
         elif dx == -1:
-            self.grid[y1][x1] -= 8
-            self.grid[y2][x2] -= 2
+            self.grid[y1][x1] &= ~8
+            self.grid[y2][x2] &= ~2
         elif dy == 1:
-            self.grid[y1][x1] -= 4
-            self.grid[y2][x2] -= 1
+            self.grid[y1][x1] &= ~4
+            self.grid[y2][x2] &= ~1
         elif dy == -1:
-            self.grid[y1][x1] -= 1
-            self.grid[y2][x2] -= 4
+            self.grid[y1][x1] &= ~1
+            self.grid[y2][x2] &= ~4
 
     def _neighbors(self, x: int, y: int) -> list[tuple[int, int]]:
         """Return a list of unvisited neighbors for a given cell."""
