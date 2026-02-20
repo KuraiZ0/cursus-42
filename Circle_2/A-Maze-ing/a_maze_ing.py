@@ -1,4 +1,12 @@
-"""docstring."""
+"""
+This script generates and solves mazes based on a configuration file.
+
+It provides an interactive command-line interface to:
+- Generate new mazes.
+- Show or hide the solution path.
+- Rotate display colors.
+- Save the generated maze and its solution to a file.
+"""
 from typing import Any
 import sys
 from mazegen.generator import MazeGenerator
@@ -11,8 +19,19 @@ def clear() -> None:
     sys.stdout.flush()
 
 
-def parsing(file_path):
-    """docstrings."""
+def parsing(file_path: str) -> dict[str, Any]:
+    """
+    Parse the configuration file for maze generation.
+
+    Args:
+        file_path (str): The path to the configuration file.
+
+    Returns:
+        dict[str, Any]: A dictionary containing the parsed configuration.
+
+    Raises:
+        SystemExit: If the configuration file is not found.
+    """
     config: dict[str, Any] = {}
     try:
         with open(file_path, 'r') as file:
@@ -61,7 +80,8 @@ if __name__ == "__main__":
         maze.display(path if show_path else "", colors[color_idx])
 
         print("\n1. Re-generate a new maze")
-        print(f"2. {'Hide' if show_path else 'Show'} path from entry to exit")
+        print(f"2. {'Hide' if show_path else 'Show'} "
+              f"path from entry to exit")
         print("3. Rotate maze colors")
         print("4. Quit")
 
