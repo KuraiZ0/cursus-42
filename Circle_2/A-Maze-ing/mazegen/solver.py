@@ -42,3 +42,4 @@ class MazeSolver:
                     if (nx, ny) not in visited and (val & mask) == 0:
                         visited.add((nx, ny))
                         queue.append((nx, ny, path + char))
+        return None

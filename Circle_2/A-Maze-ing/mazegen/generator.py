@@ -9,7 +9,8 @@ class MazeGenerator:
     """Generates a maze using a recursive backtracking algorithm."""
 
     def __init__(
-         self, width: int, height: int, start: tuple, end: tuple,
+         self, width: int, height: int, start: tuple[int, int],
+         end: tuple[int, int],
          seed: int | None = None) -> None:
         """
         Initialize the MazeGenerator with specified dimensions.
@@ -42,6 +43,7 @@ class MazeGenerator:
         x_off: int = (self.width - 7) // 2
         y_off: int = (self.height - 5) // 2
 
+        self.pattern_42 = []
         four: list[tuple[int, int]] = [
             (0, 0), (0, 1), (0, 2), (1, 2), (2, 0), (2, 1),
             (2, 2), (2, 3), (2, 4)]
@@ -50,7 +52,9 @@ class MazeGenerator:
             (4, 2), (4, 3), (4, 4), (5, 4), (6, 4)]
 
         for dx, dy in four + two:
+            px, py = dx + x_off, dy + y_off
             self.visited[y_off + dy][x_off + dx] = True
+            self.pattern_42.append((px, py))
 
     def _break_wall(self, x1: int, x2: int, y1: int, y2: int) -> None:
         """Break the wall between two adjacent cells."""
@@ -123,7 +127,7 @@ class MazeGenerator:
         sys.stdout.flush()
 
     def generate(
-            self, start_x: int = None, start_y: int = None,
+            self, start_x: int | None = None, start_y: int | None = None,
             animate: bool = False, delay: float = 0.01) -> None:
         """
         Generate the maze using a recursive backtracking algorithm.
@@ -159,10 +163,11 @@ class MazeGenerator:
 
             if animate:
                 step += 1
-                skip = max(1, (self.width * self.height) // 200)
+                skip: int = max(1, (self.width * self.height) // 200)
                 if step % skip == 0 or not stack:
-                    stack_set = set(stack)
-                    current = stack[-1] if stack else None
+                    stack_set: set[tuple[int, int]] = set(stack)
+                    current: tuple[int, int] | None = (
+                        stack[-1] if stack else None)
                     self._display_frame(current, stack_set)
                     time.sleep(delay)
 
@@ -171,7 +176,9 @@ class MazeGenerator:
             print("\n  \033[92m✓ Génération terminée !\033[0m")
             time.sleep(0.1)
 
-    def display(self, path_str: str = "", color: str = "37", char: str = "#"):
+    def display(
+            self, path_str: str = "", color: str = "37",
+            char: str = "#") -> None:
         """
         Display the maze in the console, optionally showing a path.
 
@@ -182,6 +189,7 @@ class MazeGenerator:
         """
         C: str = f"\033[{color}m"
         R = "\033[0m"
+        Y = "\033[93m"
         path_coords: set[Any] = set()
         if path_str:
             cx, cy = self.start
@@ -199,20 +207,24 @@ class MazeGenerator:
             line_b: str = C + "| " + R
             for x in range(self.width):
                 val: int = self.grid[y][x]
+                is_p: bool = hasattr(
+                    self, 'pattern_42') and (x, y) in self.pattern_42
+                cell_color: str = Y if is_p else C
                 if (x, y) == self.start:
                     sym = "\033[92m S \033[0m"
                 elif (x, y) == self.end:
                     sym = "\033[91m E \033[0m"
                 elif (x, y) in path_coords:
-                    sym: str = f"\033[94m {char} \033[0m"
+                    sym = f"\033[94m {char} \033[0m"
                 else:
                     sym = "   "
 
-                line_a += sym + (C + "|" + R if val & 2 else " ")
-                line_b += (C + "___" + R if val & 4 else "   ")
-                line_b += (C + "|" + R if val & 2 else " ")
+                line_a += sym + (cell_color + "|" + R if val & 2 else " ")
+                line_b += (cell_color + "___" + R if val & 4 else "   ")
+                line_b += (cell_color + "|" + R if val & 2 else " ")
             print(line_a)
             print(line_b)
+        return None
 
     def save_to_file(self, filename: str, path_str: str | None) -> None:
         """
