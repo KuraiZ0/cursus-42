@@ -29,7 +29,6 @@ class MazeGenerator:
                                       for _ in range(height)]
         self.visited: list[list[bool]] = [[False for _ in range(width)]
                                           for _ in range(height)]
-        # FIX: utiliser les paramètres start/end au lieu de les hardcoder
         self.start = start
         self.end = end
 
