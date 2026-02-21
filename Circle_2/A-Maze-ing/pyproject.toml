@@ -9,11 +9,11 @@ description = "A perfect maze generator and solver created for the 42 curriculum
 readme = "README.md"
 requires-python = ">=3.10"
 authors = [
-    { name = "Your Login", email = "your_login@student.42.fr" }
+    { name = "IALMANI && WAIBELFO"}
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
-    "Operating System :: OS Independent",
+    "Operating System :: LINUX && MacOS",
 ]
 
 [tool.setuptools.packages.find]

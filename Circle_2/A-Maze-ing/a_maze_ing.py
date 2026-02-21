@@ -35,12 +35,12 @@ def parsing(file_path: str) -> dict[str, Any]:
     config: dict[str, Any] = {}
     try:
         with open(file_path, 'r') as file:
-            for f in file:
-                f: str = f.strip()
-                if (f.startswith("#") or not f):
+            for line in file:
+                line = line.strip()
+                if (line.startswith("#") or not line):
                     continue
-                f: list[str] = f.split("=", 1)
-                config[f[0].strip()] = f[1].strip()
+                parts: list[str] = line.split("=", 1)
+                config[parts[0].strip()] = parts[1].strip()
     except FileNotFoundError:
         print("Config.txt isn't found in the directory.")
         exit(1)
@@ -77,7 +77,7 @@ if __name__ == "__main__":
     while True:
         clear()
         print("\n" + "="*10 + " A-Maze-ing " + "="*10)
-        maze.display(path if show_path else "", colors[color_idx])
+        maze.display((path or "") if show_path else "", colors[color_idx])
 
         print("\n1. Re-generate a new maze")
         print(f"2. {'Hide' if show_path else 'Show'} "
@@ -95,9 +95,9 @@ if __name__ == "__main__":
             path = solver.solve()
             maze.save_to_file(config['OUTPUT_FILE'], path)
         elif choice == "2":
-            show_path: bool = not show_path
+            show_path = not show_path
         elif choice == "3":
-            color_idx: int = (color_idx + 1) % len(colors)
+            color_idx = (color_idx + 1) % len(colors)
         elif choice == "4":
             print("Goodbye young padawan!")
             break
