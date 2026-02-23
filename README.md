@@ -61,7 +61,7 @@ This repository contains all my projects completed at 42 Brussels.
 | 🐍 **Python Module 08** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 09** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 🐍 **Python Module 10** | 2 | **100**/100 | 🔵 Validated | ✓ |
-| 🎯 **A-Maze-In** | 2 | **100**/100 | 🔵 Validated | ✓ |
+| 🎯 **A-Maze-In** | 2 | **110**/100 | 🔵 Validated | ✓ |
 | 📝 **Exam Rank 02** | 2 | **100**/100 | 🔵 Validated | ✓ |
 | 📞 **Call Me Maybe** | 3 | - | 🔒 Locked | ??? |
 | 🚁 **Fly-In** | 3 | - | ⚪ In Progress | ??? |
@@ -260,7 +260,7 @@ Duration : ~8-12 weeks total
 </details>
 
 <details close>
-<summary><b>🎯 A-Maze-In</b> - Ray-Casting 3D Maze</summary>
+<summary><b>🎯 A-Maze-In</b> - Maze Generator</summary>
 
 ```
 Status   : 🔵 Validated
@@ -468,7 +468,7 @@ Status   : 🔒 Locked
 - [x] **Born2beRoot** - System administration (86/100) *
 - [x] **Push_swap** - Sorting algorithms (84/100) *
 - [x] **Python Modules 00-10** - All modules (100/100)
-- [x] **A-Maze-In** - Ray-casting 3D maze (100/100)
+- [x] **A-Maze-In** - Maze generator (110/100)
 - [x] **Exam Rank 02** (100/100)
 
 _* Validated but system bug preventing proper display_
