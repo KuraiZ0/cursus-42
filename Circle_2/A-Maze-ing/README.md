@@ -1,4 +1,4 @@
-*This project has been created as part of the 42 curriculum by your_login.*
+*This project has been created as part of the 42 curriculum by ialmani.*
 
 # A-Maze-ing 🌀
 
@@ -279,7 +279,7 @@ The solver returns the path as a direction string (`"NNEESS..."`) or `None` if n
 
 | Login | Role |
 |-------|------|
-| `your_login` | Sole contributor — generator, solver, display, CLI, packaging |
+| `ialmani` | Sole contributor — generator, solver, display, CLI, packaging |
 
 ### Planning
 
