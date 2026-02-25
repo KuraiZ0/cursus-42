@@ -31,7 +31,7 @@ This repository contains all my projects completed at 42 Brussels.
 │  Circle 5  ░░░░░░░░░░░░░░░░░░░░    0%  🔒 Locked              │
 │  Circle 6  ░░░░░░░░░░░░░░░░░░░░    0%  🔒 Locked              │
 │                                                                │
-│  Validated projects : 20/27 total                              │
+│  Validated projects : 20/32 total                              │
 │  Average grade      : 100/100                                  │
 │  Current level      : 3+                                       │
 │                                                                │
