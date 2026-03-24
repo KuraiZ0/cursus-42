@@ -48,6 +48,27 @@ int parsing(int ac, char **av)
 	return (0);
 }
 
+void	manage_param(char **av, t_sim *sim)
+{
+	sim->params.nb_coders = atoi(av[1]);
+	sim->params.time_to_burnout = atoi(av[2]);
+	sim->params.time_to_compile = atoi(av[3]);
+	sim->params.time_to_debug = atoi(av[4]);
+	sim->params.time_to_refractor = atoi(av[5]);
+	sim->params.nb_compiles = atoi(av[6]);
+	sim->params.dongle_cd = atoi(av[7]);
+	if (strcmp(av[8], "edf") == 0)	
+		sim->params.scheduler = 1;
+	else
+		sim->params.scheduler = 0;
+	sim->params.start_time = get_time_ms();
+	sim->params.stop = 0;
+
+	pthread_mutex_init(&sim->params.log_mutex, NULL);
+	pthread_mutex_init(&sim->params.stop_mutex, NULL);
+
+}
+
 
 int main(int ac, char **av)
 {
@@ -57,23 +78,11 @@ int main(int ac, char **av)
 		return (printf("Error the number of arguments required is 8.\n"));
 	if (parsing(ac, av))
 		return (1);
-	// parameeter management
-	params.nb_coders = atoi(av[1]);
-	params.time_to_burnout = atoi(av[2]);
-	params.time_to_compile = atoi(av[3]);
-	params.time_to_debug = atoi(av[4]);
-	params.time_to_refractor = atoi(av[5]);
-	params.nb_compiles = atoi(av[6]);
-	params.dongle_cd = atoi(av[7]);
-	if (strcmp(av[8], "edf") == 0)	
-		params.scheduler = 1;
-	else
-		params.scheduler = 0;
-	params.start_time = get_time_ms();
-	sim.params = params;
-	pthread_mutex_init(&sim.params.log_mutex, NULL);
-	pthread_mutex_init(&sim.params.stop_mutex, NULL);
-	sim.params.stop = 0;
+	// parameter management
+	manage_param(av, &sim);
+	if (allocate(&sim) != 0)
+		return (printf("Error of malloc\n"), 1);
+	init_data(&sim);
 	return (0);
 	
 }

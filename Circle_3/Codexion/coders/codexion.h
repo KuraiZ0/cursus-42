@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:45:00 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/24 13:10:11 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/24 14:33:31 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ typedef struct s_sim
     t_params    params;
     t_coder     *coders;
     pthread_t   *threads;
+	t_dongle	*dongles;
 }   t_sim;
 
 /*|=== FUNCTION PROTOTYPE ===|*/
@@ -73,6 +74,10 @@ int		parsing(int ac, char **av);
 int		valid_int(char *str);
 long	get_time_ms(void);
 void	log_event(t_sim *sim, int id, char *msg);
+void    init_data(t_sim *sim);
+int    allocate(t_sim *sim);
+void	*coder_routine(void *arg);
+
 
 
 
