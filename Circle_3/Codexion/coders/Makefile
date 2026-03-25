@@ -6,7 +6,7 @@
 #    By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/18 13:51:41 by ialmani           #+#    #+#              #
-#    Updated: 2026/03/24 11:42:10 by ialmani          ###   ########.fr        #
+#    Updated: 2026/03/25 13:39:47 by ialmani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,11 +22,11 @@ CC      = cc
 CFLAGS  = -Wall -Werror -Wextra -pthread -I
 RM      = rm -rf
 
-SRC =   src/main.c    \
-        src/monitor.c \
-        src/utils.c   \
-        src/coder.c   \
-        src/log.c
+SRC =   main.c    \
+        monitor.c \
+        utils.c   \
+        utils2.c  \
+		monitor.c
 
 OBJ_DIR = obj
 OBJ = $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -38,7 +38,7 @@ $(NAME): $(OBJ)
 	@$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 	@echo "$(GREEN)Compilation successfully done ! $(RESET)"
 
-$(OBJ_DIR)/%.o: src/%.c includes/codexion.h
+$(OBJ_DIR)/%.o: %.c includes/codexion.h
 	@mkdir -p $(OBJ_DIR)
 	@echo "$(BLUE)Compiling $<...$(RESET)"
 	@$(CC) $(CFLAGS) -c $< -o $@
