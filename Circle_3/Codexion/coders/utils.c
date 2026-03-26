@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 14:01:38 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:07:59 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 15:31:44 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ int	allocate(t_sim *sim)
 		return (1);
 	sim->dongles = malloc(sizeof(t_dongle) * nb);
 	if (!sim->dongles)
-		return (1);
+		return (free(sim->coders), 1);
 	sim->threads = malloc(sizeof(pthread_t) * nb);
 	if (!sim->threads)
-		return (1);
+		return (free(sim->coders), free(sim->dongles), 1);
 	return (0);
 }
 

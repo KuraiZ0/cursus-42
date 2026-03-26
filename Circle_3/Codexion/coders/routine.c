@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:32:17 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:15:43 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 15:28:11 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static void	routine_impair(t_coder *coder)
 static void	routine_for_one(t_coder *coder)
 {
 	take_dongle(coder->left, coder);
-	log_event(coder->params, coder->id, "has taken a dongle.");
+	log_event(coder->params, coder->id, "has taken a dongle");
 	while (get_stop(coder->params) == 0)
 		usleep(1000);
 	release_dongle(coder->left, coder->params);
