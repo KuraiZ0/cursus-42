@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:45:12 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:08:14 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 14:54:23 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,30 +66,6 @@ static void	manage_param(char **av, t_sim *sim)
 	sim->params.finished_coders = 0;
 	pthread_mutex_init(&sim->params.log_mutex, NULL);
 	pthread_mutex_init(&sim->params.stop_mutex, NULL);
-}
-
-int	start_sim(t_sim *sim)
-{
-	int	i;
-
-	i = 0;
-	if (pthread_create(&sim->monitor_thread, NULL, monitor_routine, sim) != 0)
-		return (printf("Error on monitor thread creation.\n"), 1);
-	while (i < sim->params.nb_coders)
-	{
-		if (pthread_create(&sim->threads[i], NULL, coder_routine,
-				&sim->coders[i]) != 0)
-			return (printf("Error on thread creation.\n"), 1);
-		i++;
-	}
-	i = 0;
-	while (i < sim->params.nb_coders)
-	{
-		pthread_join(sim->threads[i], NULL);
-		i++;
-	}
-	pthread_join(sim->monitor_thread, NULL);
-	return (0);
 }
 
 int	main(int ac, char **av)

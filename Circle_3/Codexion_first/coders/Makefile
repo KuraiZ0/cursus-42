@@ -6,7 +6,7 @@
 #    By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2026/03/18 13:51:41 by ialmani           #+#    #+#              #
-#    Updated: 2026/03/26 15:23:26 by ialmani          ###   ########.fr        #
+#    Updated: 2026/03/26 14:33:53 by ialmani          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ NAME    = codexion
 CC      = cc
 CFLAGS  = -Wall -Werror -Wextra -pthread -I.
 RM      = rm -rf
-# -fsanitize=thread -g
 
 SRC =   main.c    	 \
         monitor.c 	 \

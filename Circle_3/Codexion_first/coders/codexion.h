@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:45:00 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:24:18 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 14:59:40 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,5 +111,6 @@ void		free_heap(t_heap *heap);
 void		push_heap(t_heap *heap, int coder_id, long priority);
 t_request	pop_heap(t_heap *heap);
 void		routine_utils(t_coder *coder);
+
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 14:01:38 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:07:59 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 14:11:24 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,30 @@ void	init_data(t_sim *sim)
 	}
 }
 
+int	start_sim(t_sim *sim)
+{
+	int	i;
+
+	i = 0;
+	if (pthread_create(&sim->monitor_thread, NULL, monitor_routine, sim) != 0)
+		return (printf("Error on monitor thread creation.\n"), 1);
+	while (i < sim->params.nb_coders)
+	{
+		if (pthread_create(&sim->threads[i], NULL, coder_routine,
+				&sim->coders[i]) != 0)
+			return (printf("Error on thread creation.\n"), 1);
+		i++;
+	}
+	i = 0;
+	while (i < sim->params.nb_coders)
+	{
+		pthread_join(sim->threads[i], NULL);
+		i++;
+	}
+	pthread_join(sim->monitor_thread, NULL);
+	return (0);
+}
+
 int	get_stop(t_params *params)
 {
 	int	stop;
@@ -73,11 +97,4 @@ int	get_stop(t_params *params)
 	stop = params->stop;
 	pthread_mutex_unlock(&params->stop_mutex);
 	return (stop);
-}
-
-void	set_stop(t_params *params)
-{
-	pthread_mutex_lock(&params->stop_mutex);
-	params->stop = 1;
-	pthread_mutex_unlock(&params->stop_mutex);
 }
