@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:45:00 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:24:18 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 15:30:04 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ typedef struct s_params
 	long				time_to_refractor;
 	int					nb_compiles;
 	long				dongle_cd;
-	int					scheduler;
+	t_scheduler			scheduler;
 	long				start_time;
 	int					stop;
 	int					finished_coders;
