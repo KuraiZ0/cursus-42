@@ -6,24 +6,50 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/24 14:32:17 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:15:43 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 15:00:20 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "codexion.h"
 
+static void	edf_logic(t_coder *coder)
+{
+	long	my_time;
+	long	right_time;
+	long	left_time;
+
+	if (coder->params->scheduler == 1)
+	{
+		pthread_mutex_lock(&coder->state_mutex);
+		my_time = coder->last_compile;
+		pthread_mutex_unlock(&coder->state_mutex);
+
+		pthread_mutex_lock(&coder->right_coder->state_mutex);
+		right_time = coder->right_coder->last_compile;
+		pthread_mutex_unlock(&coder->right_coder->state_mutex);
+
+		pthread_mutex_lock(&coder->left_coder->state_mutex);
+		left_time = coder->left_coder->last_compile;
+		pthread_mutex_unlock(&coder->left_coder->state_mutex);
+
+		if (my_time > right_time || my_time > left_time)
+			usleep(1000);
+	}
+}
+
 static void	routine_pair(t_coder *coder)
 {
+	edf_logic(coder);
 	take_dongle(coder->left, coder);
 	log_event(coder->params, coder->id, "has taken a dongle");
 	take_dongle(coder->right, coder);
 	log_event(coder->params, coder->id, "has taken a dongle");
 	log_event(coder->params, coder->id, "is compiling");
+	usleep(coder->params->time_to_compile * 1000);
 	pthread_mutex_lock(&coder->state_mutex);
 	coder->last_compile = get_time_ms();
 	coder->compile_count++;
 	pthread_mutex_unlock(&coder->state_mutex);
-	usleep(coder->params->time_to_compile * 1000);
 	routine_utils(coder);
 	release_dongle(coder->left, coder->params);
 	release_dongle(coder->right, coder->params);
@@ -35,16 +61,17 @@ static void	routine_pair(t_coder *coder)
 
 static void	routine_impair(t_coder *coder)
 {
+	edf_logic(coder);
 	take_dongle(coder->right, coder);
 	log_event(coder->params, coder->id, "has taken a dongle");
 	take_dongle(coder->left, coder);
 	log_event(coder->params, coder->id, "has taken a dongle");
 	log_event(coder->params, coder->id, "is compiling");
+	usleep(coder->params->time_to_compile * 1000);
 	pthread_mutex_lock(&coder->state_mutex);
 	coder->last_compile = get_time_ms();
 	coder->compile_count++;
 	pthread_mutex_unlock(&coder->state_mutex);
-	usleep(coder->params->time_to_compile * 1000);
 	routine_utils(coder);
 	release_dongle(coder->right, coder->params);
 	release_dongle(coder->left, coder->params);

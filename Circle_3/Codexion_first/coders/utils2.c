@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 14:01:29 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:24:02 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/03/26 14:59:18 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	log_event(t_params *params, int id, char *msg)
 	long	time_atm;
 
 	pthread_mutex_lock(&params->log_mutex);
-	if (get_stop(params) == 1)
+	if (params->stop == 1)
 	{
 		pthread_mutex_unlock(&params->log_mutex);
 		return ;
@@ -29,20 +29,11 @@ void	log_event(t_params *params, int id, char *msg)
 	pthread_mutex_unlock(&params->log_mutex);
 }
 
-long	take_utils(t_coder *coder, long priority)
+void	set_stop(t_params *params)
 {
-	long	last;
-
-	if (coder->params->scheduler == FIFO)
-		priority = get_time_ms();
-	else if (coder->params->scheduler == EDF)
-	{
-		pthread_mutex_lock(&coder->state_mutex);
-		last = coder->last_compile;
-		pthread_mutex_unlock(&coder->state_mutex);
-		priority = last + coder->params->time_to_burnout;
-	}
-	return (priority);
+	pthread_mutex_lock(&params->stop_mutex);
+	params->stop = 1;
+	pthread_mutex_unlock(&params->stop_mutex);
 }
 
 void	take_dongle(t_dongle *dongle, t_coder *coder)
@@ -51,7 +42,10 @@ void	take_dongle(t_dongle *dongle, t_coder *coder)
 
 	priority = 0;
 	pthread_mutex_lock(&dongle->t_mutex);
-	priority = take_utils(coder, priority);
+	if (coder->params->scheduler == FIFO)
+		priority = get_time_ms();
+	else if (coder->params->scheduler == EDF)
+		priority = coder->last_compile + coder->params->time_to_burnout;
 	push_heap(&dongle->queue, coder->id, priority);
 	while (((dongle->available) == 0) || dongle
 		->queue.array[0].coder_id != coder->id || get_time_ms()
