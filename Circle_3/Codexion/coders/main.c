@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/18 13:45:12 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:08:14 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/04/04 15:17:41 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,14 @@ int	parsing(int ac, char **av)
 		if (i == 8)
 		{
 			if (strcmp(av[i], "fifo") != 0 && strcmp(av[i], "edf") != 0)
-				return (printf("edf or fifo for the last arg."), 1);
+				return (printf("ERROR: edf or fifo for the last arg."), 1);
 		}
 		else
 		{
 			if (valid_int(av[i]))
-				return (printf("Arg %d isn't a valid int.", i), 1);
+				return (printf("ERROR: Arg %d isn't a valid int.", i), 1);
+			if (i == 1 && atoi(av[i]) <= 0)
+				return (printf("ERROR: nb_coders must be more than 0."), 1);
 		}
 		i++;
 	}
