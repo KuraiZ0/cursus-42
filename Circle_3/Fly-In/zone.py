@@ -6,7 +6,7 @@
 #   By: ialmani <ialmani@student.42belgium.be>       +#+  +:+       +#+       #
 #                                                  +#+#+#+#+#+   +#+          #
 #   Created: 2026/03/28 15:14:46 by ialmani             #+#    #+#            #
-#   Updated: 2026/03/31 17:09:56 by ialmani            ###   ########.fr      #
+#   Updated: 2026/04/01 13:46:30 by ialmani            ###   ########.fr      #
 #                                                                             #
 # ########################################################################### #
 
@@ -28,10 +28,12 @@ class Zone:
 
 
 class Connexion:
-    def __init__(self, max_link: int, zone1: Zone, zone2: Zone) -> None:
+    def __init__(self, max_link: int, zone1: Zone, zone2: Zone,
+                 flow: int = 0) -> None:
         self.max_link = max_link
         self.zone1 = zone1
         self.zone2 = zone2
+        self.flow = flow
 
 
 class Drone:
