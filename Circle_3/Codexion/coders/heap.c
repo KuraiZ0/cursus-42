@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 09:49:55 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 15:24:08 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/04/08 12:20:59 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,9 @@ void	push_heap(t_heap *heap, int coder_id, long priority)
 	while (i > 0)
 	{
 		parent = (i - 1) / 2;
-		if (heap->array[i].priority < heap->array[parent].priority)
+		if (heap->array[i].priority < heap->array[parent].priority
+			|| (heap->array[i].priority == heap->array[parent].priority
+				&& heap->array[i].coder_id > heap->array[parent].coder_id))
 		{
 			swap(&heap->array[i], &heap->array[parent]);
 			i = parent;
