@@ -6,7 +6,7 @@
 /*   By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/03/26 11:06:14 by ialmani           #+#    #+#             */
-/*   Updated: 2026/03/26 11:11:18 by ialmani          ###   ########.fr       */
+/*   Updated: 2026/04/08 12:27:32 by ialmani          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,21 @@ int	init_heap(t_heap *heap, int capacity)
 	return (0);
 }
 
+static int	cond_for_pop(t_heap *heap, int small, int left, int right)
+{
+	if (left < heap->size && (heap->array[left].priority
+			< heap->array[small].priority
+			|| (heap->array[left].priority == heap->array[small].priority
+			&& heap->array[left].coder_id > heap->array[small].coder_id)))
+		small = left;
+	if (right < heap->size && (heap->array[right].priority
+			< heap->array[small].priority
+			|| (heap->array[right].priority == heap->array[small].priority
+				&& heap->array[right].coder_id > heap->array[small].coder_id)))
+		small = right;
+	return (small);
+}
+
 void	pop_utils(t_heap *heap, int i)
 {
 	int	left;
@@ -42,12 +57,7 @@ void	pop_utils(t_heap *heap, int i)
 		small = i;
 		left = 2 * i + 1;
 		right = 2 * i + 2;
-		if (left < heap->size && heap->array[left].priority
-			< heap->array[small].priority)
-			small = left;
-		if (right < heap->size && heap->array[right].priority
-			< heap->array[small].priority)
-			small = right;
+		small = cond_for_pop(heap, small, left, right);
 		if (small != i)
 		{
 			swap(&heap->array[small], &heap->array[i]);
