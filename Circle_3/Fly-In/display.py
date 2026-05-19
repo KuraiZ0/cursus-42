@@ -13,7 +13,6 @@
 """Module for the simulation GUI using the arcade library."""
 
 import math
-from typing import Set
 import arcade
 from scheduler import Scheduler
 from algo import find_all
@@ -44,7 +43,7 @@ class SimulationWindow(arcade.Window):
         self.scheduler: Scheduler
         self.drone_sprite: arcade.Texture
         self.zone_sprite: arcade.Texture
-        self.zones: Set[Zone] = set()
+        self.zones: set[Zone] = set()
         self.map_scale: float = 1.0
         self.offset_x: float = 0.0
         self.offset_y: float = 0.0
@@ -82,6 +81,7 @@ class SimulationWindow(arcade.Window):
         self.auto_mode = False
         self.drone_sprite = arcade.load_texture("img/Spider.png")
         self.zone_sprite = arcade.load_texture("img/Zone.png")
+        self.background = arcade.load_texture("img/background.png")
 
         self.zones = set()
         for path in self.scheduler.path:
@@ -116,6 +116,8 @@ class SimulationWindow(arcade.Window):
     def on_draw(self) -> None:
         """Render the simulation screen."""
         self.clear()
+        bg_rect = arcade.LRBT(0, SCREEN_WIDTH, 0, SCREEN_HEIGHT)
+        arcade.draw_texture_rect(self.background, bg_rect)
         y_boost = 2.5
         for path in self.scheduler.path:
             for i in range(len(path) - 1):
@@ -188,9 +190,6 @@ class SimulationWindow(arcade.Window):
                 (dx - half_drone) + offset_visual_x,
                 (dy - half_drone) + offset_visual_y, drone_size, drone_size)
             arcade.draw_texture_rect(self.drone_sprite, drone_rect)
-            arcade.draw_text(
-                str(drone.id), dx, dy, arcade.color.BLACK, 8, bold=True,
-                align="center", anchor_x="center", anchor_y="center")
 
         # Leaderboard creation
         arcade.draw_lrbt_rectangle_filled(

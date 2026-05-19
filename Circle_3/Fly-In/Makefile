@@ -16,23 +16,24 @@ BLUE	= \033[1;34m
 YELLOW	= \033[1;33m
 RESET	= \033[0m
 
-
 PYTHON = python3
-MAIN = 
+MAIN = main.py
 NAME = Fly-In
+MAP = maps/easy/01_linear_path.txt
 
 all: run
 
 install:
-	$(PYTHON) -m pip install flake8 mypy
+	@echo "$(BLUE)Installing dependencies...$(RESET)"
+	$(PYTHON) -m pip install flake8 mypy arcade
 
 run:
-	@echo "$(YELLOW)🚀Launch$(NAME)...$(RESET)"
-	$(PYTHON) $(MAIN) $(CONFIG)
+	@echo "$(YELLOW)🚀 Launching $(NAME)...$(RESET)"
+	$(PYTHON) $(MAIN) $(MAP)
 
 debug:
-	@echo "$(BLUE)Debbuging...$(RESET)"
-	@$(PYTHON) -m pdb $(MAIN) $(CONFIG)
+	@echo "$(BLUE)Debugging...$(RESET)"
+	@$(PYTHON) -m pdb $(MAIN) $(MAP)
 
 clean:
 	@echo "$(RED)Removing cache...$(RESET)"
@@ -41,12 +42,13 @@ clean:
 	@find . -type d -name ".mypy_cache" -exec rm -rf {} +
 
 lint:
+	@echo "$(GREEN)Running Linter...$(RESET)"
 	flake8 .
 	mypy --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs .
 
 lint-strict:
+	@echo "$(GREEN)Running Strict Linter...$(RESET)"
 	flake8 .
 	mypy --strict .
 
-
-.PHONY: all install run debug clean lint lint-strict%     
+.PHONY: all install run debug clean lint lint-strict
