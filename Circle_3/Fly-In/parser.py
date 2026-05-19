@@ -10,13 +10,26 @@
 #                                                                             #
 # ########################################################################### #
 
-from typing import Any
-from .zone import Zone, Connexion
+"""Module for parsing map configuration files and managing parsed data."""
+
+from __future__ import annotations
+from typing import Optional
+from zone import Zone, Connexion
 
 
 class Manager:
-    def __init__(self, nb_drones: int, zones: dict[Zone],
-                 start_zone: Zone = None, end_zone: Zone = None) -> None:
+    """Manages the parsed simulation data."""
+
+    def __init__(self, nb_drones: int, zones: dict[str, Zone],
+                 start_zone: Zone, end_zone: Zone) -> None:
+        """Initialize a Manager instance.
+
+        Args:
+            nb_drones: Total number of drones in the simulation.
+            zones: Dictionary mapping zone names to Zone objects.
+            start_zone: The starting zone of the simulation.
+            end_zone: The ending zone of the simulation.
+        """
         self.nb_drones = nb_drones
         self.zones = zones
         self.start_zone = start_zone
@@ -27,10 +40,27 @@ class Parser:
     """Class to parse zone and connection data from a configuration file."""
 
     def __init__(self, file_path: str, current_line: str) -> None:
+        """Initialize a Parser instance.
+
+        Args:
+            file_path: Path to the configuration file.
+            current_line: (Placeholder) Current line being processed.
+        """
         self.file_path = file_path
         self.current_line = current_line
 
     def get_file(self, file_path: str) -> str:
+        """Read the content of a file.
+
+        Args:
+            file_path: Path to the file to read.
+
+        Returns:
+            The content of the file as a string.
+
+        Raises:
+            FileNotFoundError: If the file does not exist.
+        """
         try:
             with open(file_path, 'r') as file:
                 content: str = file.read()
@@ -39,12 +69,20 @@ class Parser:
             raise (fe)
 
     def _parse_zone(self) -> Manager:
-        zone_dic: dict[Any] = {}
-        start_zone = None
-        end_zone = None
-        nb_drones = 0
-        file: str = self.get_file(self.file_path)
-        for line in file.splitlines():
+        """Parse the configuration file and return a Manager instance.
+
+        Returns:
+            A Manager instance containing the parsed data.
+
+        Raises:
+            ValueError: If there's a parsing error or missing start/end hub.
+        """
+        zone_dic: dict[str, Zone] = {}
+        start_zone: Optional[Zone] = None
+        end_zone: Optional[Zone] = None
+        nb_drones: int = 0
+        file_content: str = self.get_file(self.file_path)
+        for line in file_content.splitlines():
             if (line.startswith("#") or not line):
                 continue
             if "[" in line:
@@ -57,10 +95,10 @@ class Parser:
                 parameters = []
 
             element: list[str] = base_info.split()
-            hub_type: list[str] = ['hub:', 'start_hub:', 'end_hub:']
+            hub_types: list[str] = ['hub:', 'start_hub:', 'end_hub:']
 
-            if (element[0] in hub_type):
-                hub = Zone(element[1], int(element[2]), int(element[3]))
+            if element[0] in hub_types:
+                hub = Zone(element[1], int(element[2]), int(element[3]), 0)
                 match element[0]:
                     case "start_hub:":
                         start_zone = hub
@@ -90,36 +128,41 @@ class Parser:
                         nb_drones = int(element[1])
                 except ValueError:
                     print("ERROR: nb_drones must be a positive integer.")
-        for line in file.splitlines():
+
+        # Re-parse for connections
+        for line in file_content.splitlines():
             if (line.startswith("#") or not line):
                 continue
             if "[" in line:
-                parts: list[str] = line.split("[")
-                base_info: str = parts[0]
-                metadata: str = parts[1]
-                parameters: list[str] = metadata.strip("]").split()
+                c_parts: list[str] = line.split("[")
+                c_base_info: str = c_parts[0]
+                c_metadata: str = c_parts[1]
+                c_parameters: list[str] = c_metadata.strip("]").split()
             else:
-                base_info = line
-                parameters = []
+                c_base_info = line
+                c_parameters = []
 
-            element: list[str] = base_info.split()
-            hub_type: list[str] = ['hub:', 'start_hub:', 'end_hub:']
+            c_element: list[str] = c_base_info.split()
 
-            if (element[0] == "connection:"):
-                zone_name: list[str] = element[1].split("-")
-                zone1 = zone_dic[zone_name[0]]
-                zone2 = zone_dic[zone_name[1]]
+            if (c_element[0] == "connection:"):
+                zone_names: list[str] = c_element[1].split("-")
+                zone1 = zone_dic[zone_names[0]]
+                zone2 = zone_dic[zone_names[1]]
                 capacity = 1
 
-                for param in parameters:
-                    key_value = param.split("=")
-                    if key_value[0] == "max_link_capacity":
+                for param in c_parameters:
+                    c_key_value = param.split("=")
+                    if c_key_value[0] == "max_link_capacity":
                         try:
-                            capacity = int(key_value[1])
+                            capacity = int(c_key_value[1])
                         except ValueError:
                             print("ERROR: max_link_capacity must be an int.")
                 connection = Connexion(capacity, zone1, zone2)
                 zone1.connection.append(connection)
                 zone2.connection.append(connection)
+
+        if start_zone is None or end_zone is None:
+            raise ValueError("Simulation requires both a start and end hub.")
+
         return Manager(
             nb_drones, zone_dic, start_zone, end_zone)
