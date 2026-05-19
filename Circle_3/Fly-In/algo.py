@@ -12,7 +12,6 @@
 
 """Module containing pathfinding algorithms for the simulation."""
 
-from __future__ import annotations
 import heapq
 from typing import Optional
 from zone import Zone
