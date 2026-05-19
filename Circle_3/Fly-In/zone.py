@@ -10,7 +10,7 @@
 #                                                                             #
 # ########################################################################### #
 
-"""Module defining the Zone, Connexion, and Drone classes for the simulation."""
+"""Module defining the Zone, Connexion, Drone classes for the simulation."""
 
 from __future__ import annotations
 from typing import Optional

@@ -54,7 +54,7 @@ class Scheduler:
         """Execute a simulation step, moving drones along their paths."""
         if self.is_finish():
             return
-        
+
         turn_moves: list[Any] = []
 
         for drone in self.drones:
