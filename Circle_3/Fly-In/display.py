@@ -163,9 +163,9 @@ class SimulationWindow(arcade.Window):
 
         progress: float = self.timer / self.turn_delay
         for drone in self.scheduler.drones:
-            start_x = (drone.previous_zone.x
+            start_x: float = (drone.previous_zone.x
                        * self.map_scale + self.offset_x)
-            start_y = (drone.previous_zone.y * y_boost
+            start_y: float = (drone.previous_zone.y * y_boost
                        * self.map_scale + self.offset_y)
             end_x = (drone.current_zone.x
                      * self.map_scale + self.offset_x)
@@ -230,3 +230,7 @@ class SimulationWindow(arcade.Window):
             if self.timer >= self.turn_delay:
                 self.scheduler.step()
                 self.timer = 0.0
+
+
+
+# ajouter une legende a droite avec les differentes touches qui existent

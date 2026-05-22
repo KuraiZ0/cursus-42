@@ -12,7 +12,6 @@
 
 """Module for parsing map configuration files and managing parsed data."""
 
-from __future__ import annotations
 from typing import Optional
 from zone import Zone, Connexion
 
@@ -112,24 +111,41 @@ class Parser:
                         case "color":
                             hub.color = value
                         case "zone":
+                            valid_types: set[str] = {"normal", "blocked",
+                                                     "restricted", "priority"}
+                            if value not in valid_types:
+                                raise ValueError(
+                                    f"Parsing ERROR: invalid zone type {value}"
+                                    f" (must be one of {valid_types})"
+                                )
                             hub.type_zone = value
                         case "max_drones":
                             try:
-                                hub.max_drones = int(value)
+                                val = int(value)
+                                if val <= 0:
+                                    raise ValueError()
+                                hub.max_drones = val
                             except ValueError:
-                                print("ERROR: Max drones must be an int.")
+                                print("ERROR: Max drones must be "
+                                      "a positive int.")
                         case _:
                             raise ValueError(
                                 f"Parsing error: metadata unknown'{key}'")
+                if element[1] in zone_dic:
+                    raise ValueError(
+                        f"Parsing ERROR: duplicate connection '{element[1]}'"
+                    )
                 zone_dic[element[1]] = hub
             elif (element[0] == "nb_drones:"):
                 try:
-                    if (int(element[1]) > 0):
+                    val = int(element[1])
+                    if val <= 0:
+                        raise ValueError()
+                        nb_drones = val
                         nb_drones = int(element[1])
                 except ValueError:
                     print("ERROR: nb_drones must be a positive integer.")
 
-        # Re-parse for connections
         for line in file_content.splitlines():
             if (line.startswith("#") or not line):
                 continue
@@ -146,17 +162,27 @@ class Parser:
 
             if (c_element[0] == "connection:"):
                 zone_names: list[str] = c_element[1].split("-")
-                zone1 = zone_dic[zone_names[0]]
-                zone2 = zone_dic[zone_names[1]]
+                try:
+                    zone1: Zone = zone_dic[zone_names[0]]
+                    zone2: Zone = zone_dic[zone_names[1]]
+                except KeyError as ke:
+                    raise ValueError(
+                        f"Parsing ERROR: unknow zone name "
+                        f"{ke} in connection '{c_element[1]}'"
+                    )
                 capacity = 1
 
                 for param in c_parameters:
-                    c_key_value = param.split("=")
+                    c_key_value: list[str] = param.split("=")
                     if c_key_value[0] == "max_link_capacity":
                         try:
-                            capacity = int(c_key_value[1])
+                            val = int(c_key_value[1])
+                            if val <= 0:
+                                raise ValueError()
+                            capacity = val
                         except ValueError:
-                            print("ERROR: max_link_capacity must be an int.")
+                            print("ERROR: max_link_capacity "
+                                  "must be a positive int.")
                 connection = Connexion(capacity, zone1, zone2)
                 zone1.connection.append(connection)
                 zone2.connection.append(connection)
