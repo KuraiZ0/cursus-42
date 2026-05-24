@@ -27,7 +27,15 @@ The simulation navigates a dynamic network of interconnected zones, respecting s
 
 To solve the routing problem efficiently and minimize the total turn count, the project relies on a modular architecture:
 1. **Parser:** Safely reads the map, validates coordinates, and builds a fully connected network graph of `Zone` objects.
-2. **Pathfinding (BFS):** The algorithm explores the graph to find all possible valid paths from the start hub to the end goal. It evaluates path lengths and prioritizes routes containing `priority` zones.
+2. **Pathfinding (Dijkstra):** The algorithm uses a weighted Dijkstra
+   implementation with a min-heap (priority queue) to find the shortest
+   path from start to end. Edge weights are determined by zone types:
+   `restricted` zones cost 2 turns, while `normal` and `priority` zones
+   cost 1 turn. `priority` zones are preferred since they share the same
+   weight but Dijkstra will explore them first when path costs are equal.
+   The `find_all()` function iterates Dijkstra multiple times using flow
+   augmentation: after each path is found, the used connections have their
+   flow incremented, naturally distributing drones across disjoint routes.
 3. **Scheduler Engine:** The core logic evaluates the network state turn-by-turn. It efficiently manages a queue of drones, checks upcoming zone and connection capacities, and coordinates simultaneous movements without creating deadlocks or exceeding throughput limits. 
 
 ## 👁️ Visual Representation

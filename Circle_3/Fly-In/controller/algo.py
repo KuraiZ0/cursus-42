@@ -14,7 +14,7 @@
 
 import heapq
 from typing import Optional
-from zone import Zone
+from controller.zone import Zone
 
 
 def find_all(start_node: Zone,
@@ -30,23 +30,55 @@ def find_all(start_node: Zone,
         A list of paths, where each path is a list of Zone objects.
     """
     all_paths: list[list[Zone]] = []
+    link_costs: dict[int, int] = {}
 
     while len(all_paths) < nb_drones:
-        path: list[Zone] = algo(start_node, end_node)
+        path: list[Zone] = algo(start_node, end_node, link_costs)
 
         if not path:
             break
+
         all_paths.append(path)
         for i in range(len(path) - 1):
             z1, z2 = path[i], path[i+1]
             for link in z1.connection:
                 if link.zone1 == z2 or link.zone2 == z2:
-                    link.flow += 1
+                    link_costs[id(link)] = (
+                        link_costs.get(id(link), 0) + 50)
                     break
     return all_paths
 
 
-def algo(start_node: Zone, end_node: Zone) -> list[Zone]:
+def dist_to_goal(end_zone: Zone) -> dict[Zone, int]:
+    """Shortest path cost from every zone to the goal (reverse Dijkstra).
+
+    Args:
+        end_zone: The target zone.
+
+    Returns:
+        A dict mapping each Zone to its cost-to-goal.
+    """
+    dist: dict[Zone, int] = {end_zone: 0}
+    heap: list[tuple[int, int, Zone]] = [(0, id(end_zone), end_zone)]
+
+    while heap:
+        cost, _, zone = heapq.heappop(heap)
+        if cost > dist.get(zone, 10**9):
+            continue
+        weight = 2 if zone.type_zone == "restricted" else 1
+        for link in zone.connection:
+            neighbor: Zone = (link.zone2 if link.zone1 == zone else link.zone1)
+            if neighbor.type_zone == "blocked":
+                continue
+            new_cost: int = cost + weight
+            if new_cost < dist.get(neighbor, 10**9):
+                dist[neighbor] = new_cost
+                heapq.heappush(heap, (new_cost, id(neighbor), neighbor))
+    return dist
+
+
+def algo(start_node: Zone, end_node: Zone,
+         link_costs: Optional[dict[int, int]] = None) -> list[Zone]:
     """Find a single shortest path from start to end node using Dijkstra.
 
     Args:
@@ -56,6 +88,8 @@ def algo(start_node: Zone, end_node: Zone) -> list[Zone]:
     Returns:
         A list of Zone objects representing the shortest path.
     """
+    if link_costs is None:
+        link_costs = {}
     queue: list[tuple[int, int, Zone]] = [(0, id(start_node), start_node)]
     distances: dict[Zone, int] = {start_node: 0}
     parent: dict[Zone, Optional[Zone]] = {start_node: None}
@@ -65,29 +99,22 @@ def algo(start_node: Zone, end_node: Zone) -> list[Zone]:
         if current_zone == end_node:
             break
         for link in current_zone.connection:
-            if link.flow < link.max_link:
-                neighbor = (
-                    link.zone2 if link.zone1 == current_zone else link.zone1)
-                match neighbor.type_zone:
-                    case "blocked":
-                        continue
-                    case "restricted":
-                        weight = 2
-                    case "normal":
-                        weight = 1
-                    case "priority":
-                        weight = 1
-                    case _:
-                        weight = 1
-                new_cost: int = current_cost + weight
-                if neighbor not in distances or new_cost < distances[neighbor]:
-                    distances[neighbor] = new_cost
-                    parent[neighbor] = current_zone
-                    heapq.heappush(queue, (new_cost, id(neighbor), neighbor))
-    path: list[Zone] = []
+            neighbor: Zone = (
+                link.zone2 if link.zone1 == current_zone else link.zone1)
+            if neighbor.type_zone == "blocked":
+                continue
+            base_weight = 2 if neighbor.type_zone == "restricted" else 1
+            penalty = link_costs.get(id(link), 0)
+            new_cost = current_cost + base_weight + penalty
+
+            if new_cost < distances.get(neighbor, 10**9):
+                distances[neighbor] = new_cost
+                parent[neighbor] = current_zone
+                heapq.heappush(queue, (new_cost, id(neighbor), neighbor))
     if end_node not in parent:
         return []
 
+    path: list[Zone] = []
     cursor: Optional[Zone] = end_node
     while cursor is not None:
         path.append(cursor)

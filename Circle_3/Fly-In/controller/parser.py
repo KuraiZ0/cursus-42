@@ -13,7 +13,7 @@
 """Module for parsing map configuration files and managing parsed data."""
 
 from typing import Optional
-from zone import Zone, Connexion
+from controller.zone import Zone, Connexion
 
 
 class Manager:
@@ -141,11 +141,11 @@ class Parser:
                     val = int(element[1])
                     if val <= 0:
                         raise ValueError()
-                        nb_drones = val
-                        nb_drones = int(element[1])
+                    nb_drones = val
                 except ValueError:
-                    print("ERROR: nb_drones must be a positive integer.")
+                    raise ("ERROR: nb_drones must be a positive integer.")
 
+        seen_connection: set[frozenset[str]] = set()
         for line in file_content.splitlines():
             if (line.startswith("#") or not line):
                 continue
@@ -162,6 +162,12 @@ class Parser:
 
             if (c_element[0] == "connection:"):
                 zone_names: list[str] = c_element[1].split("-")
+
+                pair = frozenset([zone_names[0], zone_names[1]])
+                if pair in seen_connection:
+                    raise ValueError(
+                        f"Parsing ERROR: duplicate connection '{c_element[1]}'")
+                seen_connection.add(pair)
                 try:
                     zone1: Zone = zone_dic[zone_names[0]]
                     zone2: Zone = zone_dic[zone_names[1]]
