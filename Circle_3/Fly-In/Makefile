@@ -19,7 +19,7 @@ RESET	= \033[0m
 PYTHON = python3
 MAIN = main.py
 NAME = Fly-In
-MAP = maps/easy/01_linear_path.txt
+MAP = maps/challenger/01_the_impossible_dream.txt
 
 all: run
 

@@ -1,7 +1,7 @@
 """Main entry point for the Fly-In simulation."""
 import arcade
 import sys
-from display import SimulationWindow
+from view.display import SimulationWindow
 
 
 def main():
