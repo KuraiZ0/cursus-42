@@ -170,13 +170,13 @@ class SimulationWindow(arcade.Window):
         progress: float = self.timer / self.turn_delay
         for drone in self.scheduler.drones:
             start_x: float = (drone.previous_zone.x * self.grid_x
-            * self.map_scale + self.offset_x)
+                              * self.map_scale + self.offset_x)
             start_y: float = (drone.previous_zone.y * self.grid_y
-            * self.map_scale + self.offset_y)
+                              * self.map_scale + self.offset_y)
             end_x: float = (drone.current_zone.x * self.grid_x
-            * self.map_scale + self.offset_x)
+                            * self.map_scale + self.offset_x)
             end_y: float = (drone.current_zone.y * self.grid_y
-            * self.map_scale + self.offset_y)
+                            * self.map_scale + self.offset_y)
 
             theorical_dx = start_x + (end_x - start_x) * progress
             theorical_dy = start_y + (end_y - start_y) * progress
@@ -236,8 +236,7 @@ class SimulationWindow(arcade.Window):
 
         arcade.draw_text(
             "Keybinds", text_x, rect_top - 30,
-            arcade.color.WHITE, 14, bold=True
-        )
+            arcade.color.WHITE, 14, bold=True)
         arcade.draw_text(
             "V :     Auto/Manual", text_x, rect_top - 65,
             arcade.color.LIGHT_GRAY, 12)
