@@ -25,6 +25,8 @@ all: run
 
 install:
 	@echo "$(BLUE)Installing dependencies...$(RESET)"
+	$(PYTHON) -m venv .venv
+	source .venv/bin/activate
 	$(PYTHON) -m pip install flake8 mypy arcade
 
 run:
