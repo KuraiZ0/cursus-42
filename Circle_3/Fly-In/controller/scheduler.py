@@ -13,7 +13,7 @@
 """Module for scheduling and managing drone movements along paths."""
 
 from typing import Optional
-from controller.zone import Zone, Drone
+from controller.zone import Zone, Drone, Connexion
 from controller.parser import Manager
 from controller.algo import dist_to_goal
 
@@ -38,6 +38,7 @@ class Scheduler:
     def create_new_drone(self) -> None:
         """Create drone instances based on the manager's drone count."""
         self.manager.start_zone.current_drone = self.manager.nb_drones
+        self.manager.start_zone.max_drones = self.manager.nb_drones
         for i in range(self.manager.nb_drones):
             new_drone = Drone(i + 1, self.manager.start_zone, False, 0)
             self.drones.append(new_drone)
@@ -55,7 +56,9 @@ class Scheduler:
 
     def _best_next_zone(
         self, drone: Drone, freed: dict[Zone, int],
-            claimed: dict[Zone, int]) -> Optional[Zone]:
+            claimed: dict[Zone, int],
+            link_claimed: dict[
+                Connexion, int]) -> tuple[Optional[Zone], Optional[Connexion]]:
         """Find the best next zone for a drone using greedy dist-to-goal.
 
         Args:
@@ -66,7 +69,8 @@ class Scheduler:
         Returns:
             The best neighbor zone, or None if the drone must wait.
         """
-        best: Optional[Zone] = None
+        best_zone: Optional[Zone] = None
+        best_link: Optional[Connexion] = None
         best_dist: int = 10**9
 
         for link in drone.current_zone.connection:
@@ -75,8 +79,10 @@ class Scheduler:
             )
             if neighbor.type_zone == "blocked":
                 continue
+            if link_claimed.get(link, 0) >= link.max_link:
+                continue
             if neighbor == self.manager.end_zone:
-                return neighbor
+                return neighbor, link
 
             eff_occ: int = (
                 neighbor.current_drone + claimed.get(neighbor, 0)
@@ -86,8 +92,9 @@ class Scheduler:
                 d: int = self.dist_to_goal.get(neighbor, 10**9)
                 if d < best_dist:
                     best_dist = d
-                    best = neighbor
-        return best
+                    best_zone = neighbor
+                    best_link = link
+        return best_zone, best_link
 
     def step(self) -> None:
         """Execute a simulation step, moving drones along their paths."""
@@ -105,6 +112,7 @@ class Scheduler:
 
         freed: dict[Zone, int] = {}
         claimed: dict[Zone, int] = {}
+        link_claimed: dict[Connexion, int] = {}
 
         for drone in sorted_drones:
             if drone.turns_left > 0:
@@ -124,10 +132,12 @@ class Scheduler:
             if drone.current_zone == self.manager.end_zone:
                 continue
 
-            next_zone: Zone | None = self._best_next_zone(
-                drone, freed, claimed)
-            if next_zone is None:
+            next_zone, used_link = self._best_next_zone(
+                drone, freed, claimed, link_claimed)
+            if next_zone is None or used_link is None:
                 continue
+
+            link_claimed[used_link] = link_claimed.get(used_link, 0) + 1
 
             prev_name: str = drone.current_zone.name
             drone.current_zone.current_drone -= 1

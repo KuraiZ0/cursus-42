@@ -143,7 +143,8 @@ class Parser:
                         raise ValueError()
                     nb_drones = val
                 except ValueError:
-                    raise ("ERROR: nb_drones must be a positive integer.")
+                    raise ValueError(
+                        "ERROR: nb_drones must be a positive integer.")
 
         seen_connection: set[frozenset[str]] = set()
         for line in file_content.splitlines():
@@ -166,7 +167,8 @@ class Parser:
                 pair = frozenset([zone_names[0], zone_names[1]])
                 if pair in seen_connection:
                     raise ValueError(
-                        f"Parsing ERROR: duplicate connection '{c_element[1]}'")
+                        f"Parsing ERROR: duplicate connection '{
+                            c_element[1]}'")
                 seen_connection.add(pair)
                 try:
                     zone1: Zone = zone_dic[zone_names[0]]

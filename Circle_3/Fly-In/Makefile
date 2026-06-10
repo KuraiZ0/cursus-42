@@ -1,12 +1,12 @@
 # **************************************************************************** #
 #                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: ialmani <ialmani@student.42belgium.be>     +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2026/03/28 14:27:29 by ialmani           #+#    #+#              #
-#    Updated: 2026/03/28 14:34:29 by ialmani          ###   ########.fr        #
+#                                                          :::      ::::::::   #
+#   Makefile                                             :+:      :+:    :+:   #
+#                                                      +:+ +:+         +:+     #
+#   By: ialmani <ialmani@student.42belgium.be>       +#+  +:+       +#+        #
+#                                                  +#+#+#+#+#+   +#+           #
+#   Created: 2026/03/28 14:27:29 by ialmani             #+#    #+#             #
+#   Updated: 2026/06/10 11:41:15 by ialmani            ###   ########.fr       #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,14 +20,14 @@ PYTHON = python3
 MAIN = main.py
 NAME = Fly-In
 MAP = maps/challenger/01_the_impossible_dream.txt
+VENV_PYTHON = .venv/bin/python
 
 all: run
 
 install:
 	@echo "$(BLUE)Installing dependencies...$(RESET)"
 	$(PYTHON) -m venv .venv
-	source .venv/bin/activate
-	$(PYTHON) -m pip install flake8 mypy arcade
+	$(VENV_PYTHON) -m pip install flake8 mypy arcade
 
 run:
 	@echo "$(YELLOW)🚀 Launching $(NAME)...$(RESET)"

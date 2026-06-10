@@ -50,30 +50,30 @@ def find_all(start_node: Zone,
 
 
 def dist_to_goal(end_zone: Zone) -> dict[Zone, int]:
-    """Shortest path cost from every zone to the goal (reverse Dijkstra).
-
-    Args:
-        end_zone: The target zone.
-
-    Returns:
-        A dict mapping each Zone to its cost-to-goal.
-    """
+    """Calcul the absolute shortest path cost from every zone to the goal."""
     dist: dict[Zone, int] = {end_zone: 0}
-    heap: list[tuple[int, int, Zone]] = [(0, id(end_zone), end_zone)]
 
-    while heap:
-        cost, _, zone = heapq.heappop(heap)
-        if cost > dist.get(zone, 10**9):
+    queue: list[tuple[int, int, Zone]] = [(0, id(end_zone), end_zone)]
+
+    while queue:
+        current_dist, _, current_zone = heapq.heappop(queue)
+
+        if current_dist > dist.get(current_zone, 10**9):
             continue
-        weight = 2 if zone.type_zone == "restricted" else 1
-        for link in zone.connection:
-            neighbor: Zone = (link.zone2 if link.zone1 == zone else link.zone1)
+
+        for link in current_zone.connection:
+            neighbor = link.zone1 if link.zone2 == current_zone else link.zone2
+
             if neighbor.type_zone == "blocked":
                 continue
-            new_cost: int = cost + weight
-            if new_cost < dist.get(neighbor, 10**9):
-                dist[neighbor] = new_cost
-                heapq.heappush(heap, (new_cost, id(neighbor), neighbor))
+
+            weight = 2 if current_zone.type_zone == "restricted" else 1
+            new_dist: int = current_dist + weight
+
+            if new_dist < dist.get(neighbor, 10**9):
+                dist[neighbor] = new_dist
+                heapq.heappush(queue, (new_dist, id(neighbor), neighbor))
+
     return dist
 
 
