@@ -4,7 +4,7 @@ import sys
 from view.display import SimulationWindow
 
 
-def main():
+def main() -> None:
     """Execute the sim."""
     if len(sys.argv) < 2:
         print("Error: No map file provided.")
