@@ -14,7 +14,8 @@ SCREEN_HEIGHT = 800
 class SimulationWindow(arcade.Window):
     """Main window for the Fly-In simulation."""
 
-    def __init__(self, file_path: str) -> None:
+    def __init__(
+            self, file_path: str, capacity_info: bool) -> None:
         """Initialize the simulation window.
 
         Args:
@@ -27,6 +28,7 @@ class SimulationWindow(arcade.Window):
         self.turn_delay: float = 1.0
         self.auto_mode: bool = False
         self.file_path = file_path
+        self.capacity_info = capacity_info
         self.scheduler: Scheduler
         self.drone_sprite: arcade.Texture
         self.zone_sprite: arcade.Texture
@@ -66,7 +68,7 @@ class SimulationWindow(arcade.Window):
         print(f"nb paths found: {len(paths)}")
         print(f"start connections: {len(manager.start_zone.connection)}")
 
-        self.scheduler = Scheduler(manager, paths)
+        self.scheduler = Scheduler(manager, paths, self.capacity_info)
         self.timer = 0.0
         self.auto_mode = False
         self.drone_sprite = arcade.load_texture("view/img/Spider.png")

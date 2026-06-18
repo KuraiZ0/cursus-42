@@ -13,7 +13,6 @@
 """Module containing pathfinding algorithms for the simulation."""
 
 import heapq
-from typing import Optional
 from controller.zone import Zone
 
 
@@ -78,7 +77,7 @@ def dist_to_goal(end_zone: Zone) -> dict[Zone, int]:
 
 
 def algo(start_node: Zone, end_node: Zone,
-         link_costs: Optional[dict[int, int]] = None) -> list[Zone]:
+         link_costs: dict[int, int] | None = None) -> list[Zone]:
     """Find a single shortest path from start to end node using Dijkstra.
 
     Args:
@@ -92,7 +91,7 @@ def algo(start_node: Zone, end_node: Zone,
         link_costs = {}
     queue: list[tuple[int, int, Zone]] = [(0, id(start_node), start_node)]
     distances: dict[Zone, int] = {start_node: 0}
-    parent: dict[Zone, Optional[Zone]] = {start_node: None}
+    parent: dict[Zone, Zone] | None = {start_node: None}
 
     while queue:
         current_cost, _, current_zone = heapq.heappop(queue)
@@ -115,7 +114,7 @@ def algo(start_node: Zone, end_node: Zone,
         return []
 
     path: list[Zone] = []
-    cursor: Optional[Zone] = end_node
+    cursor: Zone | None = end_node
     while cursor is not None:
         path.append(cursor)
         cursor = parent[cursor]

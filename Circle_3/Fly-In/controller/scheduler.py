@@ -12,7 +12,6 @@
 
 """Module for scheduling and managing drone movements along paths."""
 
-from typing import Optional
 from controller.zone import Zone, Drone, Connexion
 from controller.parser import Manager
 from controller.algo import dist_to_goal
@@ -21,7 +20,9 @@ from controller.algo import dist_to_goal
 class Scheduler:
     """Manages the simulation steps and drone movement."""
 
-    def __init__(self, manager: Manager, path: list[list[Zone]]) -> None:
+    def __init__(
+        self, manager: Manager, path: list[list[Zone]],
+            capacity_info: bool) -> None:
         """Initialize a Scheduler instance.
 
         Args:
@@ -34,6 +35,7 @@ class Scheduler:
         self.create_new_drone()
         self.total_turns = 0
         self.dist_to_goal: dict[Zone, int] = dist_to_goal(manager.end_zone)
+        self.capacity_info = capacity_info
 
     def create_new_drone(self) -> None:
         """Create drone instances based on the manager's drone count."""
@@ -58,7 +60,7 @@ class Scheduler:
         self, drone: Drone, freed: dict[Zone, int],
             claimed: dict[Zone, int],
             link_claimed: dict[
-                Connexion, int]) -> tuple[Optional[Zone], Optional[Connexion]]:
+                Connexion, int]) -> tuple[Zone, Connexion] | None:
         """Find the best next zone for a drone using greedy dist-to-goal.
 
         Args:
@@ -69,8 +71,8 @@ class Scheduler:
         Returns:
             The best neighbor zone, or None if the drone must wait.
         """
-        best_zone: Optional[Zone] = None
-        best_link: Optional[Connexion] = None
+        best_zone: Zone | None = None
+        best_link: Connexion | None = None
         best_dist: int = 10**9
 
         for link in drone.current_zone.connection:
@@ -156,4 +158,19 @@ class Scheduler:
                 turn_moves.append(f"D{drone.id}-{next_zone.name}")
 
         print(" ".join(turn_moves))
+        if self.capacity_info:
+            for zone in self.manager.zones.values():
+                if zone.current_drone > 0:
+                    print(f" Zone {zone.name}: "
+                          f"{zone.current_drone}/{zone.max_drones} drones")
+            seen = set()
+            for zone in self.manager.zones.values():
+                for link in zone.connection:
+                    if link not in seen:
+                        used = link_claimed.get(link, 0)
+                        if used > 0:
+                            print(f" Connection {link.zone1.name}-"
+                                  f"{link.zone2.name}: "
+                                  f"{used}/{link.max_link} capacity used")
+                        seen.add(link)
         self.total_turns += 1
