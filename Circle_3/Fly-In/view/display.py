@@ -224,7 +224,7 @@ class SimulationWindow(arcade.Window):
         arcade.draw_lrbt_rectangle_filled(
             rect_left, rect_right, rect_bottom, rect_top, (50, 50, 50, 200))
         text_x: int = rect_left + 15
-        
+
         self.text_keybinds.x = text_x
         self.text_keybinds.y = rect_top - 30
 

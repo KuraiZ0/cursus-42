@@ -15,6 +15,7 @@
 from controller.zone import Zone, Drone, Connexion
 from controller.parser import Manager
 from controller.algo import dist_to_goal
+from typing import Optional
 
 
 class Scheduler:
@@ -60,7 +61,7 @@ class Scheduler:
         self, drone: Drone, freed: dict[Zone, int],
             claimed: dict[Zone, int],
             link_claimed: dict[
-                Connexion, int]) -> tuple[Zone, Connexion] | None:
+                Connexion, int]) -> tuple[Optional[Zone], Optional[Connexion]]:
         """Find the best next zone for a drone using greedy dist-to-goal.
 
         Args:

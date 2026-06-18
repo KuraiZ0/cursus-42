@@ -14,6 +14,7 @@
 
 import heapq
 from controller.zone import Zone
+from typing import Optional
 
 
 def find_all(start_node: Zone,
@@ -91,7 +92,7 @@ def algo(start_node: Zone, end_node: Zone,
         link_costs = {}
     queue: list[tuple[int, int, Zone]] = [(0, id(start_node), start_node)]
     distances: dict[Zone, int] = {start_node: 0}
-    parent: dict[Zone, Zone] | None = {start_node: None}
+    parent: dict[Zone, Optional[Zone]] = {start_node: None}
 
     while queue:
         current_cost, _, current_zone = heapq.heappop(queue)
