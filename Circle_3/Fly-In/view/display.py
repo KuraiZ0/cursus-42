@@ -222,16 +222,30 @@ class SimulationWindow(arcade.Window):
         rect_bottom: int = rect_top - box_height
 
         arcade.draw_lrbt_rectangle_filled(
-            rect_left, rect_right, rect_bottom, rect_top, (50, 50, 50, 200)
-        )
-
+            rect_left, rect_right, rect_bottom, rect_top, (50, 50, 50, 200))
         text_x: int = rect_left + 15
+        
         self.text_keybinds.x = text_x
+        self.text_keybinds.y = rect_top - 30
+
+        self.text_v.x = text_x
+        self.text_v.y = rect_top - 65
+
+        self.text_r.x = text_x
+        self.text_r.y = rect_top - 95
+
+        self.text_space.x = text_x
+        self.text_space.y = rect_top - 125
+
+        self.text_esc.x = text_x
+        self.text_esc.y = rect_top - 155
 
         self.text_score.draw()
         self.text_turn.draw()
-        self.text_keybinds.draw()
         self.text_mode.draw()
+
+        self.text_keybinds.draw()
+        self.text_v.draw()
         self.text_r.draw()
         self.text_space.draw()
         self.text_esc.draw()
