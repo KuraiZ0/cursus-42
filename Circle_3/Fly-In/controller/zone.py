@@ -12,15 +12,13 @@
 
 """Module defining the Zone, Connexion, Drone classes for the simulation."""
 
-from typing import Optional
-
 
 class Zone:
     """Represents a zone in the simulation map."""
 
     def __init__(self, name: str, x: int, y: int, current_drone: int,
                  max_drones: int = 1, type_zone: str = "normal",
-                 color: Optional[str] = "") -> None:
+                 color: str | None = "") -> None:
         """Initialize a Zone instance.
 
         Args:

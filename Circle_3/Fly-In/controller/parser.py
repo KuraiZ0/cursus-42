@@ -12,7 +12,6 @@
 
 """Module for parsing map configuration files and managing parsed data."""
 
-from typing import Optional
 from controller.zone import Zone, Connexion
 
 
@@ -77,8 +76,8 @@ class Parser:
             ValueError: If there's a parsing error or missing start/end hub.
         """
         zone_dic: dict[str, Zone] = {}
-        start_zone: Optional[Zone] = None
-        end_zone: Optional[Zone] = None
+        start_zone: Zone | None = None
+        end_zone: Zone | None = None
         nb_drones: int = 0
         file_content: str = self.get_file(self.file_path)
         for line in file_content.splitlines():
