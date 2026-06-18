@@ -1,5 +1,5 @@
 """Module for the simulation GUI using the arcade library."""
-import arcade # type: ignore
+import arcade
 import math
 from controller.scheduler import Scheduler
 from controller.algo import find_all

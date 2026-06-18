@@ -166,8 +166,8 @@ class Parser:
                 pair = frozenset([zone_names[0], zone_names[1]])
                 if pair in seen_connection:
                     raise ValueError(
-                        f"Parsing ERROR: duplicate connection '{
-                            c_element[1]}'")
+                        f"Parsing ERROR: duplicate connection "
+                        f"'{c_element[1]}'")
                 seen_connection.add(pair)
                 try:
                     zone1: Zone = zone_dic[zone_names[0]]
