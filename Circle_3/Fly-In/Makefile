@@ -45,12 +45,12 @@ clean:
 
 lint:
 	@echo "$(GREEN)Running Linter...$(RESET)"
-	flake8 .
+	flake8 --exclude=.venv .
 	mypy --warn-return-any --warn-unused-ignores --ignore-missing-imports --disallow-untyped-defs --check-untyped-defs .
 
 lint-strict:
 	@echo "$(GREEN)Running Strict Linter...$(RESET)"
-	flake8 .
+	flake8 --exclude=.venv .
 	mypy --strict .
 
 .PHONY: all install run debug clean lint lint-strict

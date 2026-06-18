@@ -133,7 +133,7 @@ class SimulationWindow(arcade.Window):
         line_thickness: float = max(2.0, 8.0 * self.map_scale)
         roof_offset: float = sprite_size * 0.15
 
-        drawn_links: set = set()
+        drawn_links = set()
         for zone in self.zones:
             for link in zone.connection:
                 if link not in drawn_links:
