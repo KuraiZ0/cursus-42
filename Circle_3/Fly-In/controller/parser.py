@@ -175,8 +175,7 @@ class Parser:
                 except KeyError as ke:
                     raise ValueError(
                         f"Parsing ERROR: unknow zone name "
-                        f"{ke} in connection '{c_element[1]}'"
-                    )
+                        f"{ke} in connection '{c_element[1]}'")
                 capacity = 1
 
                 for param in c_parameters:
