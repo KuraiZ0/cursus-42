@@ -23,3 +23,7 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
+
+
+
+# sed -n '195,202p' /home/pepeh/42/cursus-42/Circle_3/Fly-In/.venv/lib/python3.14/site-packages/pyglet/font/fontconfig.py

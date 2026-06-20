@@ -64,6 +64,9 @@ class SimulationWindow(arcade.Window):
         manager = parser._parse_zone()
         paths: list[list[Zone]] = find_all(
             manager.start_zone, manager.end_zone, manager.nb_drones)
+        if not paths:
+            print("ERROR: No path found between start and end zone.")
+            sys.exit(1)
         print(f"nb_drones: {manager.nb_drones}")
         print(f"nb paths found: {len(paths)}")
         print(f"start connections: {len(manager.start_zone.connection)}")
