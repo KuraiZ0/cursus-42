@@ -5,6 +5,9 @@ import numpy as np
 import json
 
 
+llm_model = Small_LLM_Model()
+
+
 def get_allowed_tokens(curr_txt: str, voc: dict) -> list[int]:
     if not curr_txt:
         return [voc["{"]]
@@ -34,17 +37,21 @@ def load_fn_def(filepath: str) -> dict[str, FunctionDefinition]:
 def generate_json(
     prompt: str,
     json_processor: JSONLogitsProcessor,
+    fn_dict: dict,
     max_tokens: int = 50,
     temp: float = 0.2,
 ) -> str:
-    llm_model = Small_LLM_Model()
-    input_ids = llm_model._encode(prompt).tolist()[0]
+    fn_txt = ""
+    for fn in fn_dict.values():
+        fn_txt += (fn.name + " " + str(fn.parameters) + " "
+                   + fn.description + "\n")
+    full_prompt = fn_txt + "\n" + prompt
+    input_ids = llm_model._encode(full_prompt).tolist()[0]
     len_prompt = len(input_ids)
 
     for _ in range(max_tokens):
         logits: list[float] = llm_model.get_logits_from_input_ids(input_ids)
         masked_logits = json_processor.call(input_ids, logits)
-
         logits_np = masked_logits / temp
         exps = np.exp(logits_np)
         probs = exps / np.sum(exps)

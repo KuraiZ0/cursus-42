@@ -30,6 +30,7 @@ class JSONStateMachine:
         self.curr_param_type = ""
         self.curr_fn_buffer = ""
         self.dig_count = 0
+        self.used_params = set()
 
     def get_allowed(self, voc: dict) -> list[Any]:
         liste = []
@@ -61,7 +62,8 @@ class JSONStateMachine:
             case 9:
                 curr_param = self.fn_dict[self.curr_fn].parameters
                 for param in curr_param:
-                    liste.append(voc[param])
+                    if param not in self.used_params:
+                        liste.append(voc[param])
             case 10:
                 liste.append(voc['":'])
             case 11:
@@ -82,12 +84,23 @@ class JSONStateMachine:
                 if self.dig_count < 18:
                     liste.extend(voc[t] for t in voc if t.isdigit())
                 liste.append(voc["}}"])
-                liste.append(voc['",'])
+                remaining = (set(self.fn_dict[self.curr_fn].parameters)
+                             - self.used_params)
+                if remaining:
+                    liste.append(voc[','])
             case 91:
-                liste.extend(voc.values())
+                liste.append(voc['"'])
+                for tkn_str, tkn_id in voc.items():
+                    if '"' not in tkn_str:
+                        liste.append(tkn_id)
             case 13:
                 liste.append(voc["}}"])
-                liste.append(voc['",'])
+                remaining = (set(self.fn_dict[self.curr_fn].parameters)
+                             - self.used_params)
+                if remaining:
+                    liste.append(voc[','])
+            case 131:
+                liste.append(voc['Ġ"'])
         return liste
 
     def update(self, txt: str):
@@ -127,6 +140,7 @@ class JSONStateMachine:
             case 9:
                 if txt in self.fn_dict[self.curr_fn].parameters:
                     self.curr_param = txt
+                    self.used_params.add(txt)
                     self.stack = [10]
             case 10:
                 if txt == '":':
@@ -155,12 +169,14 @@ class JSONStateMachine:
                     self.update(txt)
             case 91:
                 if txt == '"':
-                    self.stack.pop()
-                    self.stack.append(13)
+                    self.stack = [13]
             case 13:
                 if txt == "}}":
                     self.stack = [14]
-                elif txt == '",':
+                elif txt == ',':
+                    self.stack = [9]
+            case 131:
+                if txt == 'Ġ"':
                     self.stack = [9]
 
 

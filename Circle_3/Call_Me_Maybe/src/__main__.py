@@ -35,7 +35,7 @@ if __name__ == "__main__":
     json_processor = JSONLogitsProcessor(state_machine, voc, id_to_txt)
     result = []
     for prompt in prompt_list:
-        json_txt = generate_json(prompt.prompt, json_processor)
+        json_txt = generate_json(prompt.prompt, json_processor, fn_dict)
         print(json_txt)
         state_machine = JSONStateMachine(fn_dict)
         json_processor = JSONLogitsProcessor(state_machine, voc, id_to_txt)
