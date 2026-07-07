@@ -1,32 +1,51 @@
-from llm_sdk import Small_LLM_Model
+from src.model.schemas import (
+    FunctionDefinition, JSONLogitsProcessor, FunctionCallOutput)
+from src.llm_sdk import Small_LLM_Model
 import numpy as np
 import json
 
 
-llm_model = Small_LLM_Model()
-path = llm_model.get_path_to_vocabulary_json()
-with open(path, 'r') as f:
-    voc = json.load(f)
-    for index, (token, token_id) in enumerate(voc.items()):
-        # print(f"Token: '{token}' -> ID: {token_id}")
-        if index == 4:
-            break
+def get_allowed_tokens(curr_txt: str, voc: dict) -> list[int]:
+    if not curr_txt:
+        return [voc["{"]]
+    if curr_txt == "{":
+        return [voc['"']]
+    return list(voc.values())
 
 
-def generate_json(prompt: str, max_tokens: int = 50, temp: float = 1.0) -> str:
+def load_fn_def(filepath: str) -> dict[str, FunctionDefinition]:
+    with open(filepath, "r") as file:
+        data = json.load(file)
+    valid = {}
+    for f in data:
+        params = {}
+        for arg_name, arg_type in f["args_types"].items():
+            params[arg_name] = {"type": arg_type}
+        converted = {
+            "name": f["fn_name"],
+            "description": "",
+            "parameters": params,
+            "returns": {"type": f["return_type"]},
+        }
+        valid[converted["name"]] = FunctionDefinition(**converted)
+    return valid
+
+
+def generate_json(
+    prompt: str,
+    json_processor: JSONLogitsProcessor,
+    max_tokens: int = 50,
+    temp: float = 0.2,
+) -> str:
+    llm_model = Small_LLM_Model()
     input_ids = llm_model._encode(prompt).tolist()[0]
-    is_first = True
     len_prompt = len(input_ids)
 
     for _ in range(max_tokens):
-        # temp = 0.2
         logits: list[float] = llm_model.get_logits_from_input_ids(input_ids)
-        logits_np = np.array(logits)
-        logits_np /= temp
-        if is_first:
-            logits_np = np.full(len(logits), float('-inf'))
-            is_first = False
-            logits_np[voc["{"]] = 0.0
+        masked_logits = json_processor.call(input_ids, logits)
+
+        logits_np = masked_logits / temp
         exps = np.exp(logits_np)
         probs = exps / np.sum(exps)
 
@@ -40,5 +59,10 @@ def generate_json(prompt: str, max_tokens: int = 50, temp: float = 1.0) -> str:
     return final_txt
 
 
-print(generate_json(
-    "Génère un dictionnaire JSON avec les clés 'ville' et 'pays' : "))
+def build_output(prompt: str, json_txt: str) -> FunctionCallOutput:
+    data = json.loads(json_txt)
+    name = data['name']
+    parameters = data['parameters']
+    fn_output = FunctionCallOutput(
+        prompt=prompt, name=name, parameters=parameters)
+    return fn_output
