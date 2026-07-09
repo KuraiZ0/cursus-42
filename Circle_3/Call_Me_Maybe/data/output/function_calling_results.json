@@ -1,58 +1,60 @@
 [
   {
     "prompt": "What is the square root of 16?",
-    "name": "fn_greet",
+    "name": "fn_get_square_root",
     "parameters": {
-      "name": "name"
+      "a": 16
     }
   },
   {
     "prompt": "Reverse the string 'hello'",
-    "name": "fn_greet",
+    "name": "fn_reverse_string",
     "parameters": {
-      "name": "hello"
+      "s": "hello"
     }
   },
   {
     "prompt": "Reverse the string 'world'",
-    "name": "fn_greet",
+    "name": "fn_reverse_string",
     "parameters": {
-      "name": "world"
+      "s": "world"
     }
   },
   {
     "prompt": "Substitute the digits in the string 'Hello 34 I'm 233 years old' with 'NUMBERS'",
-    "name": "fn_greet",
+    "name": "fn_substitute_string_with_regex",
     "parameters": {
-      "name": "f"
+      "source_string": "Hello 34 I'm 233 years old"
     }
   },
   {
     "prompt": "Replace all vowels in 'Programming is fun' with asterisks",
-    "name": "fn_greet",
+    "name": "fn_substitute_string_with_regex",
     "parameters": {
-      "name": "a"
+      "source_string": "Programming is fun"
     }
   },
   {
     "prompt": "Substitute the word 'cat' with 'dog' in 'The cat sat on the mat with another cat'",
-    "name": "fn_greet",
+    "name": "fn_substitute_string_with_regex",
     "parameters": {
-      "name": "frodo"
+      "source_string": "The cat sat on the mat with another cat"
     }
   },
   {
     "prompt": "What is the sum of 2 and 3?",
-    "name": "fn_greet",
+    "name": "fn_add_numbers",
     "parameters": {
-      "name": "frodo"
+      "a": 2,
+      "b": 3
     }
   },
   {
     "prompt": "What is the sum of 265 and 345?",
-    "name": "fn_greet",
+    "name": "fn_add_numbers",
     "parameters": {
-      "name": "Alice"
+      "a": 265,
+      "b": 345
     }
   },
   {
@@ -71,16 +73,18 @@
   },
   {
     "prompt": "What is the product of 3 and 5?",
-    "name": "fn_greet",
+    "name": "fn_multiply_numbers",
     "parameters": {
-      "name": "frodo"
+      "a": 3,
+      "b": 5
     }
   },
   {
     "prompt": "What is the product of 12 and 4?",
-    "name": "fn_greet",
+    "name": "fn_multiply_numbers",
     "parameters": {
-      "name": "Alice"
+      "a": 12,
+      "b": 4
     }
   },
   {

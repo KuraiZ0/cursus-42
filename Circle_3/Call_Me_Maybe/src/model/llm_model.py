@@ -43,9 +43,15 @@ def generate_json(
 ) -> str:
     fn_txt = ""
     for fn in fn_dict.values():
-        fn_txt += (fn.name + " " + str(fn.parameters) + " "
+        param_txt = ""
+        for arg_name, arg_type in fn.parameters.items():
+            param_txt += arg_name + " (" + arg_type["type"] + "), "
+        fn_txt += (fn.name + " " + param_txt + " "
                    + fn.description + "\n")
-    full_prompt = fn_txt + "\n" + prompt
+    full_prompt = (
+        "Available functions:\n" + fn_txt +
+        "\nUse the correct function for this question and output "
+        "the matching JSON.\nQuestion: " + prompt + "\n")
     input_ids = llm_model._encode(full_prompt).tolist()[0]
     len_prompt = len(input_ids)
 

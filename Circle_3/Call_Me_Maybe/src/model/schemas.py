@@ -29,6 +29,7 @@ class JSONStateMachine:
         self.curr_param = ""
         self.curr_param_type = ""
         self.curr_fn_buffer = ""
+        self.curr_param_buffer = ""
         self.dig_count = 0
         self.used_params = set()
 
@@ -60,12 +61,16 @@ class JSONStateMachine:
             case 8:
                 liste.append(voc['Ġ{"'])
             case 9:
-                curr_param = self.fn_dict[self.curr_fn].parameters
-                for param in curr_param:
-                    if param not in self.used_params:
-                        liste.append(voc[param])
-            case 10:
-                liste.append(voc['":'])
+                curr_param_dict = self.fn_dict[self.curr_fn].parameters
+                remaining = [
+                    p for p in curr_param_dict
+                    if p not in self.used_params]
+                if self.curr_param_buffer in remaining:
+                    liste.append(voc['":'])
+                for token_str, token_id in voc.items():
+                    candidate = self.curr_param_buffer + token_str
+                    if any(p.startswith(candidate) for p in remaining):
+                        liste.append(token_id)
             case 11:
                 param_type = self.fn_dict[
                     self.curr_fn].parameters[self.curr_param]["type"]
@@ -136,18 +141,20 @@ class JSONStateMachine:
                     self.stack = [8]
             case 8:
                 if txt == 'Ġ{"':
+                    self.curr_param_buffer = ""
                     self.stack = [9]
             case 9:
-                if txt in self.fn_dict[self.curr_fn].parameters:
-                    self.curr_param = txt
-                    self.used_params.add(txt)
-                    self.stack = [10]
-            case 10:
-                if txt == '":':
-                    self.curr_param_type = self.fn_dict[
-                        self.curr_fn].parameters[self.curr_param]["type"]
-                    self.dig_count = 0
-                    self.stack = [11]
+                if txt != '":':
+                    self.curr_param_buffer += txt
+                else:
+                    if self.curr_param_buffer in self.fn_dict[
+                            self.curr_fn].parameters:
+                        self.curr_param = self.curr_param_buffer
+                        self.used_params.add(self.curr_param)
+                        self.curr_param_type = self.fn_dict[
+                            self.curr_fn].parameters[self.curr_param]["type"]
+                        self.dig_count = 0
+                        self.stack = [11]
             case 11:
                 if self.curr_param_type == "bool" and (
                         txt in ["Ġtrue", "Ġfalse"]):
@@ -174,9 +181,10 @@ class JSONStateMachine:
                 if txt == "}}":
                     self.stack = [14]
                 elif txt == ',':
-                    self.stack = [9]
+                    self.stack = [131]
             case 131:
                 if txt == 'Ġ"':
+                    self.curr_param_buffer = ""
                     self.stack = [9]
 
 
