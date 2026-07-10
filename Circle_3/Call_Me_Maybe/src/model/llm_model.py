@@ -1,3 +1,5 @@
+"""High-level inference functions for JSON-constrained generation."""
+
 from src.model.schemas import (
     FunctionDefinition, JSONLogitsProcessor, FunctionCallOutput)
 from src.llm_sdk import Small_LLM_Model
@@ -9,6 +11,20 @@ llm_model = Small_LLM_Model()
 
 
 def get_allowed_tokens(curr_txt: str, voc: dict) -> list[int]:
+    """Return token ids that are valid given the current generated text prefix.
+
+    Parameters
+    ----------
+    curr_txt : str
+        Text generated so far.
+    voc : dict
+        Vocabulary mapping token strings to token ids.
+
+    Returns
+    -------
+    list[int]
+        List of valid next token ids.
+    """
     if not curr_txt:
         return [voc["{"]]
     if curr_txt == "{":
@@ -17,8 +33,32 @@ def get_allowed_tokens(curr_txt: str, voc: dict) -> list[int]:
 
 
 def load_fn_def(filepath: str) -> dict[str, FunctionDefinition]:
-    with open(filepath, "r") as file:
-        data = json.load(file)
+    """Load and validate function definitions from a JSON file.
+
+    Parameters
+    ----------
+    filepath : str
+        Path to the JSON file containing function definitions.
+
+    Returns
+    -------
+    dict[str, FunctionDefinition]
+        Mapping from function name to its parsed definition.
+
+    Raises
+    ------
+    FileNotFoundError
+        If filepath does not exist.
+    ValueError
+        If the JSON file is malformed.
+    """
+    try:
+        with open(filepath, "r") as file:
+            data = json.load(file)
+    except FileNotFoundError as fne:
+        raise FileNotFoundError(f"JSON not found: {filepath}") from fne
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON file malformed: {filepath}") from e
     valid = {}
     for f in data:
         params = {}
@@ -41,6 +81,26 @@ def generate_json(
     max_tokens: int = 50,
     temp: float = 0.2,
 ) -> str:
+    """Generate a JSON function call for prompt using constrained decoding.
+
+    Parameters
+    ----------
+    prompt : str
+        Natural-language question to answer with a function call.
+    json_processor : JSONLogitsProcessor
+        Logits processor that enforces valid JSON structure.
+    fn_dict : dict
+        Mapping from function name to FunctionDefinition.
+    max_tokens : int
+        Maximum number of tokens to generate.
+    temp : float
+        Sampling temperature (lower = more deterministic).
+
+    Returns
+    -------
+    str
+        Generated JSON string representing the function call.
+    """
     fn_txt = ""
     for fn in fn_dict.values():
         param_txt = ""
@@ -72,8 +132,29 @@ def generate_json(
     return final_txt
 
 
-def build_output(prompt: str, json_txt: str) -> FunctionCallOutput:
+def build_output(
+        prompt: str, json_txt: str, fn_dict: dict) -> FunctionCallOutput:
+    """Parse a generated JSON string and wrap it in a FunctionCallOutput.
+
+    Parameters
+    ----------
+    prompt : str
+        The original natural-language prompt.
+    json_txt : str
+        JSON string produced by generate_json.
+    fn_dict : dict
+        Mapping from function name to FunctionDefinition.
+
+    Returns
+    -------
+    FunctionCallOutput
+        Structured object containing the prompt, function name, and parameters.
+    """
     data = json.loads(json_txt)
+    for k, v in data['parameters'].items():
+        if isinstance(v, int):
+            if fn_dict[data['name']].parameters[k]["type"] == "float":
+                data['parameters'][k] = float(v)
     name = data['name']
     parameters = data['parameters']
     fn_output = FunctionCallOutput(

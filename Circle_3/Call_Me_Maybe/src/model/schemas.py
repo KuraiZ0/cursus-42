@@ -1,9 +1,13 @@
+"""Pydantic schemas and state-machine logic for JSON-constrained generation."""
+
 from pydantic import BaseModel
 from typing import Any
 import numpy as np
 
 
 class FunctionDefinition(BaseModel):
+    """Schema for a single callable function's metadata."""
+
     name: str
     description: str
     parameters: dict[str, dict[str, str]]
@@ -11,17 +15,30 @@ class FunctionDefinition(BaseModel):
 
 
 class FunctionCallOutput(BaseModel):
+    """Schema for the output produced by one function-call inference."""
+
     prompt: str
     name: str
     parameters: dict[str, Any]
 
 
 class PromptTest(BaseModel):
+    """Schema for a single test prompt."""
+
     prompt: str
 
 
 class JSONStateMachine:
-    def __init__(self, fn_dict: dict[str, FunctionDefinition]):
+    """State machine tracking valid token positions in a JSON function call."""
+
+    def __init__(self, fn_dict: dict[str, FunctionDefinition]) -> None:
+        """Initialise the state machine for a set of function definitions.
+
+        Parameters
+        ----------
+        fn_dict : dict[str, FunctionDefinition]
+            Mapping from function name to its definition.
+        """
         self.stack = [0]
         self.fn_dict = fn_dict
         self.fn_names = list(self.fn_dict.keys())
@@ -31,9 +48,21 @@ class JSONStateMachine:
         self.curr_fn_buffer = ""
         self.curr_param_buffer = ""
         self.dig_count = 0
-        self.used_params = set()
+        self.used_params: set[str] = set()
 
     def get_allowed(self, voc: dict) -> list[Any]:
+        """Return a list of token ids that are valid at the current state.
+
+        Parameters
+        ----------
+        voc : dict
+            Vocabulary mapping token strings to token ids.
+
+        Returns
+        -------
+        list[Any]
+            Token ids allowed by the current state.
+        """
         liste = []
         match self.stack[-1]:
             case 0:
@@ -62,9 +91,9 @@ class JSONStateMachine:
                 liste.append(voc['Ġ{"'])
             case 9:
                 curr_param_dict = self.fn_dict[self.curr_fn].parameters
-                remaining = [
+                remaining: set[str] = {
                     p for p in curr_param_dict
-                    if p not in self.used_params]
+                    if p not in self.used_params}
                 if self.curr_param_buffer in remaining:
                     liste.append(voc['":'])
                 for token_str, token_id in voc.items():
@@ -89,8 +118,10 @@ class JSONStateMachine:
                 if self.dig_count < 18:
                     liste.extend(voc[t] for t in voc if t.isdigit())
                 liste.append(voc["}}"])
-                remaining = (set(self.fn_dict[self.curr_fn].parameters)
-                             - self.used_params)
+                remaining = (
+                    set(self.fn_dict[self.curr_fn].parameters)
+                    - self.used_params
+                )
                 if remaining:
                     liste.append(voc[','])
             case 91:
@@ -100,15 +131,24 @@ class JSONStateMachine:
                         liste.append(tkn_id)
             case 13:
                 liste.append(voc["}}"])
-                remaining = (set(self.fn_dict[self.curr_fn].parameters)
-                             - self.used_params)
+                remaining = (
+                    set(self.fn_dict[self.curr_fn].parameters)
+                    - self.used_params
+                )
                 if remaining:
                     liste.append(voc[','])
             case 131:
                 liste.append(voc['Ġ"'])
         return liste
 
-    def update(self, txt: str):
+    def update(self, txt: str) -> None:
+        """Advance the state machine by one decoded token.
+
+        Parameters
+        ----------
+        txt : str
+            The decoded string of the last generated token.
+        """
         match self.stack[-1]:
             case 0:
                 if txt == '{"':
@@ -189,14 +229,41 @@ class JSONStateMachine:
 
 
 class JSONLogitsProcessor:
+    """Mask invalid tokens at each step using the JSON state machine."""
+
     def __init__(self, state_machine: JSONStateMachine,
-                 voc: dict, id_to_txt: dict):
+                 voc: dict, id_to_txt: dict) -> None:
+        """Initialise the processor with a state machine and vocabularies.
+
+        Parameters
+        ----------
+        state_machine : JSONStateMachine
+            The finite state machine tracking JSON structure.
+        voc : dict
+            Vocabulary mapping token strings to token ids.
+        id_to_txt : dict
+            Reverse vocabulary mapping token ids to token strings.
+        """
         self.state_machine = state_machine
         self.voc = voc
         self.id_to_txt = id_to_txt
         self.is_first_call = True
 
-    def call(self, input_ids: list[int], logits: list[float]):
+    def call(self, input_ids: list[int], logits: list[float]) -> np.ndarray:
+        """Mask logits so only state-machine-allowed tokens have finite values.
+
+        Parameters
+        ----------
+        input_ids : list[int]
+            Full sequence of token ids generated so far.
+        logits : list[float]
+            Raw next-token logits from the language model.
+
+        Returns
+        -------
+        np.ndarray
+            Logits with -inf at positions not allowed by the state machine.
+        """
         if self.is_first_call:
             self.is_first_call = False
         else:

@@ -1,16 +1,16 @@
+"""Entry point for the function-calling inference pipeline."""
+
 from src.model.schemas import JSONLogitsProcessor, JSONStateMachine
 from src.model.llm_model import (
-    generate_json, load_fn_def, build_output)
+    generate_json, load_fn_def, build_output, llm_model)
 from src.controller.cli_parser import parsing
 from dotenv import load_dotenv
-from src.llm_sdk import Small_LLM_Model
 import argparse
 import json
 
 load_dotenv()
 
 
-llm_model = Small_LLM_Model()
 path = llm_model.get_path_to_vocabulary_json()
 with open(path, "r") as f:
     voc = json.load(f)
@@ -39,7 +39,7 @@ if __name__ == "__main__":
         print(json_txt)
         state_machine = JSONStateMachine(fn_dict)
         json_processor = JSONLogitsProcessor(state_machine, voc, id_to_txt)
-        output = build_output(prompt.prompt, json_txt)
+        output = build_output(prompt.prompt, json_txt, fn_dict)
         result.append(output)
     result_dict = [obj.model_dump() for obj in result]
     with open(args.output, 'w') as f:

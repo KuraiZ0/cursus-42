@@ -3,7 +3,7 @@
     "prompt": "What is the square root of 16?",
     "name": "fn_get_square_root",
     "parameters": {
-      "a": 16
+      "a": 16.0
     }
   },
   {
@@ -45,16 +45,16 @@
     "prompt": "What is the sum of 2 and 3?",
     "name": "fn_add_numbers",
     "parameters": {
-      "a": 2,
-      "b": 3
+      "a": 2.0,
+      "b": 3.0
     }
   },
   {
     "prompt": "What is the sum of 265 and 345?",
     "name": "fn_add_numbers",
     "parameters": {
-      "a": 265,
-      "b": 345
+      "a": 265.0,
+      "b": 345.0
     }
   },
   {
@@ -75,16 +75,16 @@
     "prompt": "What is the product of 3 and 5?",
     "name": "fn_multiply_numbers",
     "parameters": {
-      "a": 3,
-      "b": 5
+      "a": 3.0,
+      "b": 5.0
     }
   },
   {
     "prompt": "What is the product of 12 and 4?",
     "name": "fn_multiply_numbers",
     "parameters": {
-      "a": 12,
-      "b": 4
+      "a": 12.0,
+      "b": 4.0
     }
   },
   {
