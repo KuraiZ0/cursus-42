@@ -18,8 +18,8 @@ class FunctionCallOutput(BaseModel):
     """Schema for the output produced by one function-call inference."""
 
     prompt: str
-    name: str
-    parameters: dict[str, Any]
+    fn_name: str
+    args: dict[str, Any]
 
 
 class PromptTest(BaseModel):

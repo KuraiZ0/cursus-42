@@ -80,6 +80,7 @@ def generate_json(
     fn_dict: dict,
     max_tokens: int = 50,
     temp: float = 0.2,
+    verbose: bool = False,
 ) -> str:
     """Generate a JSON function call for prompt using constrained decoding.
 
@@ -95,6 +96,8 @@ def generate_json(
         Maximum number of tokens to generate.
     temp : float
         Sampling temperature (lower = more deterministic).
+    verbose : bool
+        If True, print the FSA state and chosen token at every step.
 
     Returns
     -------
@@ -115,7 +118,7 @@ def generate_json(
     input_ids = llm_model._encode(full_prompt).tolist()[0]
     len_prompt = len(input_ids)
 
-    for _ in range(max_tokens):
+    for step in range(max_tokens):
         logits: list[float] = llm_model.get_logits_from_input_ids(input_ids)
         masked_logits = json_processor.call(input_ids, logits)
         logits_np = masked_logits / temp
@@ -125,6 +128,13 @@ def generate_json(
         best_token_id = int(np.random.choice(len(logits_np), p=probs))
         input_ids.append(best_token_id)
         final_txt = llm_model._decode([best_token_id])
+
+        if verbose:
+            n_allowed = int(np.sum(np.isfinite(masked_logits)))
+            stack = json_processor.state_machine.stack
+            print(f"step {step + 1:2d} | stack={stack!s:12} | "
+                  f"allowed={n_allowed:<6} | chosen={final_txt!r}")
+
         if "}" in final_txt:
             break
 
@@ -150,7 +160,10 @@ def build_output(
     FunctionCallOutput
         Structured object containing the prompt, function name, and parameters.
     """
-    data = json.loads(json_txt)
+    try:
+        data = json.loads(json_txt)
+    except json.JSONDecodeError as js:
+        raise json.JSONDecodeError(js)
     for k, v in data['parameters'].items():
         if isinstance(v, int):
             if fn_dict[data['name']].parameters[k]["type"] == "float":
@@ -158,5 +171,5 @@ def build_output(
     name = data['name']
     parameters = data['parameters']
     fn_output = FunctionCallOutput(
-        prompt=prompt, name=name, parameters=parameters)
+        prompt=prompt, fn_name=name, args=parameters)
     return fn_output

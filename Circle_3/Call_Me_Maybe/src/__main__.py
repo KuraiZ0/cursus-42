@@ -7,6 +7,7 @@ from src.controller.cli_parser import parsing
 from dotenv import load_dotenv
 import argparse
 import json
+import os
 
 load_dotenv()
 
@@ -35,12 +36,18 @@ if __name__ == "__main__":
     json_processor = JSONLogitsProcessor(state_machine, voc, id_to_txt)
     result = []
     for prompt in prompt_list:
-        json_txt = generate_json(prompt.prompt, json_processor, fn_dict)
+        json_txt = generate_json(
+            prompt.prompt, json_processor, fn_dict, verbose=False)
         print(json_txt)
         state_machine = JSONStateMachine(fn_dict)
         json_processor = JSONLogitsProcessor(state_machine, voc, id_to_txt)
         output = build_output(prompt.prompt, json_txt, fn_dict)
         result.append(output)
     result_dict = [obj.model_dump() for obj in result]
-    with open(args.output, 'w') as f:
-        json.dump(result_dict, f, indent=2)
+    try:
+        directory = os.path.dirname(args.output)
+        os.makedirs(directory, exist_ok=True)
+        with open(args.output, 'w') as f:
+            json.dump(result_dict, f, indent=2)
+    except FileNotFoundError:
+        raise FileNotFoundError("Output files doesn't exist.")

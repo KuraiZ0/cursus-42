@@ -30,6 +30,8 @@ def parsing(input_path: str) -> list[PromptTest]:
             tests = json.load(f)
     except FileNotFoundError as fne:
         raise FileNotFoundError(f"Input file missing: {input_path}") from fne
+    except json.JSONDecodeError as e:
+        raise ValueError(f"JSON file malformed: {input_path}") from e
     for line in tests:
         prompt_list.append(PromptTest(**line))
     return prompt_list

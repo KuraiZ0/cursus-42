@@ -14,8 +14,7 @@ all: run
 
 install:
 	@echo "$(BLUE)Installing dependencies...$(RESET)"
-	$(PYTHON) -m venv .venv
-	$(VENV_PYTHON) -m pip install flake8 mypy uv pydantic dotenv numpy torch transformers accelerate
+	uv sync
 
 run:
 	@echo "$(YELLOW)🚀 Launching $(NAME)...$(RESET)"
