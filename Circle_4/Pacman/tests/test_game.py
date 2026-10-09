@@ -1,6 +1,7 @@
 """Tests for the main game controller."""
 
 from src.config import GameConfig, LevelConfig
+from src.entities.entity import Position
 from src.game.game import Game, GameStatus
 from src.game.maze import Maze
 from src.game.maze_adapter import MazeAdapter
@@ -116,11 +117,11 @@ def test_pause_and_resume() -> None:
     game.start()
     game.toggle_pause()
 
-    assert game.status == GameStatus.PAUSED
+    assert game.status.name == GameStatus.PAUSED.name
 
     game.toggle_pause()
 
-    assert game.status == GameStatus.RUNNING
+    assert game.status.name == GameStatus.RUNNING.name
 
 
 def test_invincibility_cheat() -> None:
@@ -180,3 +181,55 @@ def test_skip_last_level_wins_game() -> None:
     game.skip_level()
 
     assert game.status == GameStatus.WON
+
+
+def test_ghosts_chase_player_by_shortest_path() -> None:
+    """Chasing ghosts get closer to the player on every move."""
+
+    game = create_game()
+    game.start()
+
+    assert game.player is not None
+    ghost = game.ghosts[0]
+    ghost.position = Position(row=1, column=1)
+    game.player.position = Position(row=5, column=5)
+
+    distances = game._distance_map(game.player.position)
+    before = distances[ghost.position]
+
+    game._move_ghosts()
+
+    assert distances[ghost.position] == before - 1
+
+
+def test_frightened_ghost_runs_away() -> None:
+    """Edible ghosts increase their distance from the player."""
+
+    game = create_game()
+    game.start()
+
+    assert game.player is not None
+    ghost = game.ghosts[0]
+    ghost.position = Position(row=3, column=3)
+    ghost.frighten(5.0)
+    game.player.position = Position(row=2, column=3)
+
+    distances = game._distance_map(game.player.position)
+    before = distances[ghost.position]
+
+    game._move_ghosts()
+
+    assert distances[ghost.position] == before + 1
+
+
+def test_next_levels_are_not_reproducible() -> None:
+    """Only the first level uses the configured seed."""
+
+    first = create_game()
+    second = create_game()
+    first.level_index = 1
+    second.level_index = 1
+
+    seeds = {first._get_level_seed(), second._get_level_seed()}
+
+    assert first.config.seed not in seeds

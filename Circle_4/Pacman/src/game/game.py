@@ -1,6 +1,7 @@
 """Core Pac-Man game logic."""
 
 import random
+from collections import deque
 from enum import Enum, auto
 
 from src.config import GameConfig
@@ -27,6 +28,9 @@ class GameStatus(Enum):
 class Game:
     """Control the complete Pac-Man game state."""
 
+    CLYDE_SAFE_DISTANCE = 8
+    PINKY_LOOKAHEAD = 4
+
     def __init__(
         self,
         config: GameConfig,
@@ -36,7 +40,9 @@ class Game:
 
         self.config = config
         self.maze_adapter = maze_adapter or MazeAdapter()
-        self.random = random.Random(config.seed)
+        # Only the first maze uses the configured seed: every other level
+        # (and every ghost decision) must differ from one run to the next.
+        self.random = random.Random()
 
         self.status = GameStatus.READY
         self.score = 0
@@ -111,7 +117,7 @@ class Game:
         if self.level_index == 0:
             return self.config.seed
 
-        return self.random.randint(0, 2_147_483_647)
+        return self.random.randint(1, 2_147_483_647)
 
     def _create_ghosts(self) -> None:
         """Create four ghosts near the maze corners."""
@@ -225,6 +231,8 @@ class Game:
         if self.level is None or self.player is None:
             return
 
+        player_distances = self._distance_map(self.player.position)
+
         for ghost in self.ghosts:
             if not ghost.can_move:
                 continue
@@ -239,9 +247,39 @@ class Game:
             direction = self._choose_ghost_direction(
                 ghost=ghost,
                 directions=directions,
+                player_distances=player_distances,
             )
 
             ghost.move(direction)
+            ghost.last_direction = direction
+
+    def _distance_map(
+        self,
+        target: Position,
+    ) -> dict[Position, int]:
+        """Return the walking distance from the target to every tile."""
+
+        distances: dict[Position, int] = {target: 0}
+
+        if self.level is None:
+            return distances
+
+        queue: deque[Position] = deque([target])
+
+        while queue:
+            current = queue.popleft()
+
+            for direction in self._available_directions(current):
+                neighbour = Position(
+                    row=current.row + direction.row_offset,
+                    column=current.column + direction.column_offset,
+                )
+
+                if neighbour not in distances:
+                    distances[neighbour] = distances[current] + 1
+                    queue.append(neighbour)
+
+        return distances
 
     def _available_directions(
         self,
@@ -275,58 +313,101 @@ class Game:
         self,
         ghost: Ghost,
         directions: list[Direction],
+        player_distances: dict[Position, int],
     ) -> Direction:
-        """Choose a chase or escape direction."""
+        """Choose a chase or escape direction.
 
-        if self.player is None:
-            return self.random.choice(directions)
+        Edible ghosts run away from the player. Otherwise each ghost follows
+        the shortest path to its own target:
 
-        scored_directions: list[
-            tuple[int, Direction]
-        ] = []
+        * Blinky chases the player directly.
+        * Pinky ambushes a few tiles ahead of the player.
+        * Inky is unpredictable: it often moves at random.
+        * Clyde chases from afar but retreats to his corner when close.
+        """
 
-        for direction in directions:
-            destination = ghost.next_position(direction)
-
-            distance = self._manhattan_distance(
-                destination,
-                self.player.position,
-            )
-
-            scored_directions.append(
-                (distance, direction)
-            )
+        # Never turn back on the same tile unless it is a dead end.
+        forward = [
+            direction
+            for direction in directions
+            if ghost.last_direction is None
+            or direction != ghost.last_direction.opposite
+        ]
+        candidates = forward or directions
 
         if ghost.state == GhostState.FRIGHTENED:
-            best_distance = max(
-                score
-                for score, _ in scored_directions
-            )
-        else:
-            best_distance = min(
-                score
-                for score, _ in scored_directions
+            return self._best_direction(
+                ghost, candidates, player_distances, flee=True
             )
 
-        best_directions = [
-            direction
-            for score, direction in scored_directions
-            if score == best_distance
+        if ghost.name == "Inky" and self.random.random() < 0.4:
+            return self.random.choice(candidates)
+
+        if ghost.name == "Pinky":
+            target_distances = self._distance_map(
+                self._ambush_target()
+            )
+        elif (
+            ghost.name == "Clyde"
+            and player_distances.get(ghost.position, 0)
+            <= self.CLYDE_SAFE_DISTANCE
+        ):
+            target_distances = self._distance_map(ghost.corner)
+        else:
+            target_distances = player_distances
+
+        return self._best_direction(
+            ghost, candidates, target_distances, flee=False
+        )
+
+    def _best_direction(
+        self,
+        ghost: Ghost,
+        directions: list[Direction],
+        distances: dict[Position, int],
+        flee: bool,
+    ) -> Direction:
+        """Pick the direction closest to (or farthest from) a target."""
+
+        unreachable = 1_000_000
+        scored = [
+            (
+                distances.get(ghost.next_position(direction), unreachable),
+                direction,
+            )
+            for direction in directions
         ]
 
-        return self.random.choice(best_directions)
+        if flee:
+            best = max(score for score, _ in scored)
+        else:
+            best = min(score for score, _ in scored)
 
-    def _manhattan_distance(
-        self,
-        first: Position,
-        second: Position,
-    ) -> int:
-        """Return the Manhattan distance."""
-
-        return (
-            abs(first.row - second.row)
-            + abs(first.column - second.column)
+        return self.random.choice(
+            [direction for score, direction in scored if score == best]
         )
+
+    def _ambush_target(self) -> Position:
+        """Return the tile a few steps ahead of the player."""
+
+        if self.player is None or self.level is None:
+            return Position(row=0, column=0)
+
+        target = self.player.position
+        direction = self.player.direction
+
+        for _ in range(self.PINKY_LOOKAHEAD):
+            ahead = Position(
+                row=target.row + direction.row_offset,
+                column=target.column + direction.column_offset,
+            )
+
+            if not self.level.maze.is_walkable(ahead):
+                break
+
+            target = ahead
+
+        return target
 
     def _consume_player_position(self) -> None:
         """Consume the collectible under the player."""

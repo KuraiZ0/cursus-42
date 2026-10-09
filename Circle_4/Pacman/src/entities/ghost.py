@@ -2,7 +2,7 @@
 
 from enum import Enum, auto
 
-from src.entities.entity import Entity, Position
+from src.entities.entity import Direction, Entity, Position
 
 
 class GhostState(Enum):
@@ -33,6 +33,7 @@ class Ghost(Entity):
         self.state = GhostState.CHASE
         self.frightened_time = 0.0
         self.respawn_time = 0.0
+        self.last_direction: Direction | None = None
 
     @property
     def is_edible(self) -> bool:
@@ -91,6 +92,7 @@ class Ghost(Entity):
                 self.respawn_time = 0.0
                 self.position = self.corner
                 self.state = GhostState.CHASE
+                self.last_direction = None
 
     def respawn(self) -> None:
         """Immediately respawn the ghost in its corner."""
@@ -99,3 +101,4 @@ class Ghost(Entity):
         self.state = GhostState.CHASE
         self.frightened_time = 0.0
         self.respawn_time = 0.0
+        self.last_direction = None

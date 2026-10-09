@@ -1,0 +1,35 @@
+PAC-MAN 42 - quick instructions
+===============================
+
+Launch
+------
+    ./pacman42 config.json            (Linux / macOS)
+    pacman42.exe config.json          (Windows)
+
+The only argument is the configuration file (JSON, '#' and '//' comment
+lines allowed). Invalid or missing values fall back to safe defaults.
+
+Controls
+--------
+    Arrow keys / WASD   Move
+    P or ESC            Pause / resume
+    ENTER or SPACE      Confirm in menus
+
+Cheat mode (for evaluation)
+---------------------------
+    F1  Invincibility          F4  Add one life
+    F2  Skip current level     F5  Speed boost
+    F3  Freeze ghosts
+
+Rules
+-----
+Eat every pacgum to clear the level (10 levels, 90 s each by default).
+Super-pacgums (the 4 corners) make ghosts edible for a few seconds.
+Losing all lives ends the game; your score can be saved in the Top 10.
+
+Configuration keys
+------------------
+    highscore_filename, lives, points_per_pacgum, points_per_super_pacgum,
+    points_per_ghost, super_pacgum_duration, ghost_respawn_time,
+    level_max_time, seed, levels: [{"width": N, "height": N}, ...]
+width/height are counted in maze cells (5 to 30).

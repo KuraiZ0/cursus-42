@@ -88,13 +88,13 @@ def default_config() -> GameConfig:
 
 
 def _remove_comment_lines(content: str) -> str:
-    """Remove lines beginning with a hash character."""
+    """Remove lines beginning with ``#`` or ``//`` (comment lines)."""
 
     lines = content.splitlines()
     valid_lines = [
         line
         for line in lines
-        if not line.lstrip().startswith("#")
+        if not line.lstrip().startswith(("#", "//"))
     ]
     return "\n".join(valid_lines)
 
@@ -157,8 +157,8 @@ def _safe_filename(value: Any) -> str:
     return value.strip()
 
 
-def _normalise_dimension(value: Any, default: int, name: str) -> int:
-    """Validate and normalise a maze dimension."""
+def _safe_dimension(value: Any, default: int, name: str) -> int:
+    """Validate a maze dimension expressed in cells."""
 
     dimension = _safe_int(
         value=value,
@@ -167,14 +167,6 @@ def _normalise_dimension(value: Any, default: int, name: str) -> int:
         minimum=MIN_LEVEL_SIZE,
         maximum=MAX_LEVEL_SIZE,
     )
-
-    if dimension % 2 == 0:
-        if dimension < MAX_LEVEL_SIZE:
-            dimension += 1
-        else:
-            dimension -= 1
-
-        _warn(f"'{name}' must be odd. Using {dimension}.")
 
     return dimension
 
@@ -193,12 +185,12 @@ def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
             _warn(f"Level {index + 1} is invalid and was ignored.")
             continue
 
-        width = _normalise_dimension(
+        width = _safe_dimension(
             value=level_data.get("width"),
             default=DEFAULT_LEVEL_WIDTH,
             name=f"levels[{index}].width",
         )
-        height = _normalise_dimension(
+        height = _safe_dimension(
             value=level_data.get("height"),
             default=DEFAULT_LEVEL_HEIGHT,
             name=f"levels[{index}].height",
@@ -220,16 +212,12 @@ def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
 def _read_json_file(path: Path) -> dict[str, Any]:
     """Read and decode a JSON configuration file."""
 
-    if path.suffix.lower() != ".json":
-        raise ConfigError(
-            "The configuration file must use the .json extension.")
-
     if not path.is_file():
         raise ConfigError(f"Configuration file not found: {path}")
 
     try:
         content = path.read_text(encoding="utf-8")
-    except OSError as error:
+    except (OSError, UnicodeDecodeError) as error:
         raise ConfigError(
             f"Unable to read configuration file: {error}"
         ) from error
@@ -322,6 +310,7 @@ def load_config(filename: str) -> GameConfig:
             value=data.get("seed", DEFAULT_SEED),
             default=DEFAULT_SEED,
             name="seed",
+            minimum=1,
         ),
         levels=_parse_levels(data.get("levels")),
     )

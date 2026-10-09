@@ -26,11 +26,11 @@ DEFAULT_LEVEL_MAX_TIME: Final[int] = 90
 DEFAULT_SEED: Final[int] = 42
 
 DEFAULT_LEVEL_COUNT: Final[int] = 10
-DEFAULT_LEVEL_WIDTH: Final[int] = 21
-DEFAULT_LEVEL_HEIGHT: Final[int] = 21
+DEFAULT_LEVEL_WIDTH: Final[int] = 20
+DEFAULT_LEVEL_HEIGHT: Final[int] = 14
 
-MIN_LEVEL_SIZE: Final[int] = 7
-MAX_LEVEL_SIZE: Final[int] = 51
+MIN_LEVEL_SIZE: Final[int] = 5
+MAX_LEVEL_SIZE: Final[int] = 30
 
 MIN_LIVES: Final[int] = 1
 MAX_LIVES: Final[int] = 10

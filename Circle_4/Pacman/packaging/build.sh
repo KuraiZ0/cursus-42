@@ -10,7 +10,7 @@ PROJECT_ROOT="$(
 cd "$PROJECT_ROOT"
 
 echo "Installing project dependencies..."
-uv sync
+make install
 
 echo "Cleaning previous builds..."
 rm -rf build
@@ -25,6 +25,7 @@ uv run pyinstaller \
 echo "Copying configuration files..."
 cp config.json dist/config.json
 cp highscores.json dist/highscores.json
+cp packaging/INSTRUCTIONS.txt dist/INSTRUCTIONS.txt
 
 echo
 echo "Build completed successfully."

@@ -11,6 +11,7 @@ analysis = Analysis(
     datas=[],
     hiddenimports=[
         "pygame",
+        "mazegenerator",
     ],
     hookspath=[],
     hooksconfig={},

@@ -116,3 +116,12 @@ The generated executable may fail on another computer.
 
 Test the packaged application and declare required hidden imports in the
 PyInstaller specification.
+
+## Update after integration
+
+The assigned package turned out to expose `MazeGenerator(size, perfect, seed)`
+whose `maze` property returns wall bit-masks (N=1, E=2, S=4, W=8). The risk of
+an unexpected interface is closed: `MazeAdapter` targets exactly this API and
+raises a clean `MazeError` if the package is missing or returns invalid data.
+Residual risk: another version of the package is installed at peer review; the
+adapter validates the size and cell types of the result to fail cleanly.

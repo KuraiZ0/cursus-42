@@ -122,7 +122,8 @@ class HighscoreService:
             )
 
         if not all(
-            character.isalnum() or character == " "
+            (character.isascii() and character.isalnum())
+            or character == " "
             for character in cleaned_name
         ):
             raise HighscoreError(

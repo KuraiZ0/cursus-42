@@ -21,6 +21,12 @@ class Direction(Enum):
     RIGHT = (0, 1)
 
     @property
+    def opposite(self) -> "Direction":
+        """Return the opposite direction."""
+
+        return Direction((-self.value[0], -self.value[1]))
+
+    @property
     def row_offset(self) -> int:
         """Return the vertical movement offset."""
 

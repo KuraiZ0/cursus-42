@@ -1,8 +1,12 @@
 CONFIG = config.json
 PYTHON = uv run python3
 
+# The assigned A-Maze-ing package is installed as-is from its wheel
+# (unzipped from mazegenerator-*.zip when no .whl is present).
 install:
 	uv sync
+	@ls mazegenerator-*.whl >/dev/null 2>&1 || unzip -oq mazegenerator-*.zip
+	uv pip install mazegenerator-*.whl
 
 run:
 	$(PYTHON) pac-man.py $(CONFIG)
@@ -19,8 +23,8 @@ clean:
 	rm -rf dist
 
 lint:
-	uv run flake8 src tests pac-man.py
-	uv run mypy src tests pac-man.py \
+	uv run flake8 .
+	uv run mypy . \
 		--warn-return-any \
 		--warn-unused-ignores \
 		--ignore-missing-imports \
@@ -28,8 +32,8 @@ lint:
 		--check-untyped-defs
 
 lint-strict:
-	uv run flake8 src tests pac-man.py
-	uv run mypy src tests pac-man.py --strict
+	uv run flake8 .
+	uv run mypy . --strict
 
 test:
 	uv run pytest
@@ -39,4 +43,4 @@ check: lint test
 build:
 	./packaging/build.sh
 
-.PHONY: install run debug clean lint lint-strict test check build
+.PHONY: install run debug clean lint lint-strict test check build

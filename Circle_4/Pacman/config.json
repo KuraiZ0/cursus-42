@@ -1,4 +1,5 @@
 # Pac-Man configuration file
+# width/height are given in maze cells (the grid drawn is 2*n+1 tiles)
 
 {
     "highscore_filename": "highscores.json",
@@ -11,15 +12,15 @@
     "level_max_time": 90,
     "seed": 42,
     "levels": [
-        {"width": 21, "height": 21},
-        {"width": 21, "height": 21},
-        {"width": 23, "height": 23},
-        {"width": 23, "height": 23},
-        {"width": 25, "height": 25},
-        {"width": 25, "height": 25},
-        {"width": 27, "height": 27},
-        {"width": 27, "height": 27},
-        {"width": 29, "height": 29},
-        {"width": 29, "height": 29}
+        {"width": 16, "height": 11},
+        {"width": 16, "height": 11},
+        {"width": 18, "height": 12},
+        {"width": 18, "height": 12},
+        {"width": 20, "height": 13},
+        {"width": 20, "height": 13},
+        {"width": 22, "height": 14},
+        {"width": 22, "height": 14},
+        {"width": 24, "height": 15},
+        {"width": 24, "height": 15}
     ]
 }

@@ -34,12 +34,21 @@ persistent highscores, external maze generation and a graphical interface.
 
 - Python 3.10 or later
 - uv
-- The assigned A-Maze-ing package
+- The assigned A-Maze-ing package (`mazegenerator`, wheel provided in
+  `mazegenerator-00001.zip`)
 
 ### Installation
 
 ```bash
 make install
+```
+
+`make install` runs `uv sync`, then installs the assigned `mazegenerator`
+wheel as-is (it is unzipped from `mazegenerator-*.zip` if needed). To use
+another version of the package (for example at peer review):
+
+```bash
+uv pip install --reinstall path/to/mazegenerator-X.Y.Z-py3-none-any.whl
 ```
 
 ### Execution
@@ -104,7 +113,8 @@ make build
 
 The game uses a JSON configuration file.
 
-Lines beginning with `#` are treated as comments and ignored.
+Lines beginning with `#` (or `//`) are treated as comments and ignored.
+The file may have any name; it only has to contain JSON.
 
 Example:
 
@@ -121,10 +131,8 @@ Example:
     "level_max_time": 90,
     "seed": 42,
     "levels": [
-        {
-            "width": 21,
-            "height": 21
-        }
+        {"width": 16, "height": 11},
+        {"width": 18, "height": 12}
     ]
 }
 ```
@@ -141,10 +149,15 @@ Example:
 | `super_pacgum_duration` | `8.0` | Frightened mode duration |
 | `ghost_respawn_time` | `5.0` | Ghost respawn delay |
 | `level_max_time` | `90` | Time limit in seconds |
-| `seed` | `42` | Seed used for the first level |
-| `levels` | 10 default levels | Maze dimensions |
+| `seed` | `42` | Seed used for the first level (minimum 1) |
+| `levels` | 10 levels of 20x14 | Maze size **in cells** (5 to 30); at least 10 levels are always played |
 
-Invalid values are replaced or clamped to safe values.
+`width` and `height` count maze cells, as in A-Maze-ing: the grid drawn on
+screen has `2 * n + 1` tiles per side (walls included).
+
+Invalid values are replaced or clamped to safe values and a warning is
+printed. A missing file or a file that cannot be read stops the program with
+a clear message (never a traceback).
 
 Unknown configuration keys are ignored.
 
@@ -164,7 +177,7 @@ Each entry contains:
 Player names:
 
 - Must contain between 1 and 10 characters
-- May contain letters, numbers and spaces
+- May contain ASCII letters, numbers and spaces
 - Cannot contain special characters
 
 Scores:
@@ -175,32 +188,35 @@ Scores:
 The entries are sorted from highest to lowest score.
 Only the best 10 entries are kept.
 
+A missing, empty or corrupted file is treated as "no highscore" (the game
+never crashes); invalid entries inside a valid file are skipped. The list is
+loaded at start-up, saved as soon as a name is validated at the end of a game
+(win or lose) and the best five scores are shown in the main menu.
+
 The JSON implementation was selected because it is simple, readable,
 portable and easy to validate.
 
 ## Maze Generation
 
-The project does not implement its own maze generator.
+The project does not implement its own maze generator: it uses the assigned
+`mazegenerator` package (class `MazeGenerator`), installed as-is.
 
-`MazeAdapter` loads the external A-Maze-ing package and attempts to adapt
-its result to the internal `Maze` representation.
+`MazeAdapter` (`src/game/maze_adapter.py`) adapts the project to the package:
 
-The generator is called with:
+1. It calls `MazeGenerator(size=(width, height), perfect=False, seed=seed)`.
+   `PERFECT` is `False`, so the maze has loops and no dead ends.
+2. The package returns `generator.maze`: for each cell, an integer whose four
+   low bits are the walls (North = 1, East = 2, South = 4, West = 8).
+3. The adapter expands this into a grid of `2 * height + 1` rows and
+   `2 * width + 1` columns: every cell is a corridor tile, and the tile
+   between two cells is a corridor only if the wall between them is open.
+   The isolated "42" cells (value 15) stay walls.
+4. Any failure (package missing, wrong interface, bad data) becomes a
+   `MazeError`, displayed cleanly.
 
-- Level width
-- Level height
-- A seed
-- `PERFECT` or `perfect` set to `False`
-
-The first level uses the fixed seed from the configuration file.
-
-The following levels use randomly generated seeds.
-
-The adapter accepts several possible function names and result formats so
-that the project can be connected to the package assigned during the
-project.
-
-The assigned package must not be modified.
+The first level uses the seed from the configuration file; the following
+levels use random seeds. Seed `0` is never used because it means "random"
+for the package.
 
 ## Implementation
 
@@ -216,6 +232,18 @@ The game is divided into several independent components:
 - Level progression
 - Highscore persistence
 - Rendering and keyboard input
+
+Ghost behaviour (`Game._choose_ghost_direction`): every move, a ghost follows
+the shortest path (breadth-first search distances) to its target and never
+turns back unless it is in a dead end. When edible, it flees from the player.
+
+- Blinky targets the player
+- Pinky targets four tiles ahead of the player
+- Inky moves randomly 40 % of the time
+- Clyde chases from afar but retreats to his corner when closer than 8 tiles
+
+The player starts in the middle of the maze, super-pacgums and ghosts are in
+the four corners, and every other corridor tile holds a pacgum.
 
 The game uses a state-based application flow:
 
@@ -331,8 +359,12 @@ Generated files are placed in:
 dist/
 ```
 
+The `dist/` folder also receives `config.json`, `highscores.json` and
+`INSTRUCTIONS.txt` (controls, cheat keys and configuration).
+
 The packaged game must be uploaded as a free private or unlisted build to
-a public gaming platform such as Itch.io.
+a public gaming platform such as Itch.io (for example with `butler push
+dist/ <user>/<game>:linux`).
 
 ## Resources
 
@@ -361,4 +393,4 @@ AI-generated suggestions must be reviewed, tested and understood before
 being included in the final project.
 
 The student remains responsible for the implementation, testing,
-technical decisions and ability to explain the complete project.
+technical decisions and ability to explain the complete project.

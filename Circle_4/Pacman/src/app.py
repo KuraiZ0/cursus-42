@@ -155,8 +155,6 @@ class App:
 
         if direction is not None:
             self.game.request_player_direction(direction)
-            self.game.move_player()
-            self.player_move_timer = 0.0
             return
 
         if key == pygame.K_F1:
@@ -242,7 +240,7 @@ class App:
             len(self.player_name)
             < HighscoreService.MAX_NAME_LENGTH
             and (
-                character.isalnum()
+                (character.isascii() and character.isalnum())
                 or character == " "
             )
         ):
