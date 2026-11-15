@@ -31,6 +31,13 @@ class Game:
     CLYDE_SAFE_DISTANCE = 8
     PINKY_LOOKAHEAD = 4
 
+    # Ghosts move once every GHOST_BASE_INTERVAL seconds on level 1 and a
+    # little faster on each following level, but never faster than
+    # GHOST_MIN_INTERVAL (the player moves every 0.12 s).
+    GHOST_BASE_INTERVAL = 0.25
+    GHOST_INTERVAL_STEP = 0.01
+    GHOST_MIN_INTERVAL = 0.16
+
     def __init__(
         self,
         config: GameConfig,
@@ -53,7 +60,7 @@ class Game:
         self.ghosts: list[Ghost] = []
 
         self.ghost_move_timer = 0.0
-        self.ghost_move_interval = 0.25
+        self.ghost_move_interval = self.GHOST_BASE_INTERVAL
         self.ghosts_frozen = False
 
     def start(self) -> None:
@@ -109,7 +116,26 @@ class Game:
             self.player.respawn()
 
         self._create_ghosts()
+        self.ghost_move_interval = self.ghost_interval_for(self.level_index)
+        self.ghost_move_timer = 0.0
         self._consume_player_position()
+
+    @classmethod
+    def ghost_interval_for(cls, level_index: int) -> float:
+        """Return the delay between two ghost moves on a level.
+
+        Args:
+            level_index: Zero-based index of the level.
+
+        Returns:
+            The movement interval in seconds.
+        """
+
+        return max(
+            cls.GHOST_MIN_INTERVAL,
+            cls.GHOST_BASE_INTERVAL
+            - cls.GHOST_INTERVAL_STEP * level_index,
+        )
 
     def _get_level_seed(self) -> int:
         """Return the maze seed for the current level."""
@@ -454,6 +480,10 @@ class Game:
                     self.config.points_per_ghost
                 )
             elif ghost.state != GhostState.EATEN:
+                if self.player.invincible:
+                    # Cheat: ghosts go through the player harmlessly.
+                    continue
+
                 self._handle_player_hit()
                 return
 

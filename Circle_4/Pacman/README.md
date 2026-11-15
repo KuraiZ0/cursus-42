@@ -103,7 +103,8 @@ make build
 | W, A, S, D | Move Pac-Man |
 | P or Escape | Pause or resume |
 | Enter | Confirm menu option |
-| F1 | Toggle invincibility |
+| Escape (name entry) | Return to the menu without saving |
+| F1 | Toggle invincibility (ghosts go through the player) |
 | F2 | Skip the current level |
 | F3 | Freeze or release ghosts |
 | F4 | Add one life |
@@ -146,8 +147,8 @@ Example:
 | `points_per_pacgum` | `10` | Points for a pacgum |
 | `points_per_super_pacgum` | `50` | Points for a super-pacgum |
 | `points_per_ghost` | `200` | Points for an edible ghost |
-| `super_pacgum_duration` | `8.0` | Frightened mode duration |
-| `ghost_respawn_time` | `5.0` | Ghost respawn delay |
+| `super_pacgum_duration` | `8.0` | Frightened mode duration in seconds (0 to 60) |
+| `ghost_respawn_time` | `5.0` | Ghost respawn delay in seconds (0 to 60) |
 | `level_max_time` | `90` | Time limit in seconds |
 | `seed` | `42` | Seed used for the first level (minimum 1) |
 | `levels` | 10 levels of 20x14 | Maze size **in cells** (5 to 30); at least 10 levels are always played |
@@ -241,6 +242,15 @@ turns back unless it is in a dead end. When edible, it flees from the player.
 - Pinky targets four tiles ahead of the player
 - Inky moves randomly 40 % of the time
 - Clyde chases from afar but retreats to his corner when closer than 8 tiles
+
+Difficulty grows with the levels: ghosts move every 0.25 s on level 1 and
+0.01 s faster on each following level, down to 0.16 s (the player moves every
+0.12 s, so the player always stays faster). See `Game.ghost_interval_for`.
+
+`NaN` / `Infinity` values (accepted by Python's JSON decoder) are rejected by
+the configuration loader. If the external generator fails while loading a
+later level, the game ends on the game-over screen (the score can still be
+saved) instead of closing the program.
 
 The player starts in the middle of the maze, super-pacgums and ghosts are in
 the four corners, and every other corridor tile holds a pacgum.
@@ -393,4 +403,4 @@ AI-generated suggestions must be reviewed, tested and understood before
 being included in the final project.
 
 The student remains responsible for the implementation, testing,
-technical decisions and ability to explain the complete project.
+technical decisions and ability to explain the complete project.

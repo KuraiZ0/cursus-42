@@ -140,3 +140,27 @@ def test_invalid_json_uses_defaults(
 
     assert config.lives == 3
     assert len(config.levels) == 10
+
+
+def test_non_finite_and_huge_durations(
+    tmp_path: Path,
+) -> None:
+    """NaN / Infinity are rejected and huge durations are clamped."""
+
+    config_file = tmp_path / "config.json"
+    config_file.write_text(
+        '{"super_pacgum_duration": NaN, "ghost_respawn_time": Infinity}',
+        encoding="utf-8",
+    )
+
+    config = load_config(str(config_file))
+
+    assert config.super_pacgum_duration == 8.0
+    assert config.ghost_respawn_time == 5.0
+
+    config_file.write_text(
+        '{"super_pacgum_duration": 100000}',
+        encoding="utf-8",
+    )
+
+    assert load_config(str(config_file)).super_pacgum_duration == 60.0

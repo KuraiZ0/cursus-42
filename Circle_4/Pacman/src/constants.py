@@ -37,3 +37,6 @@ MAX_LIVES: Final[int] = 10
 
 MIN_LEVEL_TIME: Final[int] = 10
 MAX_LEVEL_TIME: Final[int] = 600
+
+# Upper bound of super-pacgum and ghost respawn durations (seconds).
+MAX_DURATION: Final[float] = 60.0

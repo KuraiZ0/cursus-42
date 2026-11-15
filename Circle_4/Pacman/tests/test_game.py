@@ -233,3 +233,38 @@ def test_next_levels_are_not_reproducible() -> None:
     seeds = {first._get_level_seed(), second._get_level_seed()}
 
     assert first.config.seed not in seeds
+
+
+def test_invincible_player_ignores_ghosts() -> None:
+    """An invincible player is neither hit nor sent back to the centre."""
+
+    game = create_game()
+
+    game.start()
+    game.toggle_invincibility()
+
+    assert game.player is not None
+    game.player.position = Position(row=1, column=2)
+    game.ghosts[0].position = game.player.position
+    game._handle_collisions()
+
+    assert game.player.lives == 3
+    assert game.player.position == Position(row=1, column=2)
+    assert game.status == GameStatus.RUNNING
+
+
+def test_ghosts_speed_up_on_later_levels() -> None:
+    """Ghosts move a bit faster each level, within a lower bound."""
+
+    first = Game.ghost_interval_for(0)
+    second = Game.ghost_interval_for(1)
+
+    assert first == Game.GHOST_BASE_INTERVAL
+    assert second < first
+    assert Game.ghost_interval_for(100) == Game.GHOST_MIN_INTERVAL
+
+    game = create_game(level_count=3)
+    game.start()
+    game.skip_level()
+
+    assert game.ghost_move_interval == second

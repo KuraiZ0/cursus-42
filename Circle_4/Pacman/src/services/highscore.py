@@ -31,14 +31,14 @@ class HighscoreService:
     def load(self) -> list[HighscoreEntry]:
         """Load valid highscores from disk."""
 
-        if not self.path.exists():
+        if not self.path.is_file():
             self.entries = []
             return self.entries.copy()
 
         try:
             content = self.path.read_text(encoding="utf-8")
             decoded = json.loads(content)
-        except (OSError, json.JSONDecodeError):
+        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
             self.entries = []
             return self.entries.copy()
 

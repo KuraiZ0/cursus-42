@@ -96,3 +96,27 @@ def test_saved_file_contains_valid_json(
             "score": 800,
         }
     ]
+
+
+def test_non_utf8_file_is_ignored(
+    tmp_path: Path,
+) -> None:
+    """A binary (non UTF-8) highscore file means "no highscore"."""
+
+    highscore_file = tmp_path / "scores.json"
+    highscore_file.write_bytes(b"\xff\xfe\x00garbage")
+
+    assert HighscoreService(str(highscore_file)).load() == []
+
+
+def test_directory_path_is_ignored(
+    tmp_path: Path,
+) -> None:
+    """A directory used as highscore path loads nothing and fails on save."""
+
+    service = HighscoreService(str(tmp_path))
+
+    assert service.load() == []
+
+    with pytest.raises(HighscoreError):
+        service.add("WAIL", 10)

@@ -27,3 +27,10 @@ Legend: OK = passed, FIXED = bug found then corrected.
 | 21 | Corrupted highscore file | write garbage in the file | Ignored, no crash | OK |
 | 22 | Lint | `make lint`, `make lint-strict` | No error | OK |
 | 23 | Unit tests | `make test` | All pass | OK |
+| 24 | Binary highscore file | write non UTF-8 bytes in the file | Ignored, game starts | FIXED (UnicodeDecodeError stopped the program) |
+| 25 | Non-finite durations | `"super_pacgum_duration": NaN` / `Infinity` | Warning, default used | FIXED (accepted silently) |
+| 26 | Unwritable highscore | highscore path is a directory | Error shown, ESC returns to the menu | FIXED (player stuck on name entry) |
+| 27 | Invincibility | F1 then touch a ghost | No life lost, player not moved | FIXED (player was sent back to the centre) |
+| 28 | Generator failure mid-game | generator raises on level 2+ | Game-over screen, no exit | FIXED (program closed) |
+| 29 | Difficulty | play level 1 then level 5 | Ghosts noticeably faster | OK |
+| 30 | Maze connectivity | 1160 mazes (sizes 5-30, 29 seeds) | Every pacgum reachable, 4 corners | OK |

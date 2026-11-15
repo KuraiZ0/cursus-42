@@ -44,3 +44,14 @@
 - [ ] Build the executable on the target platform (`make build`)
 - [ ] Publish the build on itch.io (free, unlisted/private)
 - [ ] Re-test with the maze package given at peer review
+
+## Second review (robustness and gameplay)
+
+- [x] Highscore file in a non UTF-8 encoding no longer stops the program
+- [x] `NaN` / `Infinity` rejected, durations clamped to 60 s
+- [x] ESC on the name-entry screen (no dead end when saving fails)
+- [x] Invincibility cheat: ghosts go through the player
+- [x] Generator failure during a level change ends the game cleanly
+- [x] Ghosts speed up on each level (difficulty curve)
+- [x] Connectivity check on 1160 generated mazes
+- [x] 5 new unit tests (67 in total), `make lint-strict` clean

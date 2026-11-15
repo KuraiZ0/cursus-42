@@ -234,6 +234,12 @@ class App:
             self._save_highscore()
             return
 
+        if event.key == pygame.K_ESCAPE:
+            # Leave without saving (e.g. the highscore file is read-only).
+            self.game.status = GameStatus.READY
+            self.current_screen = Screen.MAIN_MENU
+            return
+
         character = event.unicode
 
         if (
@@ -297,11 +303,18 @@ class App:
         if self.game.player is not None:
             movement_interval /= self.game.player.speed
 
-        while self.player_move_timer >= movement_interval:
-            self.player_move_timer -= movement_interval
-            self.game.move_player()
+        try:
+            while self.player_move_timer >= movement_interval:
+                self.player_move_timer -= movement_interval
+                self.game.move_player()
 
-        self.game.update(delta_time)
+            self.game.update(delta_time)
+        except PacmanError as error:
+            # The next maze could not be generated: end the game cleanly
+            # so the score can still be saved.
+            print(f"Unable to load the next level: {error}")
+            self.game.status = GameStatus.LOST
+
         self._check_game_status()
 
     def _check_game_status(self) -> None:

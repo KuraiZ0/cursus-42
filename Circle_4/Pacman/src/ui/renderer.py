@@ -346,6 +346,12 @@ class Renderer:
             colour=WHITE,
             y=420,
         )
+        self._draw_centered_text(
+            text="ENTER: save    ESC: skip",
+            font=self.small_font,
+            colour=WHITE,
+            y=self.screen.get_height() - 30,
+        )
 
         if error_message:
             self._draw_centered_text(

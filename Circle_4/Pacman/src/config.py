@@ -1,6 +1,7 @@
 """Configuration loading and validation."""
 
 import json
+import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -19,6 +20,7 @@ from src.constants import (
     DEFAULT_SEED,
     DEFAULT_SUPER_PACGUM_DURATION,
     MAX_LEVEL_SIZE,
+    MAX_DURATION,
     MAX_LEVEL_TIME,
     MAX_LIVES,
     MIN_LEVEL_SIZE,
@@ -128,10 +130,19 @@ def _safe_float(
     default: float,
     name: str,
     minimum: float = 0.0,
+    maximum: float = MAX_DURATION,
 ) -> float:
-    """Validate a floating-point configuration value."""
+    """Validate and clamp a floating-point configuration value.
 
-    if isinstance(value, bool) or not isinstance(value, (int, float)):
+    ``NaN`` and ``Infinity`` (accepted by Python's JSON decoder) are
+    rejected, values above ``maximum`` are clamped.
+    """
+
+    if (
+        isinstance(value, bool)
+        or not isinstance(value, (int, float))
+        or not math.isfinite(value)
+    ):
         _warn(f"'{name}' is invalid. Using {default}.")
         return default
 
@@ -140,6 +151,10 @@ def _safe_float(
     if result < minimum:
         _warn(f"'{name}' is invalid. Using {default}.")
         return default
+
+    if result > maximum:
+        _warn(f"'{name}' was adjusted to {maximum}.")
+        return maximum
 
     return result
 
@@ -173,6 +188,10 @@ def _safe_dimension(value: Any, default: int, name: str) -> int:
 
 def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
     """Validate the configured levels."""
+
+    if value is None:
+        _warn("'levels' is missing. Using default levels.")
+        return _default_levels()
 
     if not isinstance(value, list):
         _warn("Invalid levels list. Using default levels.")

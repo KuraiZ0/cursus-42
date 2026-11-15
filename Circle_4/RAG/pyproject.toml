@@ -1,0 +1,37 @@
+[project]
+name = "rag-against-the-machine"
+version = "1.0.0"
+description = "Retrieval-Augmented Generation over the vLLM codebase (BM25 + Qwen3-0.6B)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "fire>=0.7.0",
+    "numpy>=1.26",
+    "pydantic>=2.7",
+    "torch>=2.4",
+    "tqdm>=4.66",
+    "transformers>=4.51",
+]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.0",
+    "mypy>=1.10",
+    "pytest>=8.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cpu" }]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true
+
+[tool.mypy]
+python_version = "3.12"
+ignore_missing_imports = true
+exclude = ["data/", "\\.venv/"]
