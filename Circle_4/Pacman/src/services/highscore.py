@@ -31,14 +31,14 @@ class HighscoreService:
     def load(self) -> list[HighscoreEntry]:
         """Load valid highscores from disk."""
 
-        if not self.path.is_file():
+        if not self.path.exists():
             self.entries = []
             return self.entries.copy()
 
         try:
             content = self.path.read_text(encoding="utf-8")
             decoded = json.loads(content)
-        except (OSError, UnicodeDecodeError, json.JSONDecodeError):
+        except (OSError, json.JSONDecodeError):
             self.entries = []
             return self.entries.copy()
 
@@ -122,8 +122,7 @@ class HighscoreService:
             )
 
         if not all(
-            (character.isascii() and character.isalnum())
-            or character == " "
+            character.isalnum() or character == " "
             for character in cleaned_name
         ):
             raise HighscoreError(

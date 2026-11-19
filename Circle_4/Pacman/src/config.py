@@ -1,7 +1,6 @@
 """Configuration loading and validation."""
 
 import json
-import math
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -20,7 +19,6 @@ from src.constants import (
     DEFAULT_SEED,
     DEFAULT_SUPER_PACGUM_DURATION,
     MAX_LEVEL_SIZE,
-    MAX_DURATION,
     MAX_LEVEL_TIME,
     MAX_LIVES,
     MIN_LEVEL_SIZE,
@@ -90,13 +88,13 @@ def default_config() -> GameConfig:
 
 
 def _remove_comment_lines(content: str) -> str:
-    """Remove lines beginning with ``#`` or ``//`` (comment lines)."""
+    """Remove lines beginning with a hash character."""
 
     lines = content.splitlines()
     valid_lines = [
         line
         for line in lines
-        if not line.lstrip().startswith(("#", "//"))
+        if not line.lstrip().startswith("#")
     ]
     return "\n".join(valid_lines)
 
@@ -130,19 +128,10 @@ def _safe_float(
     default: float,
     name: str,
     minimum: float = 0.0,
-    maximum: float = MAX_DURATION,
 ) -> float:
-    """Validate and clamp a floating-point configuration value.
+    """Validate a floating-point configuration value."""
 
-    ``NaN`` and ``Infinity`` (accepted by Python's JSON decoder) are
-    rejected, values above ``maximum`` are clamped.
-    """
-
-    if (
-        isinstance(value, bool)
-        or not isinstance(value, (int, float))
-        or not math.isfinite(value)
-    ):
+    if isinstance(value, bool) or not isinstance(value, (int, float)):
         _warn(f"'{name}' is invalid. Using {default}.")
         return default
 
@@ -151,10 +140,6 @@ def _safe_float(
     if result < minimum:
         _warn(f"'{name}' is invalid. Using {default}.")
         return default
-
-    if result > maximum:
-        _warn(f"'{name}' was adjusted to {maximum}.")
-        return maximum
 
     return result
 
@@ -172,8 +157,8 @@ def _safe_filename(value: Any) -> str:
     return value.strip()
 
 
-def _safe_dimension(value: Any, default: int, name: str) -> int:
-    """Validate a maze dimension expressed in cells."""
+def _normalise_dimension(value: Any, default: int, name: str) -> int:
+    """Validate and normalise a maze dimension."""
 
     dimension = _safe_int(
         value=value,
@@ -183,15 +168,19 @@ def _safe_dimension(value: Any, default: int, name: str) -> int:
         maximum=MAX_LEVEL_SIZE,
     )
 
+    if dimension % 2 == 0:
+        if dimension < MAX_LEVEL_SIZE:
+            dimension += 1
+        else:
+            dimension -= 1
+
+        _warn(f"'{name}' must be odd. Using {dimension}.")
+
     return dimension
 
 
 def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
     """Validate the configured levels."""
-
-    if value is None:
-        _warn("'levels' is missing. Using default levels.")
-        return _default_levels()
 
     if not isinstance(value, list):
         _warn("Invalid levels list. Using default levels.")
@@ -204,12 +193,12 @@ def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
             _warn(f"Level {index + 1} is invalid and was ignored.")
             continue
 
-        width = _safe_dimension(
+        width = _normalise_dimension(
             value=level_data.get("width"),
             default=DEFAULT_LEVEL_WIDTH,
             name=f"levels[{index}].width",
         )
-        height = _safe_dimension(
+        height = _normalise_dimension(
             value=level_data.get("height"),
             default=DEFAULT_LEVEL_HEIGHT,
             name=f"levels[{index}].height",
@@ -231,12 +220,16 @@ def _parse_levels(value: Any) -> tuple[LevelConfig, ...]:
 def _read_json_file(path: Path) -> dict[str, Any]:
     """Read and decode a JSON configuration file."""
 
+    if path.suffix.lower() != ".json":
+        raise ConfigError(
+            "The configuration file must use the .json extension.")
+
     if not path.is_file():
         raise ConfigError(f"Configuration file not found: {path}")
 
     try:
         content = path.read_text(encoding="utf-8")
-    except (OSError, UnicodeDecodeError) as error:
+    except OSError as error:
         raise ConfigError(
             f"Unable to read configuration file: {error}"
         ) from error
@@ -329,7 +322,6 @@ def load_config(filename: str) -> GameConfig:
             value=data.get("seed", DEFAULT_SEED),
             default=DEFAULT_SEED,
             name="seed",
-            minimum=1,
         ),
         levels=_parse_levels(data.get("levels")),
     )

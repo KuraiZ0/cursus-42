@@ -22,9 +22,6 @@ def main() -> int:
         config = load_config(sys.argv[1])
         application = App(config)
         application.run()
-    except KeyboardInterrupt:
-        print("Game interrupted.")
-        return 130
     except PacmanError as error:
         print(f"Pac-Man error: {error}")
         return 1
